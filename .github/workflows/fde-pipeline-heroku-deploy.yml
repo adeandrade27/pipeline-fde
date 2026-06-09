@@ -37,6 +37,9 @@ jobs:
           print("OK: modules import")
           PY
 
+      - name: Install Heroku CLI
+        run: curl https://cli-assets.heroku.com/install.sh | sh
+
       - name: Deploy to Heroku
         uses: akhileshns/heroku-deploy@v3.14.15
         with:
@@ -45,3 +48,4 @@ jobs:
           heroku_email: ${{ secrets.HEROKU_EMAIL }}
           appdir: "fde-pipeline"
           procfile: "fde-pipeline/Procfile"
+          dontautocreate: true
