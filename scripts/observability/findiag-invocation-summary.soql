@@ -1,0 +1,11 @@
+SELECT
+  Target__c,
+  DispatchType__c,
+  Status__c,
+  COUNT(Id) totalInvocations,
+  AVG(DurationMs__c) avgDurationMs,
+  MAX(DurationMs__c) maxDurationMs
+FROM SF_AgenticInvocation__c
+WHERE CreatedDate = LAST_N_DAYS:1
+GROUP BY Target__c, DispatchType__c, Status__c
+ORDER BY totalInvocations DESC

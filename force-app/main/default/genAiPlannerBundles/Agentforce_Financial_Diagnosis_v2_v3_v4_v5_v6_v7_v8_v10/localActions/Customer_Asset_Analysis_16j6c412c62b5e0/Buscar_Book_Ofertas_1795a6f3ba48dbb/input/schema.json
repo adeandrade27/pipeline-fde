@@ -1,0 +1,34 @@
+{
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "varAno" : {
+      "title" : "varAno",
+      "description" : "Ano da oferta utilizado como critério de busca",
+      "lightning:type" : "lightning__numberType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    },
+    "varCidade" : {
+      "title" : "varCidade",
+      "description" : "Cidade da oferta que será utilizada como filtro na busca",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    },
+    "varMes" : {
+      "title" : "varMes",
+      "description" : "Mês da oferta (ex: Janeiro, Fevereiro) utilizado como critério de busca",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    },
+    "varProduto" : {
+      "title" : "varProduto",
+      "description" : "Nome do produto para buscar no Data Cloud (deve corresponder exatamente ao campo produto)",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    }
+  },
+  "lightning:type" : "lightning__objectType"
+}

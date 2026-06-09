@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Buscar caso de atendimento</label>
+    <protected>false</protected>
+    <values>
+        <field>Target__c</field>
+        <value xsi:type="xsd:string">Buscar_caso_de_atendimento</value>
+    </values>
+    <values>
+        <field>HandlerClass__c</field>
+        <value xsi:type="xsd:string">FinDiagCaseHandler</value>
+    </values>
+    <values>
+        <field>DispatchType__c</field>
+        <value xsi:type="xsd:string">apex</value>
+    </values>
+    <values>
+        <field>AsyncMode__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>MaxBatchSize__c</field>
+        <value xsi:type="xsd:double">1.0</value>
+    </values>
+</CustomMetadata>

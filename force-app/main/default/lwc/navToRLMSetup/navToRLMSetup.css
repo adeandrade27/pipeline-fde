@@ -1,0 +1,13 @@
+.my-button-padding {
+    background-color: blueviolet!important;
+
+ 
+}
+
+lightning-button.my-style2 {
+  --sds-c-button-destructive-color-background: #ccf30d!important;
+  --sds-c-button-brand-color-border: #3bcf56;
+  --sds-c-button-brand-color-background-hover: #3bcf56;
+  --sds-c-button-brand-color-border-hover: #3bcf56;
+
+}

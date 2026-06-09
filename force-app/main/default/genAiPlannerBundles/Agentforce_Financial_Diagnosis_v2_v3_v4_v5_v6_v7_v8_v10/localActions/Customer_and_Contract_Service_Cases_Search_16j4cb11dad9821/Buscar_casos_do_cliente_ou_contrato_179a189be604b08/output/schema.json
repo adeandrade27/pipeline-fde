@@ -1,0 +1,35 @@
+{
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "colResumoAgent" : {
+      "title" : "colResumoAgent",
+      "description" : "Armazena todos os resumos dos casos NBA identificados para envio ao Agentforce.",
+      "maxItems" : 2000,
+      "items" : {
+        "lightning:type" : "lightning__textType"
+      },
+      "lightning:type" : "lightning__listType",
+      "lightning:isPII" : false,
+      "copilotAction:isDisplayable" : false,
+      "copilotAction:isUsedByPlanner" : true,
+      "copilotAction:useHydratedPrompt" : false
+    },
+    "recordCase" : {
+      "title" : "recordCase",
+      "description" : "Registros de casos de atendimento encontrados na busca.",
+      "maxItems" : 2000,
+      "items" : {
+        "lightning:type" : "lightning__recordInfoType",
+        "lightning:sObjectInfo" : {
+          "apiName" : "Case"
+        }
+      },
+      "lightning:type" : "lightning__listType",
+      "lightning:isPII" : false,
+      "copilotAction:isDisplayable" : false,
+      "copilotAction:isUsedByPlanner" : true,
+      "copilotAction:useHydratedPrompt" : false
+    }
+  },
+  "lightning:type" : "lightning__objectType"
+}

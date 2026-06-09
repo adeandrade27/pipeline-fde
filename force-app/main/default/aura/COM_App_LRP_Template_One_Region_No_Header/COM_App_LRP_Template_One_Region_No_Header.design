@@ -1,0 +1,5 @@
+<design:component label="COM One Region No Header">
+    <flexipage:template >
+           <flexipage:region name="content" label="Content" defaultWidth="LARGE" />
+    </flexipage:template>
+</design:component>

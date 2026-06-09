@@ -1,0 +1,98 @@
+.pct-sm-root {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: left;
+}
+
+.pct-sm-tile {
+    align-items: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    max-width: 140px;
+    padding: 0;
+    text-align: center;
+}
+
+.pct-sm-tile:focus {
+    outline: none;
+}
+
+.pct-sm-tile:focus-visible .pct-sm-tile__card {
+    box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #0176d3;
+}
+
+.pct-sm-tile__card {
+    background: #ffffff;
+    border: 1px solid #dddbda;
+    border-radius: 0.5rem;
+    box-sizing: border-box;
+    padding: 0.75rem;
+    position: relative;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+    width: 100%;
+}
+
+.pct-sm-tile--added .pct-sm-tile__card {
+    border-color: #1b96ff;
+    box-shadow: 0 0 0 1px #1b96ff;
+}
+
+.pct-sm-tile__badge {
+    align-items: center;
+    background: #1b96ff;
+    border-radius: 50%;
+    display: flex;
+    height: 1.375rem;
+    justify-content: center;
+    position: absolute;
+    right: -0.35rem;
+    top: -0.35rem;
+    width: 1.375rem;
+    z-index: 1;
+}
+
+.pct-sm-tile__badge-icon {
+    --sds-c-icon-color-foreground: #ffffff;
+}
+
+.pct-sm-tile__media {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    min-height: 3rem;
+    width: 100%;
+}
+
+.pct-sm-tile__image {
+    display: block;
+    max-height: 3rem;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.pct-sm-tile__price {
+    color: #3e3e3c;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.125rem 0.25rem;
+    justify-content: center;
+    margin-top: 0.5rem;
+    width: 100%;
+}
+
+.pct-sm-tile__price-value {
+    font-size: 0.8125rem;
+    font-weight: 600;
+}
+
+.pct-sm-tile__price-suffix {
+    font-size: 0.8125rem;
+    font-weight: 400;
+}

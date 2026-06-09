@@ -1,0 +1,47 @@
+name: FDE Pipeline Auto Deploy (Heroku)
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "fde-pipeline/**"
+      - ".github/workflows/fde-pipeline-heroku-deploy.yml"
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        working-directory: fde-pipeline
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run module import smoke test
+        run: |
+          PYTHONPATH="fde-pipeline" python - <<'PY'
+          import app
+          import sf_reader
+          import slack_reader
+          import scorer
+          import scheduler
+          print("OK: modules import")
+          PY
+
+      - name: Deploy to Heroku
+        uses: akhileshns/heroku-deploy@v3.14.15
+        with:
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
+          heroku_email: ${{ secrets.HEROKU_EMAIL }}
+          appdir: "fde-pipeline"
+          procfile: "fde-pipeline/Procfile"

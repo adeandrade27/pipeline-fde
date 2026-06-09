@@ -1,0 +1,21 @@
+<template>
+    <div class="com-service-available">
+        <!-- Availability Success Content -->
+        <section
+            class="availability-container slds-align_absolute-center slds-text-align_center"
+            aria-live="polite"
+        >
+            <div class="success-icon" aria-hidden="true">
+                <span class="check-mark"></span>
+            </div>
+
+            <h2 class="headline">{headline}</h2>
+
+            <p class="message">
+                {messagePrefix}
+                <strong>{serviceSpeed}</strong>
+                {messageSuffix}
+            </p>
+        </section>
+    </div>
+</template>

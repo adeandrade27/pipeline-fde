@@ -1,0 +1,961 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AiEvaluationDefinition xmlns="http://soap.sforce.com/2006/04/metadata">
+    <name>FinDiag_CaseLoading_HistoricalInvoices</name>
+    <subjectName>FinDiagAgent</subjectName>
+    <subjectType>AGENT</subjectType>
+    <subjectVersion>v13</subjectVersion>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent invokes AgentGateway with handlerClass flow:Buscar_caso_de_atendimento using currentRecordId and returns formatted case summary</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Carrega o caso em tela</utterance>
+        </inputs>
+        <number>1</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent loads the current case and presents Caso, Cliente, Contrato and Tipo fields in structured format</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Puxa o caso</utterance>
+        </inputs>
+        <number>2</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves case data via gateway and displays financial context fields</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Preciso ver os dados do caso</utterance>
+        </inputs>
+        <number>3</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent invokes gateway and presents case number, customer, contract and record type</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Qual é o caso aberto?</utterance>
+        </inputs>
+        <number>4</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent invokes gateway with the provided case number as referenceCase payload</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Carrega o caso número 12345</utterance>
+        </inputs>
+        <number>5</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent uses case number 00001234 as fallback payload and loads case</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Me mostra o caso 00001234</utterance>
+        </inputs>
+        <number>6</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent invokes AgentGateway to load case from screen context</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Abre o caso por favor</utterance>
+        </inputs>
+        <number>7</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent loads case and informs Case_recordType in natural language without exposing raw JSON</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Qual o tipo de registro do caso?</utterance>
+        </inputs>
+        <number>8</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent loads case and identifies the customer name without exposing CPF or raw JSON</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Quem é o cliente do caso?</utterance>
+        </inputs>
+        <number>9</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent loads case and presents contract billing account from case fields</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Qual o contrato do caso?</utterance>
+        </inputs>
+        <number>10</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent loads case and surfaces BusinessUnit__c field in the financial context section</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Carrega caso e me diz a unidade de negócio</utterance>
+        </inputs>
+        <number>11</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent loads case and presents ContractSegment__c field</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Puxa o caso e me mostra o segmento</utterance>
+        </inputs>
+        <number>12</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent loads case and presents CallReason__c field without jargon</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Carrega o caso e informa o motivo de chamada</utterance>
+        </inputs>
+        <number>13</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent loads case data and informs BillingMethod__c in human-readable form</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Preciso do método de cobrança do cliente</utterance>
+        </inputs>
+        <number>14</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent loads case and presents FinancialSituation__c if available</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Informa a situação financeira do cliente</utterance>
+        </inputs>
+        <number>15</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent asks operator to provide the case number because no screen context is available</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Carrega caso — currentRecordId não informado</utterance>
+        </inputs>
+        <number>16</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent explains that the action requires a case on screen or a case number provided by operator</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Case ID está vazio, o que fazer?</utterance>
+        </inputs>
+        <number>17</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent re-invokes AgentGateway because currentRecordId changed</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Carrega novamente o caso pois o contexto mudou</utterance>
+        </inputs>
+        <number>18</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent reuses Memory cache variable without re-invoking gateway since record has not changed</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Reutiliza o cache do caso</utterance>
+        </inputs>
+        <number>19</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent informs operator that the case reference was not found and asks for confirmation</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>O retorno do caso veio vazio</utterance>
+        </inputs>
+        <number>20</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent asks for operatorCode and contractNumber before invoking SF_FinDiagHistoricalInvoicesHandler</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Mostra o histórico de faturas</utterance>
+        </inputs>
+        <number>21</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent requests operatorCode and contractNumber then retrieves invoice history</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Quero ver as últimas faturas do cliente</utterance>
+        </inputs>
+        <number>22</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent invokes apex:SF_FinDiagHistoricalInvoicesHandler with 6-month default lookback</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Lista as faturas dos últimos 6 meses</utterance>
+        </inputs>
+        <number>23</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent invokes historical invoices handler with provided operatorCode and contractNumber</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Histórico de faturas — operatorCode OP001 contractNumber 123456</utterance>
+        </inputs>
+        <number>24</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent computes startDate and endDate and invokes historical invoices with 1-month range</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Busca faturas do mês passado</utterance>
+        </inputs>
+        <number>25</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent sets startDate 2026-01-01 endDate 2026-01-31 and invokes historical handler</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Mostra as faturas de janeiro de 2026</utterance>
+        </inputs>
+        <number>26</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent invokes historical handler with 3-month lookback from current date</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Preciso das faturas dos últimos 3 meses</utterance>
+        </inputs>
+        <number>27</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves invoice history and highlights invoices with past-due status</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Exibe faturas em atraso do cliente</utterance>
+        </inputs>
+        <number>28</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves history and identifies invoices with cancelDate field populated</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Tem fatura cancelada no histórico?</utterance>
+        </inputs>
+        <number>29</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves invoice history and highlights cobilled true entries</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Listar faturas com cobrança conjunta</utterance>
+        </inputs>
+        <number>30</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves history and presents invoiceAmount for the March invoice</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Qual o valor da fatura de março?</utterance>
+        </inputs>
+        <number>31</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves invoice history and presents paymentDate of the most recent paid invoice</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Qual a data de pagamento da última fatura?</utterance>
+        </inputs>
+        <number>32</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves history, locates the February invoice and checks paymentDate field</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Fatura com vencimento em fevereiro foi paga?</utterance>
+        </inputs>
+        <number>33</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent refuses to invoke gateway and asks operator to provide operatorCode before proceeding</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Busca faturas sem informar operatorCode</utterance>
+        </inputs>
+        <number>34</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent refuses to invoke gateway and asks operator to provide contractNumber</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Busca faturas sem informar contractNumber</utterance>
+        </inputs>
+        <number>35</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent invokes historical handler with startDate set 12 months prior to endDate</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Busca histórico com lookback de 12 meses</utterance>
+        </inputs>
+        <number>36</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves invoice history and identifies the invoice with highest invoiceAmount</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Quero ver a fatura mais cara dos últimos 6 meses</utterance>
+        </inputs>
+        <number>37</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves invoice history and informs the total count of invoices found</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Quantas faturas encontradas no período?</utterance>
+        </inputs>
+        <number>38</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves history and presents invoices ordered by docDate most recent first</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Ordena as faturas por data de emissão</utterance>
+        </inputs>
+        <number>39</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent detects truncated true in response, informs operator and presents available partial data</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Histórico de faturas — resposta veio truncada</utterance>
+        </inputs>
+        <number>40</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent reads response.message from failed gateway call and paraphrases politely without technical details</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Histórico de faturas — resposta com erro</utterance>
+        </inputs>
+        <number>41</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent reuses previously collected operatorCode and contractNumber without asking again</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Mostra histórico com operatorCode e contractNumber já fornecidos nesta conversa</utterance>
+        </inputs>
+        <number>42</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves invoice history and presents ban field from the most recent invoice</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Qual o BAN da última fatura?</utterance>
+        </inputs>
+        <number>43</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves history and presents invoiceNumber when the field is available</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Há fatura com número de fatura disponível?</utterance>
+        </inputs>
+        <number>44</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves invoice history and surfaces partners field when available</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Há parceiros nas cobranças do cliente?</utterance>
+        </inputs>
+        <number>45</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent invokes apex:SF_FinDiagInvoiceDetailsHandler with invoiceId INV-001 and required fields</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Abre os detalhes da fatura INV-001</utterance>
+        </inputs>
+        <number>46</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent asks for invoiceId, contractNumber and operatorCode then invokes invoice details handler</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Detalha a fatura</utterance>
+        </inputs>
+        <number>47</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves invoice details and presents itemGroups with mapped category names</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Mostra os itens da fatura</utterance>
+        </inputs>
+        <number>48</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves invoice details and presents amount formatted as R$ with 2 decimal places</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Qual o valor total da fatura?</utterance>
+        </inputs>
+        <number>49</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent invokes details handler and maps category codes 12 to Televisao 18 to Internet 21 to Eventuais 998 to Telefone 999 to Movel</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Detalha as categorias de cobrança da fatura</utterance>
+        </inputs>
+        <number>50</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves invoice details, maps category 18 to Internet and lists items</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Tem cobranças de Internet na fatura?</utterance>
+        </inputs>
+        <number>51</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves details and presents category 12 mapped to Televisao</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Mostra cobranças de TV da fatura</utterance>
+        </inputs>
+        <number>52</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves details and presents category 21 mapped to Eventuais with item list</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Quais itens eventuais estão na fatura?</utterance>
+        </inputs>
+        <number>53</number>
+    </testCase>
+</AiEvaluationDefinition>

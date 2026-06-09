@@ -1,0 +1,14 @@
+{
+  "status": 0,
+  "result": {
+    "success": true,
+    "compiled": true,
+    "compileProblem": "",
+    "exceptionMessage": "",
+    "exceptionStackTrace": "",
+    "line": -1,
+    "column": -1,
+    "logs": "67.0 APEX_CODE,DEBUG;APEX_PROFILING,INFO\nExecute Anonymous: SF_AgenticGateway.Request req = new SF_AgenticGateway.Request();\nExecute Anonymous: req.handlerClass = 'flow:Buscar_Book_Ofertas';\nExecute Anonymous: req.payloadJson  = '{\\\"varAno\\\":2026,\\\"varCidade\\\":\\\"São Paulo\\\",\\\"varMes\\\":\\\"06\\\",\\\"varProduto\\\":\\\"FIXO\\\"}';\nExecute Anonymous: req.correlationId = 'smokeh07Ofertas';\nExecute Anonymous: List<SF_AgenticGateway.Request> reqs = new List<SF_AgenticGateway.Request>{ req };\nExecute Anonymous: List<SF_AgenticGateway.Response> resps = SF_AgenticGateway.invoke(reqs);\nExecute Anonymous: SF_AgenticGateway.Response r = resps[0];\nExecute Anonymous: System.debug('RESULT::' + JSON.serialize(r));\n13:47:04.270 (2270680772)|USER_INFO|[EXTERNAL]|005HZ00000LVGNm|adeandrade@salesforce.com.ibuy|(GMT-03:00) Brasilia Standard Time (America/Sao_Paulo)|GMT-03:00\n13:47:04.270 (2270702590)|EXECUTION_STARTED\n13:47:04.270 (2270869148)|CODE_UNIT_STARTED|[EXTERNAL]|execute_anonymous_apex\n13:47:08.448 (6448254050)|USER_DEBUG|[8]|DEBUG|RESULT::{\"success\":true,\"message\":null,\"dataJson\":\"{\\\"data\\\":{\\\"output\\\":{\\\"Flow__InterviewStatus\\\":\\\"Finished\\\",\\\"Flow__InterviewGuid\\\":\\\"7023d7458948eca9995b4909ed9b19ead2e68c8-17ba\\\",\\\"varResposta\\\":\\\"Não encontramos ofertas para os filtros informados.\\\"},\\\"success\\\":true},\\\"truncated\\\":false,\\\"dataRef\\\":null,\\\"summary\\\":null}\",\"correlationId\":\"smokeh07Ofertas\"}\n13:47:08.465 (6465908822)|CUMULATIVE_LIMIT_USAGE\n13:47:08.465 (6465908822)|LIMIT_USAGE_FOR_NS|(default)|\n  Number of SOQL queries: 3 out of 100\n  Number of query rows: 28 out of 50000\n  Number of SOSL queries: 0 out of 20\n  Number of DML statements: 1 out of 150\n  Number of Publish Immediate DML: 0 out of 150\n  Number of DML rows: 1 out of 10000\n  Maximum CPU time: 87 out of 10000\n  Maximum heap size: 0 out of 6000000\n  Number of callouts: 1 out of 100\n  Number of Email Invocations: 0 out of 10\n  Number of future calls: 0 out of 50\n  Number of queueable jobs added to the queue: 0 out of 50\n  Number of Mobile Apex push calls: 0 out of 10\n\n13:47:08.465 (6465908822)|CUMULATIVE_LIMIT_USAGE_END\n\n13:47:08.448 (6465980975)|CODE_UNIT_FINISHED|execute_anonymous_apex\n13:47:08.448 (6466001546)|EXECUTION_FINISHED\n"
+  },
+  "warnings": []
+}

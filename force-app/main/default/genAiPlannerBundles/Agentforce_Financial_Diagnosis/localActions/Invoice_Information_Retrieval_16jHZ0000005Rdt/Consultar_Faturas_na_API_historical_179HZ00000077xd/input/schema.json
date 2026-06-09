@@ -1,0 +1,35 @@
+{
+  "required" : [ "contractNumber", "endDate", "operatorCode", "startDate" ],
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "contractNumber" : {
+      "title" : "contractNumber",
+      "description" : "Número do contrato do cliente. Deve ser numérico. Necessário para recuperar os dados da fatura.",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    },
+    "endDate" : {
+      "title" : "endDate",
+      "description" : "Data final do período de pesquisa de faturas. O formato deve ser AAAA-MM-DD.",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    },
+    "operatorCode" : {
+      "title" : "operatorCode",
+      "description" : "Código numérico do operador associado ao contrato do cliente.",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    },
+    "startDate" : {
+      "title" : "startDate",
+      "description" : "Data de início do período de pesquisa de faturas. O formato deve ser AAAA-MM-DD.",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    }
+  },
+  "lightning:type" : "lightning__objectType"
+}

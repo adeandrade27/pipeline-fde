@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Get_Account_Balance</name>
+        <label>Get Account Balance</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>GetAccountBalance.Get Account Balance</actionName>
+        <actionType>externalService</actionType>
+        <connector>
+            <targetReference>IsAccountBalanceAvailable</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <nameSegment>GetAccountBalance.Get Account Balance</nameSegment>
+        <offset>0</offset>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <apiVersion>64.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <description>Adds details from the Outputs from TransformAccountBalance variable to the prompt instructions. Shows the account number, account balance, and the currency code.</description>
+        <name>AddAccountBalancePromptInstructions</name>
+        <elementSubtype>AddPromptInstructions</elementSubtype>
+        <label>Add Account Balance Prompt Instructions</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Output.Prompt</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <stringValue>Account Number : {!TransformAccountBalance.account_no}
+Account Balance:{!TransformAccountBalance.balance_currency}{!TransformAccountBalance.account_balance}
+</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>IterateOverTransformAccountBalance</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Adds details from the Outputs from IterativeAccountServices variable to the prompt instructions. Shows the service name and balance.</description>
+        <name>AddAccountBalanceSummaryPromptInstructions</name>
+        <elementSubtype>AddPromptInstructions</elementSubtype>
+        <label>Add Account Balance Summary Prompt Instructions</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Output.Prompt</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <stringValue>Service Name :{!IterateOverTransformAccountBalance.service_name}
+Service Balance :{!TransformAccountBalance.balance_currency}{!IterateOverTransformAccountBalance.service_balance}
+</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>IterateOverTransformAccountBalance</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Assignment_3</name>
+        <label>Assignment 3</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>DEMO_Apex_Account_Balance.services</assignToReference>
+            <operator>Assign</operator>
+        </assignmentItems>
+        <connector>
+            <targetReference>Get_Account_Balance</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Service_Assignments</name>
+        <label>Service Assignments</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>DEMO_Apex_Service1.service_balance</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>202.08</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>DEMO_Apex_Service1.service_description</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Blaze Mobile 25GB</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>DEMO_Apex_Service1.service_name</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>laze Mobile 25GB</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Assignment_3</targetReference>
+        </connector>
+    </assignments>
+    <decisions>
+        <description>Determines whether the account balance is available in the external billing system.</description>
+        <name>IsAccountBalanceAvailable</name>
+        <label>Is Account Balance Available?</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>HasAccountBalance</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>ActionResponse</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>OK</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>TransformAccountBalance</targetReference>
+            </connector>
+            <label>Yes</label>
+        </rules>
+    </decisions>
+    <description>Hard coding results and data.</description>
+    <environments>Default</environments>
+    <interviewLabel>COM - Get Account Balance {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>COM - Get Account Balance</label>
+    <loops>
+        <description>Repeats actions for each service in Outputs from TransformAccountBalance variable.</description>
+        <name>IterateOverTransformAccountBalance</name>
+        <label>Iterate Over Transform Account Balance</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <collectionReference>TransformAccountBalance.services</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>AddAccountBalanceSummaryPromptInstructions</targetReference>
+        </nextValueConnector>
+    </loops>
+    <overriddenFlow>ind_comms_agentforce__GetAcctBalance</overriddenFlow>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>PromptFlow</processType>
+    <recordLookups>
+        <description>Gets the account number with an ID that matches the Account ID associated with the account that&apos;s passed into the flow. Stores the result in the AccountNumber variable.</description>
+        <name>GetAccountNumber</name>
+        <label>Get Account Number</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Service_Assignments</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Input.objectToSummarize.Id</elementReference>
+            </value>
+        </filters>
+        <object>Account</object>
+        <outputAssignments>
+            <assignToReference>AccountNumber</assignToReference>
+            <field>AccountNumber</field>
+        </outputAssignments>
+    </recordLookups>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <capabilityTypes>
+            <name>PromptTemplateType://einstein_gpt__recordSummary</name>
+            <capabilityName>PromptTemplateType://einstein_gpt__recordSummary</capabilityName>
+            <inputs>
+                <name>objectToSummarize</name>
+                <capabilityInputName>objectToSummarize</capabilityInputName>
+                <dataType>SOBJECT://Account</dataType>
+                <isCollection>false</isCollection>
+            </inputs>
+        </capabilityTypes>
+        <connector>
+            <targetReference>GetAccountNumber</targetReference>
+        </connector>
+        <triggerType>Capability</triggerType>
+    </start>
+    <status>Draft</status>
+    <transforms>
+        <description>Maps and transforms fields from the AccountBalanceFormat record collection to the Apex ind_comms_agentforce__AccountBalance class. Stores the target data in Outputs from TransformAccountBalance.</description>
+        <name>TransformAccountBalance</name>
+        <label>Transform Account Balance</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <apexClass>ind_comms_agentforce__AccountBalance</apexClass>
+        <connector>
+            <targetReference>AddAccountBalancePromptInstructions</targetReference>
+        </connector>
+        <dataType>Apex</dataType>
+        <isCollection>false</isCollection>
+        <scale>0</scale>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+        <transformValues>
+            <transformValueActions>
+                <outputFieldApiName>account_no</outputFieldApiName>
+                <transformType>Map</transformType>
+                <value>
+                    <elementReference>AccountNumber</elementReference>
+                </value>
+            </transformValueActions>
+            <transformValueActions>
+                <outputFieldApiName>account_balance</outputFieldApiName>
+                <transformType>Map</transformType>
+                <value>
+                    <elementReference>AccountBalanceFormat.account_balance</elementReference>
+                </value>
+            </transformValueActions>
+            <transformValueActions>
+                <outputFieldApiName>balance_currency</outputFieldApiName>
+                <transformType>Map</transformType>
+                <value>
+                    <elementReference>AccountBalanceFormat.balance_currency</elementReference>
+                </value>
+            </transformValueActions>
+            <transformValueActions>
+                <outputFieldApiName>services[$EachItem].service_balance</outputFieldApiName>
+                <transformType>Map</transformType>
+                <value>
+                    <elementReference>AccountBalanceFormat.services[$EachItem].service_balance</elementReference>
+                </value>
+            </transformValueActions>
+            <transformValueActions>
+                <outputFieldApiName>services[$EachItem].service_description</outputFieldApiName>
+                <transformType>Map</transformType>
+                <value>
+                    <elementReference>AccountBalanceFormat.services[$EachItem].service_description</elementReference>
+                </value>
+            </transformValueActions>
+            <transformValueActions>
+                <outputFieldApiName>services[$EachItem].service_name</outputFieldApiName>
+                <transformType>Map</transformType>
+                <value>
+                    <elementReference>AccountBalanceFormat.services[$EachItem].service_name</elementReference>
+                </value>
+            </transformValueActions>
+        </transformValues>
+    </transforms>
+    <variables>
+        <description>Stores the format for mapping the account balance record to the ind_comms_agentforce__AccountBalance Apex variable.</description>
+        <name>AccountBalanceFormat</name>
+        <apexClass>ind_comms_agentforce__AccountBalance</apexClass>
+        <dataType>Apex</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Stores the AccountNumber from GetAccountNumber.</description>
+        <name>AccountNumber</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Stores the response of the call to the external billing system while trying to retrieve the account balance.</description>
+        <name>ActionResponse</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>DEMO_Account_Balance_response</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <stringValue>{   &quot;error_code&quot;: 0,   &quot;error_msg&quot;: &quot;OK&quot;,   &quot;currency_cd&quot;: &quot;usd&quot;,   &quot;acct_balance&quot;: &quot;466.08&quot;,   &quot;master_plan_instances&quot;: [     {       &quot;master_plan_instance_no&quot;: 43981759,       &quot;client_def_master_plan_instance_id&quot;: &quot;43981759&quot;,       &quot;master_plan_name&quot;: &quot;Blaze Mobile 25GB&quot;,       &quot;master_plan_instance_desc&quot;: &quot;Blaze Mobile 25GB&quot;,       &quot;master_plan_instance_balance&quot;: 202.08     },     {       &quot;master_plan_instance_no&quot;: 43981760,       &quot;client_def_master_plan_instance_id&quot;: &quot;43981760&quot;,       &quot;master_plan_name&quot;: &quot;Blaze Internet Premium&quot;,       &quot;master_plan_instance_desc&quot;: &quot;Blaze Internet Premium&quot;,       &quot;master_plan_instance_balance&quot;: 264     }   ] }</stringValue>
+        </value>
+    </variables>
+    <variables>
+        <name>DEMO_Apex_Account_Balance</name>
+        <apexClass>ind_comms_agentforce__AccountBalance</apexClass>
+        <dataType>Apex</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>DEMO_Apex_Service1</name>
+        <apexClass>ind_comms_agentforce__AccountService</apexClass>
+        <dataType>Apex</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>DEMO_Apex_Service2</name>
+        <apexClass>ind_comms_agentforce__AccountService</apexClass>
+        <dataType>Apex</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Get_Catalogs</name>
+        <label>Get Catalogs</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>getCatalogs</actionName>
+        <actionType>getCatalogs</actionType>
+        <connector>
+            <targetReference>Return_Catalogs</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <nameSegment>getCatalogs</nameSegment>
+        <offset>0</offset>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <apiVersion>66.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <name>Return_Catalogs</name>
+        <label>Return Catalogs</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>catalogCount</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Get_Catalogs.resultListCount</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>catalogs</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Get_Catalogs.resultCatalogList</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <description>Retrieves the catalogs from RCA</description>
+    <environments>Default</environments>
+    <interviewLabel>Test Get Catalogs {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Test Get Catalogs</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Get_Catalogs</targetReference>
+        </connector>
+    </start>
+    <status>Draft</status>
+    <variables>
+        <description>The number of catalogs found</description>
+        <name>catalogCount</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+        <scale>0</scale>
+        <value>
+            <numberValue>0.0</numberValue>
+        </value>
+    </variables>
+    <variables>
+        <description>The list of catalogs</description>
+        <name>catalogs</name>
+        <apexClass>runtime_industries_cpq__CatalogOutputRepresentation</apexClass>
+        <dataType>Apex</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+</Flow>

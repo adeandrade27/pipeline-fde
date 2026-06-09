@@ -1,0 +1,44 @@
+<template>
+    <lightning-card title="Demo Jobs" icon-name="standard:task">
+
+        <!-- Job Buttons -->
+        <div class="slds-m-around_medium">
+
+            <h2 class="slds-text-heading_small slds-m-bottom_small">
+                Start demo administration jobs by clicking the appropriate button below and monitoring the console below.
+            </h2>            
+
+            <!-- Setup Job 
+            <lightning-button variant="brand" label="Setup" title="Performs all necessary setup steps for the the Multiplay Demo" icon-name="utility:play" disabled={buttonsDisabled} onclick={setup} class="slds-m-left_x-small"></lightning-button>            
+            -->
+
+            <!-- OmniScript Recompilation Job 
+                <lightning-button variant="brand" label="Recompile OmniScripts" title="Recompiles all active OmniScripts" icon-name="utility:refresh" disabled={buttonsDisabled} onclick={recompileOS} class="slds-m-left_x-small"></lightning-button>            
+            -->
+            <!-- Rebuild Product Hierarchy, Refresh CPQ Platform Cache, Refresh the Digital Commerce Cache             
+            <lightning-button variant="brand" label="Rebuild Cache" title="Rebuilds the Product Hierarchy, refreshes the CPQ Platform Cache, an refresh the Digital Commerce Cache" icon-name="utility:refresh" disabled={buttonsDisabled} onclick={rebuildCatalog} class="slds-m-left_x-small"></lightning-button>
+            -->
+            <!-- Cleanup Job -->            
+            <lightning-button   variant="brand" 
+                                label="Cleanup" 
+                                title="Performs all of the cleanup operations for the  Demo" 
+                                icon-name="utility:delete" disabled={buttonsDisabled} 
+                                onclick={cleanup} 
+                                class="slds-m-left_x-small">
+            </lightning-button>
+
+            <!-- Optimization Job - Special button, only visible in the IDO 
+            <template lwc:if={optimizeButtonVisible}>                
+                <lightning-button variant="destructive" label="Optimize" title="Optimizes the demo platform" icon-name="utility:refresh" disabled={buttonsDisabled} onclick={optimize} class="slds-m-left_x-small"></lightning-button>
+            </template>
+            -->
+
+        </div>
+
+        <!-- Event Console -->
+        <div class="slds-m-around_medium">
+            <c-demo_event-console></c-demo_event-console>
+        </div>
+
+    </lightning-card>
+</template>

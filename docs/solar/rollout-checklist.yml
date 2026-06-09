@@ -1,0 +1,40 @@
+name: solar_rollout_checklist
+version: 1
+phases:
+  - name: pre_go_live
+    required:
+      - "gmud_evidence_package_generated"
+      - "regression_gate_passed"
+      - "adversarial_gate_passed"
+      - "stress_gate_passed"
+      - "observability_alerts_enabled"
+      - "rollback_validated"
+      - "kill_switch_validated"
+      - "operations_owner_defined"
+      - "go_no_go_approved"
+  - name: go_live
+    required:
+      - "scope_limited_to_first_dispute_type"
+      - "human_fallback_active"
+      - "incident_channel_open"
+      - "hourly_kpi_monitoring_active"
+    rollback_conditions:
+      - "error_rate_above_threshold"
+      - "p95_latency_above_threshold"
+      - "out_of_scope_behavior_detected"
+  - name: plus_30_days
+    required:
+      - "weekly_kpi_review_running"
+      - "top_issues_backlog_prioritized"
+      - "ibm_fde_pending_items_tracked"
+  - name: plus_60_days
+    required:
+      - "new_dispute_types_added_with_tests"
+      - "cost_per_resolution_within_budget"
+      - "regression_suite_expanded"
+  - name: plus_90_days
+    required:
+      - "dispatch_optimization_completed"
+      - "escalation_rate_reduced"
+      - "alert_thresholds_recalibrated"
+      - "executive_summary_published"

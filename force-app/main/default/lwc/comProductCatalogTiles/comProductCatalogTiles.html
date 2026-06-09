@@ -1,0 +1,33 @@
+<template>
+    <div class="pct-root">
+        <template for:each={tileRows} for:item="row">
+            <article key={row.key} class={row.tileClass}>
+                <div class="pct-tile__media">
+                    <img
+                        class="pct-tile__image"
+                        src={row.displayUrl}
+                        alt={row.name}
+                        loading="lazy"
+                    />
+                </div>
+                <div class="pct-tile__divider" aria-hidden="true"></div>
+                <h2 class="pct-tile__name">{row.name}</h2>
+                <div class="pct-tile__divider" aria-hidden="true"></div>
+                <p class="pct-tile__description">{row.description}</p>
+                <div class="pct-tile__divider" aria-hidden="true"></div>
+                <div class="pct-tile__price">
+                    <span class="pct-tile__price-value">{row.priceAmountFormatted}</span>
+                    <span class="pct-tile__price-suffix">/month</span>
+                </div>
+                <button
+                    type="button"
+                    class="pct-tile__action"
+                    data-product-id={row.id}
+                    onclick={handleAddToCart}
+                >
+                    Add to Cart
+                </button>
+            </article>
+        </template>
+    </div>
+</template>

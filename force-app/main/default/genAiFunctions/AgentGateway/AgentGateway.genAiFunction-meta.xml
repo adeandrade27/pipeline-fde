@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiFunction xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Recupera dados completos de um caso de atendimento e contexto de cobrança para diagnóstico financeiro. Usar quando o operador perguntar sobre um caso ou fatura específica.</description>
+    <developerName>AgentGateway</developerName>
+    <invocationTarget>SF_AgenticGateway</invocationTarget>
+    <invocationTargetType>apex</invocationTargetType>
+    <isConfirmationRequired>false</isConfirmationRequired>
+    <isIncludeInProgressIndicator>true</isIncludeInProgressIndicator>
+    <masterLabel>Agent Gateway</masterLabel>
+    <progressIndicatorMessage>Consultando dados do caso...</progressIndicatorMessage>
+</GenAiFunction>

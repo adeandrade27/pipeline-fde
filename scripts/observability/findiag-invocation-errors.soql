@@ -1,0 +1,13 @@
+SELECT
+  Id,
+  CreatedDate,
+  Target__c,
+  HandlerClass__c,
+  DispatchType__c,
+  Status__c,
+  DurationMs__c
+FROM SF_AgenticInvocation__c
+WHERE CreatedDate = LAST_N_DAYS:1
+AND Status__c = 'Error'
+ORDER BY CreatedDate DESC
+LIMIT 200

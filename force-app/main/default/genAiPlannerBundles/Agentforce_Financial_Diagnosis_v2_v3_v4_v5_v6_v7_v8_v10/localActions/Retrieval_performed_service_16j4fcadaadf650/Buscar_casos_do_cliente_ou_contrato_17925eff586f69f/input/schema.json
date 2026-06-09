@@ -1,0 +1,14 @@
+{
+  "required" : [ "contractReference" ],
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "contractReference" : {
+      "title" : "contractReference",
+      "description" : "Id do contrato do caso de atendimento que pode ser o contrato do caso em tela.",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    }
+  },
+  "lightning:type" : "lightning__objectType"
+}

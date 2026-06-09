@@ -1,0 +1,20 @@
+{
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "IDdaconta" : {
+      "title" : "IDdaconta",
+      "description" : "ID da conta como referência para buscar os ativos.",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    },
+    "orderReference" : {
+      "title" : "orderReference",
+      "description" : "ID do pedido como referência para buscar os ativos.",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    }
+  },
+  "lightning:type" : "lightning__objectType"
+}

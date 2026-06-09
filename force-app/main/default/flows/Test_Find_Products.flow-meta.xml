@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>GetProducts</name>
+        <label>Get Products</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>getProducts</actionName>
+        <actionType>getProducts</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>categoryId</name>
+            <value>
+                <stringValue>0ZGHn0000004pBAOAY</stringValue>
+            </value>
+        </inputParameters>
+        <nameSegment>getProducts</nameSegment>
+        <offset>0</offset>
+        <outputParameters>
+            <assignToReference>products</assignToReference>
+            <name>results</name>
+        </outputParameters>
+    </actionCalls>
+    <apiVersion>66.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <environments>Default</environments>
+    <interviewLabel>Test Find Products {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Test Find Products</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>GetProducts</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <variables>
+        <name>products</name>
+        <apexClass>runtime_industries_cpq__ProductListRepresentation</apexClass>
+        <dataType>Apex</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+</Flow>

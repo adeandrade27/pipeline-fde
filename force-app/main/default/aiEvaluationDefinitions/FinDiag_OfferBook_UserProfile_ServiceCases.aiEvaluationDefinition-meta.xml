@@ -1,0 +1,961 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AiEvaluationDefinition xmlns="http://soap.sforce.com/2006/04/metadata">
+    <name>FinDiag_OfferBook_UserProfile_ServiceCases</name>
+    <subjectName>FinDiagAgent</subjectName>
+    <subjectType>AGENT</subjectType>
+    <subjectVersion>v13</subjectVersion>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent extracts Profilename from dataJson and stores in Profile_name variable</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Perfil retornado — Profilename preenchido</utterance>
+        </inputs>
+        <number>1</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent cannot invoke handler and informs operator that user ID is not available in context</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Busca perfil sem TargetUserId disponivel</utterance>
+        </inputs>
+        <number>2</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent informs permission requirements from knowledge base without exposing internal configs</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Qual perfil tem permissao para rotear casos?</utterance>
+        </inputs>
+        <number>3</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent reuses stored Profile_name variable and does not re-invoke unless session changes</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Mantem Profile_name durante toda a conversa</utterance>
+        </inputs>
+        <number>4</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent paraphrases error politely and maintains conversation without profile context</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Perfil do usuario — resposta com erro</utterance>
+        </inputs>
+        <number>5</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves profile at start of conversation per Bloco A8 early-invocation rule</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Busca perfil para determinar escopo do atendimento</utterance>
+        </inputs>
+        <number>6</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent invokes flow:Buscar_casos_do_cliente_ou_contrato with Contract_id</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Historico de casos do cliente</utterance>
+        </inputs>
+        <number>7</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves case history and presents each case with number type status and subject</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Atendimentos anteriores do cliente</utterance>
+        </inputs>
+        <number>8</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves cases and counts those with Financeiro record type in last 90 days</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Quantos casos o cliente abriu sobre financeiro?</utterance>
+        </inputs>
+        <number>9</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves cases and issues mandatory alert if more than 1 financial case in 90 days</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Cliente reincidente em casos financeiros</utterance>
+        </inputs>
+        <number>10</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent presents ATENCAO alert message when financial case count exceeds threshold</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Casos anteriores — alerta de reincidencia</utterance>
+        </inputs>
+        <number>11</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves case history and filters for closed status entries</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Quais casos foram fechados?</utterance>
+        </inputs>
+        <number>12</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent asks operator for Contract ID before invoking cases handler</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Historico de casos sem Contract ID</utterance>
+        </inputs>
+        <number>13</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent informs that no cases were found for the given contract</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Casos do cliente — sem casos encontrados</utterance>
+        </inputs>
+        <number>14</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves cases and presents Subject of the most recent financial case</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Qual o assunto do ultimo caso financeiro?</utterance>
+        </inputs>
+        <number>15</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves cases and presents Description of the specified case</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Mostra descricao do caso 00005678</utterance>
+        </inputs>
+        <number>16</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves cases and filters by CreatedDate within last 30 days</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Casos criados nos ultimos 30 dias</utterance>
+        </inputs>
+        <number>17</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves cases and presents only Financeiro record type entries</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Apenas casos do tipo Financeiro</utterance>
+        </inputs>
+        <number>18</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves cases and counts those with open or in-progress status</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Quantos atendimentos abertos o cliente tem?</utterance>
+        </inputs>
+        <number>19</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves cases and searches subjects or descriptions for billing dispute keywords</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Ha casos sobre cobranças indevidas anteriores?</utterance>
+        </inputs>
+        <number>20</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent reads error from gateway and paraphrases politely without stack traces</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Casos — erro de gateway</utterance>
+        </inputs>
+        <number>21</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent clarifies that A0 loads current case from screen and A9 retrieves historical case list</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Diferenca entre caso atual em tela e historico de casos</utterance>
+        </inputs>
+        <number>22</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves cases and presents mandatory reincidence alert for high contact frequency</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Cliente com 3 casos financeiros em 60 dias</utterance>
+        </inputs>
+        <number>23</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent clarifies that contractReference should be the Billing Contract ID from Contract_id variable</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Casos do cliente ou do contrato — qual usar?</utterance>
+        </inputs>
+        <number>24</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves cases and presents NBA summaries from colResumoAgent when available</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Casos — colResumoAgent preenchido</utterance>
+        </inputs>
+        <number>25</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves cases and presents CreatedDate of the most recent financial case</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Ultimo caso financeiro — quando foi aberto?</utterance>
+        </inputs>
+        <number>26</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent invokes flow:Buscar_Ajuste_de_Pagamento with accountReference and caseReference</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Historico de ajustes de pagamento</utterance>
+        </inputs>
+        <number>27</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves payment adjustments and presents each with type status and amount</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Alteracoes financeiras realizadas no contrato</utterance>
+        </inputs>
+        <number>28</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves adjustments and identifies FinancialSettlement record types</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Tem algum acordo financeiro registrado?</utterance>
+        </inputs>
+        <number>29</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves adjustments and identifies BilletsWriteOffs record type entries</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Baixa de boletos realizada?</utterance>
+        </inputs>
+        <number>30</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves adjustments and identifies InvoiceCancellation entries</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Houve cancelamento de fatura no historico?</utterance>
+        </inputs>
+        <number>31</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves adjustments and identifies DismemberInvoice record type</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Desmembramento de fatura aplicado?</utterance>
+        </inputs>
+        <number>32</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves adjustments and presents Itens_Contestados entries</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Itens contestados registrados para o caso?</utterance>
+        </inputs>
+        <number>33</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves adjustments and identifies Negotiation record type entries</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Negociacao registrada para o cliente?</utterance>
+        </inputs>
+        <number>34</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves adjustments and identifies Refund record type entries</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Reembolso aplicado ao cliente?</utterance>
+        </inputs>
+        <number>35</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent asks operator to provide Account ID before invoking adjustments handler</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Ajustes de pagamento — sem Account ID</utterance>
+        </inputs>
+        <number>36</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent asks operator for Case ID reference before invoking payment adjustments</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Ajustes de pagamento — sem Case ID</utterance>
+        </inputs>
+        <number>37</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent detects mismatch and informs operator before proceeding</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>IDs de Account e Case nao correspondem</utterance>
+        </inputs>
+        <number>38</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves adjustments and presents Amount field of FinancialSettlement formatted as R$</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Valor do acordo financeiro registrado</utterance>
+        </inputs>
+        <number>39</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves adjustments and presents Reason field of Refund adjustment</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Motivo do reembolso aplicado</utterance>
+        </inputs>
+        <number>40</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves adjustments and presents CreatedDate of the most recent entry</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Data do ultimo ajuste de pagamento</utterance>
+        </inputs>
+        <number>41</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves complete adjustment history linked to the current case</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Todos os ajustes de pagamento para este caso</utterance>
+        </inputs>
+        <number>42</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent informs operator that no payment adjustments were found for this case</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Ajuste de pagamento — retornou nenhum registro</utterance>
+        </inputs>
+        <number>43</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent maps FinancialSettlement to Acordo Financeiro in the presented output</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Mapeamento FinancialSettlement para portugues</utterance>
+        </inputs>
+        <number>44</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves adjustments and presents summary grouped by translated record type names</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Resumo de todos os tipos de ajuste aplicados</utterance>
+        </inputs>
+        <number>45</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent refuses to process adjustment type not in the allowed list of 7 types</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Ajuste do tipo fora da lista — qual usar?</utterance>
+        </inputs>
+        <number>46</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent invokes flow:Buscar_Customer_Interaction_do_pedido_order with Order__c from loaded case</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Historico de interacoes do cliente</utterance>
+        </inputs>
+        <number>47</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves customer interactions and presents each with date type channel and description</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Comunicacoes realizadas com o cliente</utterance>
+        </inputs>
+        <number>48</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves interactions linked to Order__c and presents summary</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Solicitacoes e tratativas do pedido</utterance>
+        </inputs>
+        <number>49</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent informs operator that interactions cannot be retrieved without Order ID</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Busca interacoes — Order__c vazio no caso</utterance>
+        </inputs>
+        <number>50</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent refuses and clarifies that only Order ID is valid for customer interaction search</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Usa Client ID para buscar interacoes</utterance>
+        </inputs>
+        <number>51</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent refuses and clarifies that only Order ID is the valid identifier</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Usa Contract ID para buscar interacoes</utterance>
+        </inputs>
+        <number>52</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves interactions and presents total count from recordCInteraction array</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Quantas interacoes encontradas para o pedido?</utterance>
+        </inputs>
+        <number>53</number>
+    </testCase>
+</AiEvaluationDefinition>

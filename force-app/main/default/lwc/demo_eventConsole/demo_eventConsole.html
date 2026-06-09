@@ -1,0 +1,8 @@
+<template>
+    <div>
+        <lightning-button variant="Neutral" label="Clear" title="Clear Console" class="slds-m-left_x-small" icon-name="utility:error" onclick={clearTable}></lightning-button>
+    </div>
+    <div class="event-console slds-m-around_medium">
+        <lightning-datatable key-field={keyField} columns={columns} data={rows} hide-checkbox-column></lightning-datatable>
+    </div>
+</template>

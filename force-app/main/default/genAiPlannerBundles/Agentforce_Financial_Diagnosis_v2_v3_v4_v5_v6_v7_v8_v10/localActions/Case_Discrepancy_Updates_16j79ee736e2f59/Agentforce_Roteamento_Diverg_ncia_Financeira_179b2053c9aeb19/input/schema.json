@@ -1,0 +1,21 @@
+{
+  "required" : [ "varCaseId", "varDescricaoAnalise" ],
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "varCaseId" : {
+      "title" : "varCaseId",
+      "description" : "Identificador único do Caso (Id do Salesforce). Utilizado como prioridade para busca do registro.",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    },
+    "varDescricaoAnalise" : {
+      "title" : "varDescricaoAnalise",
+      "description" : "Descrição preenchida pelo agente contendo a análise realizada. Será registrada no campo Description do Caso junto com o texto padrão do Agentforce.",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    }
+  },
+  "lightning:type" : "lightning__objectType"
+}

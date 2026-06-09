@@ -1,0 +1,35 @@
+{
+  "required" : [ "contractNumber", "endDate", "operatorCode", "startDate" ],
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "contractNumber" : {
+      "title" : "contractNumber",
+      "description" : "Número do contrato do cliente usado como referência para buscar informações de faturas.\n",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    },
+    "endDate" : {
+      "title" : "endDate",
+      "description" : "Data final usada como referência para buscar informações de fatura. Considerar sempre o primeiro dia do mês de 180 dias retroagidos da data atual. O formato deve ser AAAA-MM-DD.",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    },
+    "operatorCode" : {
+      "title" : "operatorCode",
+      "description" : "Número do operador associado ao contrato do cliente.",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    },
+    "startDate" : {
+      "title" : "startDate",
+      "description" : "Data de início usada como referência para buscar informações de faturas. Considerar sempre o último dia do mês subsequente. O formato deve ser AAAA-MM-DD.",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    }
+  },
+  "lightning:type" : "lightning__objectType"
+}

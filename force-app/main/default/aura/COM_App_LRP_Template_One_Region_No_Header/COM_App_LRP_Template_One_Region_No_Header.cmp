@@ -1,0 +1,14 @@
+<aura:component 
+    implements="lightning:appHomeTemplate" 
+    description="COM layout with 1 Region and no Header">
+    <aura:attribute name="content" type="Aura.Component[]" />    
+
+    <ltng:require styles="{!$Resource.COM_LRP_NoHeader}"/>
+
+    <div class="bg-Fixed"></div>
+    <lightning:layout>
+        <lightning:layoutItem class="slds-size_1-of-1">
+            {!v.content}
+        </lightning:layoutItem>
+    </lightning:layout> 
+</aura:component>

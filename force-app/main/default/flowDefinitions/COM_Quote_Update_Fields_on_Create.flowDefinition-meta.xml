@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FlowDefinition xmlns="http://soap.sforce.com/2006/04/metadata">
+    <activeVersionNumber>4</activeVersionNumber>
+    <description>COM:  Set the Account for Quote field (QuoteAccountId) to the same value as Account Name (AccountId).  Set the expiration date for +1 year.  Set Contact on quote to the be same as on Account.  Set default value for Approval Status</description>
+    <masterLabel>COM - Quote Update Fields on Create</masterLabel>
+</FlowDefinition>

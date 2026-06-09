@@ -1,0 +1,7 @@
+Flask>=3.0,<4.0
+anthropic>=0.40.0
+simple-salesforce>=1.12.6
+slack_sdk>=3.31.0
+APScheduler>=3.10.4
+python-dotenv>=1.0.1
+gunicorn>=22.0.0

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FlowDefinition xmlns="http://soap.sforce.com/2006/04/metadata">
+    <activeVersionNumber>8</activeVersionNumber>
+    <description>COM: 1) Create related Order Action and App Usage Assignment Records; 2) Update record type; 3) Set Address fields</description>
+    <masterLabel>COM - Order Update on Create</masterLabel>
+</FlowDefinition>

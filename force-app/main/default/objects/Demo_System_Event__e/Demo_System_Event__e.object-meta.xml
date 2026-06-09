@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Used in the demo event framework and acts somewhat like syslog. Used for reporting demo admin related activities.</description>
+    <eventType>HighVolume</eventType>
+    <label>Demo - System Event</label>
+    <pluralLabel>Demo - System Events</pluralLabel>
+    <publishBehavior>PublishImmediately</publishBehavior>
+</CustomObject>

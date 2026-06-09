@@ -1,0 +1,28 @@
+{
+  "required": ["target", "inputJson"],
+  "unevaluatedProperties": false,
+  "properties": {
+    "target": {
+      "title": "target",
+      "description": "Identificador do handler a invocar. Para diagnóstico de caso usar: Buscar_caso_de_atendimento",
+      "lightning:type": "lightning__textType",
+      "lightning:isPII": false,
+      "copilotAction:isUserInput": false
+    },
+    "inputJson": {
+      "title": "inputJson",
+      "description": "JSON com os parâmetros para o handler. Para Buscar_caso_de_atendimento usar: {\"caseId\": \"<ID do caso Salesforce>\"}",
+      "lightning:type": "lightning__textType",
+      "lightning:isPII": false,
+      "copilotAction:isUserInput": true
+    },
+    "sessionId": {
+      "title": "sessionId",
+      "description": "ID da sessão Agentforce para rastreabilidade (opcional)",
+      "lightning:type": "lightning__textType",
+      "lightning:isPII": false,
+      "copilotAction:isUserInput": false
+    }
+  },
+  "lightning:type": "lightning__objectType"
+}

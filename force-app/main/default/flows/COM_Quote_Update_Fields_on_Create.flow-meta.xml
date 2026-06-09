@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>61.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <description>Read account id from quote and store in variable Account_Id</description>
+        <name>Read_AccountId</name>
+        <label>Read AccountId</label>
+        <locationX>176</locationX>
+        <locationY>539</locationY>
+        <assignmentItems>
+            <assignToReference>Account_ID</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.AccountId</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Check_Account_Id_Var</targetReference>
+        </connector>
+    </assignments>
+    <constants>
+        <name>PriceBookName</name>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Standard Price Book</stringValue>
+        </value>
+    </constants>
+    <decisions>
+        <name>Check_Account_Id_Var</name>
+        <label>Check Account_Id Var</label>
+        <locationX>176</locationX>
+        <locationY>647</locationY>
+        <defaultConnector>
+            <targetReference>Update_QuoteAccountId_Field</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Account Id Populated</defaultConnectorLabel>
+        <rules>
+            <name>Account_Id_blank</name>
+            <conditionLogic>1</conditionLogic>
+            <conditions>
+                <leftValueReference>Account_ID</leftValueReference>
+                <operator>IsBlank</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_Account_Details</targetReference>
+            </connector>
+            <label>Account Id blank</label>
+        </rules>
+    </decisions>
+    <description>Set the Account for Quote field (QuoteAccountId) to the same value as Account Name (AccountId).  Set the expiration date for +1 year.  Set Contact on quote to the be same as on Account.  Set default value for Approval Status</description>
+    <environments>Default</environments>
+    <formulas>
+        <name>TodayPlus12Months</name>
+        <dataType>Date</dataType>
+        <expression>ADDMONTHS( {!$Record.CreatedDate},12)</expression>
+    </formulas>
+    <interviewLabel>COM - Quote Update Fields on Create {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>COM - Quote Update Fields on Create</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <description>Get account details so that we have contact id.</description>
+        <name>Get_Account_Details</name>
+        <label>Get Account Details</label>
+        <locationX>176</locationX>
+        <locationY>947</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Set_Contact_Id</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.QuoteAccountId</elementReference>
+            </value>
+        </filters>
+        <object>Account</object>
+        <outputAssignments>
+            <assignToReference>Contact_Id</assignToReference>
+            <field>COM_Contact__c</field>
+        </outputAssignments>
+    </recordLookups>
+    <recordLookups>
+        <description>Get the id of the Standard Pricebook</description>
+        <name>Get_Pricebook_Id</name>
+        <label>Get Pricebook Id</label>
+        <locationX>176</locationX>
+        <locationY>1163</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Set_Price_Book</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Name</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>PriceBookName</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Pricebook2</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <description>Set Approval Status to Not Required.</description>
+        <name>Set_Approval_Status</name>
+        <label>Set Approval Status</label>
+        <locationX>176</locationX>
+        <locationY>431</locationY>
+        <connector>
+            <targetReference>Read_AccountId</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>COM_Approval_Status__c</field>
+            <value>
+                <stringValue>Not Required</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Set_Contact_Id</name>
+        <label>Set Contact Id</label>
+        <locationX>176</locationX>
+        <locationY>1055</locationY>
+        <connector>
+            <targetReference>Get_Pricebook_Id</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>ContactId</field>
+            <value>
+                <elementReference>Contact_Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Set_Expiration_Date</name>
+        <label>Set Expiration Date</label>
+        <locationX>176</locationX>
+        <locationY>323</locationY>
+        <connector>
+            <targetReference>Set_Approval_Status</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>ExpirationDate</field>
+            <value>
+                <elementReference>TodayPlus12Months</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Set Pricebook to Standard Pricebook.</description>
+        <name>Set_Price_Book</name>
+        <label>Set Price Book</label>
+        <locationX>176</locationX>
+        <locationY>1271</locationY>
+        <inputAssignments>
+            <field>Pricebook2Id</field>
+            <value>
+                <elementReference>Get_Pricebook_Id.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_QuoteAccountId_Field</name>
+        <label>Update QuoteAccountId Field</label>
+        <locationX>264</locationX>
+        <locationY>755</locationY>
+        <connector>
+            <targetReference>Get_Account_Details</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>QuoteAccountId</field>
+            <value>
+                <elementReference>$Record.AccountId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Set_Expiration_Date</targetReference>
+        </connector>
+        <object>Quote</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <variables>
+        <name>Account_ID</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+    <variables>
+        <name>Contact_Id</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+</Flow>

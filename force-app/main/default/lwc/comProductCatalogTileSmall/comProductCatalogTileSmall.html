@@ -1,0 +1,39 @@
+<template>
+    <div class="pct-sm-root">
+        <template for:each={tileRows} for:item="row">
+            <button
+                key={row.key}
+                type="button"
+                class={row.tileClass}
+                data-product-id={row.id}
+                aria-label={row.ariaLabel}
+                onclick={handleAddToCart}
+            >
+                <div class="pct-sm-tile__card">
+                    <template if:true={row.isAdded}>
+                        <div class="pct-sm-tile__badge" aria-hidden="true">
+                            <lightning-icon
+                                icon-name="utility:check"
+                                size="xx-small"
+                                alternative-text=""
+                                class="pct-sm-tile__badge-icon"
+                            ></lightning-icon>
+                        </div>
+                    </template>
+                    <div class="pct-sm-tile__media">
+                        <img
+                            class="pct-sm-tile__image"
+                            src={row.displayUrl}
+                            alt={row.name}
+                            loading="lazy"
+                        />
+                    </div>
+                </div>
+                <div class="pct-sm-tile__price">
+                    <span class="pct-sm-tile__price-value">{row.priceAmountFormatted}</span>
+                    <span class="pct-sm-tile__price-suffix">/month</span>
+                </div>
+            </button>
+        </template>
+    </div>
+</template>

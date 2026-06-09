@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FDE Allocation Pipeline</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+  <body>
+    <main class="container">
+      <header class="header">
+        <h1>FDE Allocation Pipeline</h1>
+        <p class="muted">
+          Last scoring run: {{ generated_at if generated_at else "not generated yet" }}
+        </p>
+        <p class="muted">Open requests scored: {{ request_count }}</p>
+      </header>
+
+      <section class="cards">
+        {% if scorecards %}
+          {% for card in scorecards %}
+            <article class="card">
+              <h2>{{ card.account_name }} · {{ card.request_id }}</h2>
+              <div class="scores">
+                <span>Readiness: {{ card.readiness_score }}</span>
+                <span>Business: {{ card.business_score }}</span>
+                <span>Risk: {{ card.risk_score }}</span>
+                <span class="composite">Composite: {{ card.composite_score }}</span>
+              </div>
+              <p><strong>Recommended FDE:</strong> {{ card.recommended_fde }}</p>
+              <p><strong>Reason:</strong> {{ card.recommendation_reason }}</p>
+              <p><strong>Summary:</strong> {{ card.summary }}</p>
+              <p><strong>Similar projects:</strong> {{ card.similar_projects | join(", ") }}</p>
+              <p><strong>Blockers:</strong> {{ card.blockers | join(", ") }}</p>
+            </article>
+          {% endfor %}
+        {% else %}
+          <article class="empty">
+            <h2>No scorecards yet</h2>
+            <p>Run POST <code>/api/score/run</code> to generate the first score set.</p>
+          </article>
+        {% endif %}
+      </section>
+    </main>
+  </body>
+</html>

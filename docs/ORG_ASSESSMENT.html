@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projeto Solar — Org Assessment · FinDiagAgent v13</title>
+  <style>
+    :root {
+      --red:    #dc2626;
+      --orange: #ea580c;
+      --yellow: #ca8a04;
+      --gray:   #6b7280;
+      --green:  #16a34a;
+      --blue:   #2563eb;
+      --bg:     #f9fafb;
+      --card:   #ffffff;
+      --border: #e5e7eb;
+      --text:   #111827;
+      --muted:  #6b7280;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    /* ── Header ── */
+    .header {
+      background: linear-gradient(135deg, #1e3a5f 0%, #1d4ed8 100%);
+      color: #fff;
+      padding: 40px 48px 32px;
+    }
+    .header-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      opacity: .7;
+      margin-bottom: 8px;
+    }
+    .header h1 {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .header-meta {
+      display: flex;
+      gap: 24px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+    .header-meta span {
+      font-size: 12px;
+      opacity: .8;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .status-pill {
+      display: inline-block;
+      background: rgba(255,255,255,.15);
+      border: 1px solid rgba(255,255,255,.3);
+      border-radius: 20px;
+      padding: 2px 12px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .04em;
+    }
+
+    /* ── Layout ── */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 32px 64px;
+    }
+
+    section { margin-top: 40px; }
+
+    h2 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    h2 .section-num {
+      background: #1d4ed8;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* ── Summary cards ── */
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 24px;
+    }
+    .summary-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px 20px;
+      text-align: center;
+    }
+    .summary-card .count {
+      font-size: 32px;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .summary-card .label { font-size: 12px; color: var(--muted); }
+    .c-red    { color: var(--red);    }
+    .c-orange { color: var(--orange); }
+    .c-yellow { color: var(--yellow); }
+    .c-gray   { color: var(--gray);   }
+
+    /* ── Badges ── */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+    .badge-critical { background: #fee2e2; color: var(--red);    }
+    .badge-high     { background: #ffedd5; color: var(--orange); }
+    .badge-medium   { background: #fef9c3; color: var(--yellow); }
+    .badge-low      { background: #f3f4f6; color: var(--gray);   }
+    .badge-ok       { background: #dcfce7; color: var(--green);  }
+    .badge-warn     { background: #fff7ed; color: var(--orange); }
+    .badge-none     { background: #fef2f2; color: var(--red);    }
+
+    /* ── Finding cards ── */
+    .finding-group { margin-bottom: 8px; }
+    .finding-group-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 20px 0 8px;
+    }
+
+    .finding {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-bottom: 8px;
+    }
+    .finding.critical { border-left-color: var(--red);    }
+    .finding.high     { border-left-color: var(--orange); }
+    .finding.medium   { border-left-color: var(--yellow); }
+    .finding.low      { border-left-color: var(--gray);   }
+
+    .finding-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+    .finding-id {
+      font-size: 11px;
+      font-weight: 700;
+      font-family: "SF Mono", "Fira Code", monospace;
+      color: var(--muted);
+      min-width: 36px;
+    }
+    .finding-title { font-size: 14px; font-weight: 600; flex: 1; }
+    .finding-body  { font-size: 13px; color: #374151; margin-top: 6px; line-height: 1.55; }
+    .finding-action {
+      margin-top: 8px;
+      font-size: 12px;
+      color: #1d4ed8;
+      background: #eff6ff;
+      border-radius: 4px;
+      padding: 6px 10px;
+    }
+    .finding-action strong { color: #1e40af; }
+
+    /* ── Architecture table ── */
+    .arch-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .arch-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+    }
+    .arch-card .comp-name {
+      font-size: 12px;
+      font-weight: 700;
+      font-family: "SF Mono", "Fira Code", monospace;
+      margin-bottom: 4px;
+    }
+    .arch-card .comp-type { font-size: 11px; color: var(--muted); margin-bottom: 8px; }
+
+    /* ── Coverage table ── */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--card);
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      font-size: 13px;
+    }
+    th {
+      background: #f3f4f6;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 10px 14px;
+      text-align: left;
+    }
+    td { padding: 10px 14px; border-top: 1px solid var(--border); vertical-align: middle; }
+    tr:hover td { background: #f9fafb; }
+    td code {
+      font-family: "SF Mono", "Fira Code", monospace;
+      font-size: 11px;
+      background: #f3f4f6;
+      padding: 1px 5px;
+      border-radius: 3px;
+    }
+
+    /* ── Callout ── */
+    .callout {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      border-left: 4px solid #2563eb;
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin-top: 16px;
+    }
+    .callout-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #1e40af;
+      margin-bottom: 8px;
+    }
+    .callout p { font-size: 13px; color: #1e3a8a; }
+    blockquote {
+      border-left: 3px solid #93c5fd;
+      margin: 10px 0;
+      padding: 4px 14px;
+      font-style: italic;
+      color: #1e3a8a;
+      font-size: 13px;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .option-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+    }
+    .option-card .opt-label {
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .option-card p { font-size: 12px; color: #374151; }
+    .opt-a { border-top: 3px solid #16a34a; }
+    .opt-b { border-top: 3px solid #d97706; }
+
+    /* ── Next steps ── */
+    .steps-list { list-style: none; }
+    .steps-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .steps-list li:last-child { border-bottom: none; }
+    .step-num {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #1d4ed8;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .step-body { flex: 1; }
+    .step-body strong { font-size: 13px; }
+    .step-body p { font-size: 12px; color: var(--muted); margin-top: 2px; }
+    .step-owner {
+      font-size: 11px;
+      background: #f3f4f6;
+      border-radius: 4px;
+      padding: 2px 8px;
+      color: var(--muted);
+      white-space: nowrap;
+      align-self: center;
+    }
+
+    /* ── Print ── */
+    @media print {
+      .header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .finding, .arch-card, .option-card, .callout { break-inside: avoid; }
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .summary-grid { grid-template-columns: repeat(2, 1fr); }
+      .arch-grid    { grid-template-columns: 1fr; }
+      .options-grid { grid-template-columns: 1fr; }
+      .container    { padding: 0 16px 48px; }
+      .header       { padding: 28px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════ HEADER ══════════════════════════════ -->
+<div class="header">
+  <div class="header-eyebrow">Salesforce — Time Interno · Confidencial</div>
+  <h1>Projeto Solar — Org Assessment</h1>
+  <div style="display:flex; align-items:center; gap:12px; margin-top:6px;">
+    <span style="font-size:18px; opacity:.85;">FinDiagAgent v13 · <code style="font-size:14px; opacity:.8;">cec-claro--ibuypfpme</code></span>
+    <span class="status-pill">🧪 Sandbox — Rascunho para alinhamento</span>
+  </div>
+  <div class="header-meta">
+    <span>📅 08/jun/2026</span>
+    <span>👥 Time interno Salesforce (FDE + arquitetura)</span>
+    <span>🎯 Deadline go-live: 30/jun/2026</span>
+    <span>⚠️ Este assessment reflete o estado atual do sandbox — não de produção</span>
+  </div>
+</div>
+
+<div style="background:#1e3a5f; border-top:1px solid rgba(255,255,255,0.1); padding:12px 48px; display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
+  <span style="color:rgba(255,255,255,0.5); font-size:12px; text-transform:uppercase; letter-spacing:.08em; font-weight:600;">Documentos relacionados</span>
+  <a href="tests.html" style="display:inline-flex; align-items:center; gap:6px; background:#2563eb; color:#fff; font-size:13px; font-weight:600; padding:7px 16px; border-radius:6px; text-decoration:none;">
+    📋 Relatório de Testes — Handler Smoke Suite (09/jun/2026)
+  </a>
+</div>
+
+<div class="container">
+
+  <!-- ══ 1. Contexto ══ -->
+  <section>
+    <h2><span class="section-num">1</span> Contexto executivo</h2>
+    <p style="font-size:14px; color:#374151; line-height:1.7;">
+      O Projeto Solar é uma iniciativa de IA generativa da Claro Brasil, atualmente em fase de desenvolvimento e testes no sandbox <strong><code>cec-claro--ibuypfpme</code></strong>.
+      A IBM entregou uma base funcional em 2024 usando o Agentforce Builder clássico (7 subagentes, ~16 ações) — a IBM <strong>não migrou para o novo Studio por falta de capacitação</strong>, não por complexidade técnica. Isso é contexto político relevante para o alinhamento com a Claro.
+      O time Salesforce (Lucas) redesenhou no novo Agent Studio (Spring '26, code-first), comprimindo os 7 subagentes para um <strong>Router + único FinDiag_SubAgent</strong>, com 2 ações expostas ao LLM e um gateway centralizado com boundary de segurança.
+      Existem <strong>três artefatos distintos</strong> ativos: o SF Agentic Gateway Bot Template (biblioteca de contratos), o FinDiagAgent (redesenho Salesforce em ibuy), e o Agente Diagnóstico Financeiro original da IBM (ativo em partial, ~22 créditos/conversa em BSIM).
+      A estrutura arquitetural está sólida — os gaps identificados são <strong>pré-requisitos para o go-live</strong>: cobertura de testes, observabilidade e processo de deploy.
+    </p>
+
+    <div class="summary-grid">
+      <div class="summary-card">
+        <div class="count c-red">3</div>
+        <div class="label">🔴 Críticos</div>
+      </div>
+      <div class="summary-card">
+        <div class="count c-orange">6</div>
+        <div class="label">🟠 Altos</div>
+      </div>
+      <div class="summary-card">
+        <div class="count c-yellow">3</div>
+        <div class="label">🟡 Médios</div>
+      </div>
+      <div class="summary-card">
+        <div class="count c-gray">3</div>
+        <div class="label">⚪ Observações</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 2. Arquitetura ══ -->
+  <section>
+    <h2><span class="section-num">2</span> Arquitetura atual — o que foi construído</h2>
+    <div class="arch-grid">
+      <div class="arch-card">
+        <div class="comp-name">FinDiagAgent v13 <span style="font-weight:400;font-size:11px;color:var(--muted)">(confirmar se v13=arquivo ou versão deployada)</span></div>
+        <div class="comp-type">GenAiPlannerBundle · Agent Studio · ibuy</div>
+        <span class="badge badge-ok">✅ Ativo</span>
+      </div>
+      <div class="arch-card">
+        <div class="comp-name">SF_AgenticGateway</div>
+        <div class="comp-type">Apex Invocable @InvocableMethod</div>
+        <span class="badge badge-ok">✅ Ativo</span>
+      </div>
+      <div class="arch-card">
+        <div class="comp-name">SF_AgenticGateway_Allow__mdt</div>
+        <div class="comp-type">Custom Metadata — 44 registros</div>
+        <span class="badge badge-warn">⚠️ 12 ativos · 32 legacy</span>
+      </div>
+      <div class="arch-card">
+        <div class="comp-name">SF_AgenticInvocation__c</div>
+        <div class="comp-type">Custom Object — audit trail</div>
+        <span class="badge badge-warn">⚠️ Sem dashboard</span>
+      </div>
+      <div class="arch-card">
+        <div class="comp-name">SmokeRunner</div>
+        <div class="comp-type">SfAgenticGatewayBotTemplate_v3 · 19 probes</div>
+        <span class="badge badge-warn">⚠️ Execução manual</span>
+      </div>
+      <div class="arch-card">
+        <div class="comp-name">FinDiag_StressTest</div>
+        <div class="comp-type">AiEvaluationDefinition</div>
+        <span class="badge badge-none">❌ Só 5 casos</span>
+      </div>
+      <div class="arch-card">
+        <div class="comp-name">STDM — Data Cloud</div>
+        <div class="comp-type">AI_Agent_Session__dlm · AI_Agent_Interaction_Step__dlm · sandbox <code>cec-claro--partial</code></div>
+        <span class="badge badge-warn">⚠️ Sandbox separada — não conectado a ibuy</span>
+      </div>
+      <div class="arch-card">
+        <div class="comp-name">Agente IBM Legado</div>
+        <div class="comp-type">EinsteinCopilot · partial · ~22 créditos/conversa (BSIM)</div>
+        <span class="badge badge-warn">⚠️ Ainda ativo — sem política de desativação</span>
+      </div>
+      <div class="arch-card">
+        <div class="comp-name">Manifest Copado</div>
+        <div class="comp-type">package.xml · Pipeline GitLab</div>
+        <span class="badge badge-none">❌ Não formalizado</span>
+      </div>
+      <div class="arch-card">
+        <div class="comp-name">FinDiag_Regression</div>
+        <div class="comp-type">AiEvaluationDefinition — novo</div>
+        <span class="badge badge-ok">✅ 31 casos criados</span>
+      </div>
+    </div>
+
+    <div style="margin-top:20px;">
+      <div style="font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); margin-bottom:10px;">Decisões do redesenho IBM → Lucas</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Decisão</th>
+            <th>IBM (antes)</th>
+            <th>Lucas (agora)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Subagentes</td>
+            <td><span style="color:var(--red); font-weight:600;">7 subagentes independentes</span></td>
+            <td><span style="color:var(--green); font-weight:600;">1 Router + 1 FinDiag_SubAgent</span></td>
+          </tr>
+          <tr>
+            <td>Ações expostas ao LLM</td>
+            <td><span style="color:var(--red); font-weight:600;">~16 ações</span></td>
+            <td><span style="color:var(--green); font-weight:600;">2 ações (AgentGateway + KB)</span></td>
+          </tr>
+          <tr>
+            <td>Boundary de segurança</td>
+            <td>Nenhum</td>
+            <td><code>SF_AgenticGateway</code> + CMDT allow-list + HMAC audit</td>
+          </tr>
+          <tr>
+            <td>Versionamento</td>
+            <td>Point-and-click (não commitável)</td>
+            <td><code>.agent</code> files em git · deploy via Copado</td>
+          </tr>
+          <tr>
+            <td>Async / spill</td>
+            <td>Não tratado</td>
+            <td>QueueableWorker + Platform Cache (&gt;16KB)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ══ 3. Findings ══ -->
+  <section>
+    <h2><span class="section-num">3</span> Findings — organizados por prioridade</h2>
+
+    <div class="finding-group-label">🔴 Crítico — gap identificado no sandbox, bloqueia go-live</div>
+
+    <div class="finding critical">
+      <div class="finding-header">
+        <span class="finding-id">F-01</span>
+        <span class="finding-title">Fluxo case-first — risco de travamento na triagem</span>
+        <span class="badge badge-critical">Crítico</span>
+      </div>
+      <div class="finding-body">
+        O agente exige <code>currentRecordId</code> (caso aberto em tela) para funcionar. Se o operador ainda não criou o caso,
+        precisa do diagnóstico para saber qual tipo criar — <strong>círculo vicioso</strong>.
+        Existe risco de o atendimento exigir <code>CaseId</code> prévio para diagnóstico, o que pode travar a triagem inicial.
+        Referência: <code>docs/solar/06-ibm-scenarios-and-no-case-risk.md</code>
+      </div>
+      <div class="finding-action">
+        <strong>Ação:</strong> Validar com operação da Claro se o fluxo é sempre case-first. Se não for, implementar entrada sem case (CPF/contrato) com handoff controlado.
+      </div>
+    </div>
+
+    <div class="finding critical">
+      <div class="finding-header">
+        <span class="finding-id">F-02</span>
+        <span class="finding-title">Eval suite insuficiente</span>
+        <span class="badge badge-critical">Crítico</span>
+      </div>
+      <div class="finding-body">
+        5 casos de teste, todos com o mesmo CaseId, sem variação de fraseado, sem testes de out-of-scope funcionais,
+        sem PII/prompt-leak. <strong>7 de 9 domínios sem nenhuma cobertura.</strong>
+        Não há como garantir o comportamento do agente em cenários reais.
+      </div>
+      <div class="finding-action">
+        <strong>Ação:</strong> Expandir para 31 casos em 9 grupos — <code>FinDiag_Regression</code> já criado nesta sessão.
+      </div>
+    </div>
+
+    <div class="finding critical">
+      <div class="finding-header">
+        <span class="finding-id">F-03</span>
+        <span class="finding-title">32 registros CMDT Active=false + 1 handler ausente do allow-list</span>
+        <span class="badge badge-critical">Crítico</span>
+      </div>
+      <div class="finding-body">
+        Registros legacy IBM com <code>Target='teste'</code>, <code>'teste1'</code>, <code>'teste4'</code> ainda presentes.
+        Risco de confusão no deploy e na auditoria. Sem limpeza, o manifest de deploy fica poluído.
+        <br><br>
+        Adicionalmente, o smoke test de 09/jun/2026 identificou que o handler
+        <strong><code>flow:Buscar_perfil_do_usuario_em_conversa</code></strong> — um dos 12 handlers ativos mapeados —
+        <strong>não consta no CMDT allow-list</strong> (<code>SF_AgenticGateway_Allow__mdt</code>).
+        Qualquer chamada do agente a esse handler falha silenciosamente com
+        <code>Handler not in allow-list</code>. O agente não consegue consultar perfil do usuário no estado atual.
+      </div>
+      <div class="finding-action">
+        <strong>Ação 1:</strong> Limpar os 32 registros <code>Active=false</code> ou documentar intencionalmente como legacy antes do GMUD.<br>
+        <strong>Ação 2:</strong> Adicionar registro ativo no CMDT para <code>flow:Buscar_perfil_do_usuario_em_conversa</code>
+        — confirmar com o Lucas o schema de payload esperado antes de ativar.
+      </div>
+    </div>
+
+    <div class="finding critical">
+      <div class="finding-header">
+        <span class="finding-id">F-06f</span>
+        <span class="finding-title">DML síncrono no gateway por ação — bloqueio de produção em org de grande porte</span>
+        <span class="badge badge-critical">Crítico ↑</span>
+      </div>
+      <div class="finding-body">
+        O <code>SF_AgenticGateway</code> grava um registro em <code>SF_AgenticInvocation__c</code> de forma <strong>síncrona</strong>
+        a cada ação do agente — dentro da mesma transação Apex que executa o handler.
+        Em uma org de grande porte como a Claro Brasil, esse padrão é um <strong>bloqueio de produção</strong>:
+        <ul style="margin:8px 0 0 16px; line-height:1.9;">
+          <li><strong>Governor limit de DML:</strong> Salesforce limita 150 DML statements por transação síncrona.
+              Com 12 handlers e sessões de até 44 action-steps, uma única conversa pode consumir
+              <strong>44 DML statements</strong> só em audit trail — antes de qualquer DML dos próprios handlers.</li>
+          <li><strong>CPU limit:</strong> O cálculo HMAC-SHA256 inline a cada chamada adiciona CPU mensurável.
+              Sessões longas com múltiplas ações se aproximam do limite de 10.000ms sem nenhum trabalho de negócio.</li>
+          <li><strong>Contenção em pico de atendimento:</strong> Em call center com centenas de atendentes simultâneos,
+              cada sessão concorre pelo mesmo pool de recursos síncronos. Um único pico de volume pode
+              causar <code>APEX_CPU_TIME_LIMIT_EXCEEDED</code> ou <code>DML limit exceeded</code> em cascata —
+              derrubando o agente para todos os operadores ao mesmo tempo.</li>
+          <li><strong>Dados de telemetria perdidos em erro:</strong> Se qualquer etapa da transação falhar após o DML,
+              o Salesforce faz rollback do audit trail inteiro — o registro de invocação desaparece silenciosamente,
+              exatamente quando mais seria necessário para diagnóstico.</li>
+        </ul>
+        O padrão correto para audit trail em agentes é assíncrono: publicar um Platform Event ou enfileirar um Queueable,
+        desacoplando o registro da transação principal. O smoke test de 09/jun/2026 confirma que o DML ocorre
+        a cada invocação — 11 de 12 handlers dispararam a gravação.
+      </div>
+      <div class="finding-action">
+        <strong>Ação bloqueante (não vai para produção sem resolver):</strong> Refatorar o audit trail do
+        <code>SF_AgenticGateway</code> para publicação assíncrona via Platform Event antes do go-live.
+        Proposta detalhada abaixo.
+      </div>
+      <div style="margin-top:16px; overflow-x:auto;">
+        <table style="width:100%; border-collapse:collapse; font-size:13px;">
+          <thead>
+            <tr style="background:#f3f4f6;">
+              <th style="padding:8px 12px; text-align:left; border:1px solid var(--border); width:20%;">Camada</th>
+              <th style="padding:8px 12px; text-align:left; border:1px solid var(--border); width:38%;">DE (atual)</th>
+              <th style="padding:8px 12px; text-align:left; border:1px solid var(--border); width:42%;">PARA (produção)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding:8px 12px; border:1px solid var(--border); font-weight:600;">Controle de acesso</td>
+              <td style="padding:8px 12px; border:1px solid var(--border);">Prefix validation + CMDT allow-list consultados a cada chamada — SOQL síncrono por invocação</td>
+              <td style="padding:8px 12px; border:1px solid var(--border);">Confiar na camada nativa do Agentforce (Agent Builder controla quais ações o agente pode invocar). Remover CMDT lookup síncrono; manter apenas como validação de deploy-time.</td>
+            </tr>
+            <tr style="background:#fafafa;">
+              <td style="padding:8px 12px; border:1px solid var(--border); font-weight:600;">Audit trail</td>
+              <td style="padding:8px 12px; border:1px solid var(--border);">DML síncrono em <code>SF_AgenticInvocation__c</code> com HMAC-SHA256 a cada chamada — consome DML limit por ação do agente</td>
+              <td style="padding:8px 12px; border:1px solid var(--border);">Publicar Platform Event por chamada; Queueable consome o evento e grava o registro assincronamente — zero impacto nos governor limits da sessão principal.</td>
+            </tr>
+            <tr>
+              <td style="padding:8px 12px; border:1px solid var(--border); font-weight:600;">HMAC / integridade</td>
+              <td style="padding:8px 12px; border:1px solid var(--border);">HMAC-SHA256 calculado inline, adicionando CPU a cada invocação</td>
+              <td style="padding:8px 12px; border:1px solid var(--border);">Manter HMAC apenas para ações de escrita (DML handlers). Ações read-only (queries, flows de consulta) não precisam de integridade de payload — o dado não é persistido.</td>
+            </tr>
+            <tr style="background:#fafafa;">
+              <td style="padding:8px 12px; border:1px solid var(--border); font-weight:600;">Impacto esperado</td>
+              <td style="padding:8px 12px; border:1px solid var(--border);">12+ DML + 12 SOQL + 12 cálculos HMAC por conversa com 12 ações</td>
+              <td style="padding:8px 12px; border:1px solid var(--border); color:var(--green); font-weight:600;">0 DML síncrono + 0 SOQL por ação de leitura — estimativa: redução de 40–60% no consumo de CPU e DML por sessão.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="finding-group-label">🟠 Alto — resolver no sandbox antes do go-live</div>
+
+    <div class="finding high">
+      <div class="finding-header">
+        <span class="finding-id">F-04</span>
+        <span class="finding-title">Sem observabilidade ativa — STDM e Data Cloud não configurados</span>
+        <span class="badge badge-high">Alto</span>
+      </div>
+      <div class="finding-body">
+        O Data Cloud da Claro está em uma <strong>sandbox separada (<code>cec-claro--partial</code>)</strong> — padrão para isolar recursos de telemetria da org principal (<code>cec-claro--ibuypfpme</code>).
+        O STDM (Session Trace Data Model) com os DMOs <code>AI_Agent_Session__dlm</code>, <code>AI_Agent_Interaction_Step__dlm</code> e <code>GenAIGatewayRequest/Response__dlm</code> deve estar configurado lá.
+        O <code>SF_AgenticInvocation__c</code> existe na org do agente e captura dados de gateway (DispatchType, latência, payload, HMAC), mas não há dashboard criado sobre ele.
+        Sem validar o STDM em <code>cec-claro--partial</code>, não há como confirmar se custo por sessão e rastreabilidade completa de LLM estarão disponíveis após o go-live.
+      </div>
+      <div class="finding-action">
+        <strong>Ação imediata:</strong> Criar Report/Dashboard sobre <code>SF_AgenticInvocation__c</code> na org do agente — já captura DispatchType, Target, DurationMs, Status, SessionId. Disponível agora, sem dependência de sandbox separada.
+        <strong>Ação de validação:</strong> Conectar à sandbox <code>cec-claro--partial</code> e verificar se o STDM está ativo e coletando sessões do agente. Probe: <code>SELECT Id FROM AI_Agent_Session__dlm LIMIT 1</code> via Data Cloud Query API.
+        Referência: skill <code>observing-agentforce</code>.
+      </div>
+    </div>
+
+    <div class="finding high">
+      <div class="finding-header">
+        <span class="finding-id">F-05</span>
+        <span class="finding-title">SmokeRunner manual — sem CI</span>
+        <span class="badge badge-high">Alto</span>
+      </div>
+      <div class="finding-body">
+        19 probes existem no SmokeRunner mas não rodam automaticamente no pipeline GitLab.
+        Deploy pode quebrar o agente sem nenhum alerta automático.
+      </div>
+      <div class="finding-action">
+        <strong>Ação:</strong> Adicionar <code>sf agent test run</code> no pipeline GitLab como quality gate antes de qualquer deploy.
+      </div>
+    </div>
+
+    <div class="finding high">
+      <div class="finding-header">
+        <span class="finding-id">F-06</span>
+        <span class="finding-title">5 handlers ativos sem eval correspondente</span>
+        <span class="badge badge-high">Alto</span>
+      </div>
+      <div class="finding-body">
+        <code>SF_FinDiagInvoiceDetailsHandler</code>, <code>SF_FinDiagHistoricalInvoicesHandler</code>,
+        <code>SF_FinDiagCaseRouteHandler</code> e outros estão ativos no CMDT mas sem nenhum caso de teste mapeado.
+      </div>
+      <div class="finding-action">
+        <strong>Ação:</strong> Completar a matriz handler → eval no <code>FinDiag_Regression</code>.
+      </div>
+    </div>
+
+    <div class="finding high">
+      <div class="finding-header">
+        <span class="finding-id">F-06b</span>
+        <span class="finding-title">Permissões de acesso ao audit trail acima do mínimo necessário</span>
+        <span class="badge badge-high">Alto</span>
+      </div>
+      <div class="finding-body">
+        As permissões de acesso ao objeto <code>SF_AgenticInvocation__c</code> não seguem o princípio de menor privilégio.
+        Qualquer perfil com acesso ao gateway pode ler o trail completo de invocações, incluindo payloads de entrada e saída.
+        Evidências: <code>force-app/main/default/objects/SF_AgenticInvocation__c/</code> · <code>force-app/main/default/permissionsets/FinDiag_Admin.permissionset-meta.xml</code>
+      </div>
+      <div class="finding-action">
+        <strong>Ação:</strong> Endurecer permissões conforme menor privilégio — restringir leitura de <code>InputJson__c</code> / <code>OutputJson__c</code> a perfis de admin/auditoria. Referência: <code>force-app/main/default/classes/SF_AgenticGateway_AllowList.cls</code>
+      </div>
+    </div>
+
+    <div class="finding high">
+      <div class="finding-header">
+        <span class="finding-id">F-06c</span>
+        <span class="finding-title">Gate de qualidade apenas estrutural — sem critério semântico</span>
+        <span class="badge badge-high">Alto</span>
+      </div>
+      <div class="finding-body">
+        O pipeline de deploy valida apenas a estrutura dos artefatos (XML bem formado, metadata presente).
+        Não há gate semântico: nenhum resultado de eval de regressão, adversarial ou stress test é exigido como critério de corte antes do deploy.
+        Evidência: <code>scripts/gmud/run-gmud-gates.sh</code>
+      </div>
+      <div class="finding-action">
+        <strong>Ação:</strong> Exigir resultado de eval (<code>sf agent test run</code>) como gate obrigatório no pipeline — não apenas validação estrutural de artefato. Critério mínimo: 100% out-of-scope + PII, ≥90% in-scope.
+      </div>
+    </div>
+
+    <div class="finding high">
+      <div class="finding-header">
+        <span class="finding-id">F-06d</span>
+        <span class="finding-title">Governor limits — risco no gateway sob carga</span>
+        <span class="badge badge-high">Alto</span>
+      </div>
+      <div class="finding-body">
+        O <code>SF_AgenticGateway</code> opera em contexto síncrono (limite de CPU: 10.000ms, heap: 6MB, SOQL: 100, DML: 150).
+        Sessões com múltiplas chamadas ao gateway em sequência (observadas: 3–44 action-steps por sessão, picos de ~400 créditos)
+        acumulam CPU e SOQL no mesmo contexto Apex. O <code>QueueableWorker</code> existe para aliviar isso, mas
+        <strong>não há teste de carga validando o comportamento sob sessões simultâneas</strong>.
+        Riscos específicos identificados: SOQL potencialmente dentro de loops em handlers <code>SF_FinDiag*</code>,
+        heap pressure em respostas de histórico de faturas (payload >16KB aciona Platform Cache spill, não testado).
+      </div>
+      <div class="finding-action">
+        <strong>Ação:</strong> Revisar handlers <code>SF_FinDiag*</code> com a skill <code>debugging-apex-logs</code> — checar SOQL-in-loop e heap pressure.
+        Executar stress test com o SmokeRunner (S1..S19) em sessões paralelas.
+        Validar comportamento do Platform Cache spill para payloads >16KB.
+      </div>
+    </div>
+
+    <div class="finding high">
+      <div class="finding-header">
+        <span class="finding-id">F-06e</span>
+        <span class="finding-title">Guardrails — cobertura de testes insuficiente para validar blocos P0/P2</span>
+        <span class="badge badge-high">Alto</span>
+      </div>
+      <div class="finding-body">
+        O system prompt do FinDiagAgent tem blocos de guardrail definidos:
+        <strong>P0</strong> (proteção de PII — nunca expor CPF, dados pessoais) e
+        <strong>P2</strong> (proteção de prompt — nunca revelar instruções internas).
+        A suíte atual (<code>FinDiag_StressTest</code>) tem 0 casos cobrindo esses blocos.
+        Sem eval de contenção no sandbox, não há garantia de que os guardrails funcionarão após o go-live —
+        qualquer mudança de versão do LLM pode silenciosamente comprometer a proteção.
+        A skill <code>testing-agentforce</code> exige explicitamente <strong>ao menos 1 caso de guardrail por bloco</strong> como critério mínimo.
+      </div>
+      <div class="finding-action">
+        <strong>Ação:</strong> Os grupos H (out-of-scope, 4 casos) e I (PII + prompt leak, 3 casos) do <code>FinDiag_Regression</code>
+        cobrem isso — executar e exigir 100% de acerto como critério de corte obrigatório no gate de CI.
+      </div>
+    </div>
+
+    <div class="finding high">
+      <div class="finding-header">
+        <span class="finding-id">F-09</span>
+        <span class="finding-title">Prazo Anatel não confirmado — risco jurídico real</span>
+        <span class="badge badge-high">Alto ↑</span>
+      </div>
+      <div class="finding-body">
+        System prompt menciona "7 dias" para contestação. Resolução 765/2023 menciona 30 dias; noticiário de dez/2025 cita 7 dias para algumas situações.
+        <strong>Agente em produção citando prazo regulatório incorreto = passivo jurídico real para a Claro</strong> — elevado de Médio para Alto.
+      </div>
+      <div class="finding-action">
+        <strong>Ação:</strong> Confirmar prazo vinculante com time jurídico/regulatório da Claro antes do go-live. Atualizar system prompt se necessário.
+      </div>
+    </div>
+
+    <div class="finding-group-label">🟡 Médio — melhoria de qualidade e manutenibilidade</div>
+
+    <div class="finding medium">
+      <div class="finding-header">
+        <span class="finding-id">F-07</span>
+        <span class="finding-title">Manifest Copado ausente — incluir integração cross-sandbox</span>
+        <span class="badge badge-medium">Médio</span>
+      </div>
+      <div class="finding-body">
+        Sem <code>package.xml</code> formalizado para os componentes do gateway. O manifest precisa incluir a integração com <code>cec-claro--partial</code> (Data Cloud / telemetria) —
+        GMUD não pode ser registrado sem isso definido.
+      </div>
+      <div class="finding-action">
+        <strong>Ação:</strong> Criar <code>manifest/package-findex-agent.xml</code> com os tipos necessários, incluindo referências cross-sandbox.
+      </div>
+    </div>
+
+    <div class="finding medium">
+      <div class="finding-header">
+        <span class="finding-id">F-08</span>
+        <span class="finding-title">Handlers SF_FinDiag* — payload schema não documentado</span>
+        <span class="badge badge-medium">Médio</span>
+      </div>
+      <div class="finding-body">
+        O smoke test de 09/jun/2026 executou os 12 handlers via Anonymous Apex diretamente contra o
+        <code>SF_AgenticGateway</code>. Resultados:
+        <ul style="margin:8px 0 0 16px; line-height:1.8;">
+          <li><strong>11/12 handlers passam pelo gateway</strong> (CMDT allow-list ok, prefix ok)</li>
+          <li><strong>1/12 bloqueado</strong>: <code>flow:Buscar_perfil_do_usuario_em_conversa</code> — ausente do allow-list (ver F-03)</li>
+          <li><strong>Apex handlers</strong> (<code>SF_FinDiagHistoricalInvoicesHandler</code>, <code>SF_FinDiagInvoiceDetailsHandler</code>)
+              retornam erro de validação própria: <em>"startDate é obrigatório"</em> e <em>"invoiceId é obrigatório"</em>
+              — o gateway despacha corretamente, mas o schema de payload usado pelo agente precisa incluir esses campos</li>
+          <li><strong>Flows</strong> retornam <em>"The flow doesn't have a variable with the name…"</em>
+              — os flows esperam variáveis com nomes específicos que diferem do JSON genérico <code>{"caseId":"…"}</code>
+              enviado pelo gateway. O contrato de payload entre o agente e cada flow não está documentado.</li>
+        </ul>
+      </div>
+      <div class="finding-action">
+        <strong>Ação:</strong> Documentar o schema de payload esperado por cada handler (quais campos, quais nomes de variáveis de flow).
+        Criar um smoke probe por handler no <code>SfAgenticGatewayBotTemplate_v3</code> com payload válido — atualmente os 14 probes existentes
+        não cobrem os handlers específicos do FinDiag.
+        <br><br>
+        <strong>Resultado do smoke test de 09/jun/2026:</strong> schemas extraídos e todos os 12 handlers testados —
+        <a href="tests.html" style="color:var(--blue); font-weight:600;">ver relatório completo de testes →</a>
+      </div>
+    </div>
+
+    <div class="finding medium">
+      <div class="finding-header">
+        <span class="finding-id">F-13</span>
+        <span class="finding-title">Data Cloud em sandbox isolada — integração não mapeada</span>
+        <span class="badge badge-medium">Médio</span>
+      </div>
+      <div class="finding-body">
+        Data Cloud está em <code>cec-claro--partial</code> por design — não é ausência acidental. Os DMOs <code>AiAgentSession</code> e <code>AiAgentInteractionStep</code> devem estar ativos lá.
+        A integração DC ↔ ibuy não está mapeada no manifest de deploy e não foi validada.
+      </div>
+      <div class="finding-action">
+        <strong>Ação:</strong> Mapear integração no manifest (F-07). Conectar à sandbox <code>cec-claro--partial</code> e verificar DMOs ativos.
+      </div>
+    </div>
+
+    <div class="finding medium">
+      <div class="finding-header">
+        <span class="finding-id">F-14</span>
+        <span class="finding-title">Agente IBM legado ativo em partial — sem política de desativação</span>
+        <span class="badge badge-medium">Médio</span>
+      </div>
+      <div class="finding-body">
+        O "Agente Diagnóstico Financeiro" original da IBM está ativo em partial (~22 créditos/conversa em BSIM).
+        Sem política clara de desativação ou coexistência, há risco de confusão de ambiente e consumo duplicado de créditos após o go-live.
+      </div>
+      <div class="finding-action">
+        <strong>Ação:</strong> Definir com Lucas e Claro: desativar o IBM antes do go-live, ou manter em coexistência controlada com sunset definido.
+      </div>
+    </div>
+
+    <div class="finding-group-label">⚪ Baixo / Observação</div>
+
+    <div class="finding low">
+      <div class="finding-header">
+        <span class="finding-id">F-10</span>
+        <span class="finding-title">CaseId vs currentRecordId — inconsistência nos evals</span>
+        <span class="badge badge-low">Observação</span>
+      </div>
+      <div class="finding-body">
+        <code>FinDiag_StressTest.yml</code> usa variável <code>CaseId</code>; agent script usa <code>currentRecordId</code> — pode causar falso positivo/negativo.
+      </div>
+    </div>
+
+    <div class="finding low">
+      <div class="finding-header">
+        <span class="finding-id">F-11</span>
+        <span class="finding-title">Flows IBM sem documentação de dependência</span>
+        <span class="badge badge-low">Observação</span>
+      </div>
+      <div class="finding-body">
+        <code>Buscar_caso_de_atendimento</code> e similares foram reaproveitadas (boa decisão), mas sem registro explícito
+        de que o gateway depende delas — risco se alguém desativar uma Flow sem saber.
+      </div>
+    </div>
+
+    <div class="finding low">
+      <div class="finding-header">
+        <span class="finding-id">F-12</span>
+        <span class="finding-title">Async pipeline não testado sob carga</span>
+        <span class="badge badge-low">Observação</span>
+      </div>
+      <div class="finding-body">
+        QueueableWorker / FutureWorker estão bem implementados mas nunca passaram por stress test
+        com volume real de sessões simultâneas.
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 4. Cobertura ══ -->
+  <section>
+    <h2><span class="section-num">4</span> Mapa de cobertura: IBM → estado atual</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Domínio IBM</th>
+          <th>Subagente IBM</th>
+          <th>Handler atual</th>
+          <th>Eval</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Divergência financeira</td>
+          <td><code>Case_Discrepancy_Updates</code></td>
+          <td><code>Buscar_caso_de_atendimento</code></td>
+          <td><span class="badge badge-warn">⚠️ Parcial</span></td>
+        </tr>
+        <tr>
+          <td>Assets do cliente</td>
+          <td><code>Customer_Asset_Analysis</code></td>
+          <td><code>SF_FinDiagHistoricalInvoicesHandler</code></td>
+          <td><span class="badge badge-none">❌ Nenhum</span></td>
+        </tr>
+        <tr>
+          <td>Busca de casos / perfil</td>
+          <td><code>Customer_and_Contract_Cases_Search</code></td>
+          <td><code>Buscar_caso_de_atendimento</code> + outros</td>
+          <td><span class="badge badge-warn">⚠️ Parcial</span></td>
+        </tr>
+        <tr>
+          <td>KB / políticas</td>
+          <td><code>Knowledge_Base_Consultant</code></td>
+          <td>AnswerQuestionsWithKnowledge (nativo)</td>
+          <td><span class="badge badge-none">❌ Nenhum</span></td>
+        </tr>
+        <tr>
+          <td>Pedidos / serviços</td>
+          <td><code>Retrieval_performed_service</code></td>
+          <td><code>SF_FinDiagCaseRouteHandler</code></td>
+          <td><span class="badge badge-none">❌ Nenhum</span></td>
+        </tr>
+        <tr>
+          <td>Detalhes de fatura</td>
+          <td><code>X05</code> (invoice details)</td>
+          <td><code>SF_FinDiagInvoiceDetailsHandler</code></td>
+          <td><span class="badge badge-none">❌ Nenhum</span></td>
+        </tr>
+        <tr>
+          <td>Histórico de faturas</td>
+          <td><code>X05</code> (historical)</td>
+          <td><code>SF_FinDiagHistoricalInvoicesHandler</code></td>
+          <td><span class="badge badge-none">❌ Nenhum</span></td>
+        </tr>
+        <tr>
+          <td>Out-of-scope / contenção</td>
+          <td>—</td>
+          <td>Blocos P0/P2 no system prompt</td>
+          <td><span class="badge badge-none">❌ Nenhum funcional</span></td>
+        </tr>
+        <tr>
+          <td>PII / prompt leak</td>
+          <td>—</td>
+          <td>Bloco P2 no system prompt</td>
+          <td><span class="badge badge-none">❌ Nenhum</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="margin-top:10px; font-size:12px; color:var(--muted);">
+      Resultado: 7 de 9 domínios sem cobertura de eval. <code>FinDiag_Regression</code> (31 casos) cobre todos os 9 grupos.
+    </p>
+  </section>
+
+  <!-- ══ 5. F-01 detalhe ══ -->
+  <section>
+    <h2><span class="section-num">5</span> Risco funcional crítico — F-01 em detalhe</h2>
+
+    <div class="callout">
+      <div class="callout-title">⚠️ Case-first obrigatório — potencial erro de fluxo</div>
+      <p>
+        O código atual exige <code>currentRecordId</code> preenchido. Sem ele, o agente pede o número do caso ao operador.
+        O problema: o operador precisa do diagnóstico para criar o caso do tipo certo — mas o diagnóstico só roda com o caso já aberto.
+        Este é um <strong>risco de travamento na triagem inicial</strong> que precisa ser validado com a operação da Claro ainda no sandbox, antes do go-live.
+      </p>
+    </div>
+
+    <div class="options-grid" style="grid-template-columns: 1fr 1fr 1fr;">
+      <div class="option-card" style="border-top: 3px solid #16a34a;">
+        <div class="opt-label" style="color:var(--green);">Opção A — Case-first (manter atual)</div>
+        <p>O caso é criado antes do agente ser acionado. O agente é ferramenta de diagnóstico <em>pós-abertura</em>.<br><br>
+        ✅ Sem mudança de código.<br>
+        ⚠️ Exige confirmar com a operação da Claro que este é o fluxo real.</p>
+      </div>
+      <div class="option-card" style="border-top: 3px solid #2563eb;">
+        <div class="opt-label" style="color:#1d4ed8;">Opção A+ — OmniStudio (verificar primeiro)</div>
+        <p>O OmniScript de atendimento (<code>Solar_GenericVIPCallout</code>) pode já criar o caso automaticamente antes de lançar o agente.<br><br>
+        ✅ Resolve o círculo sem mudança de código.<br>
+        ⚠️ Precisa ser verificado com Odair/Lucas.</p>
+      </div>
+      <div class="option-card" style="border-top: 3px solid #d97706;">
+        <div class="opt-label" style="color:var(--orange);">Opção B — Diagnosis-first</div>
+        <p>Agente aceita CPF ou número de contrato como entrada inicial, busca dados, sugere tipo de caso.<br><br>
+        ✅ Resolve o círculo de forma definitiva.<br>
+        ⚠️ Novo handler + campo + bloco de instrução.</p>
+      </div>
+    </div>
+
+    <p style="margin-top:12px; font-size:13px; color:var(--muted);">
+      Referência: <code>docs/solar/06-ibm-scenarios-and-no-case-risk.md</code> · Verificar OmniStudio primeiro — pode eliminar o problema sem mudança de código.
+    </p>
+  </section>
+
+  <!-- ══ 6. Próximos passos ══ -->
+  <section>
+    <h2><span class="section-num">6</span> Próximos passos — ordem de prioridade</h2>
+    <ul class="steps-list">
+      <li>
+        <span class="step-num" style="background:var(--red);">P0</span>
+        <div class="step-body">
+          <strong>Reconciliação metadata/código + hardening de permissões (F-03, F-06b)</strong>
+          <p>Limpar CMDT legacy + restringir acesso ao audit trail por menor privilégio</p>
+        </div>
+        <span class="step-owner">Lucas + FDE</span>
+      </li>
+      <li>
+        <span class="step-num" style="background:var(--red);">P0</span>
+        <div class="step-body">
+          <strong>Gate semântico no pipeline — eval como critério de corte (F-06c)</strong>
+          <p>Exigir resultado de <code>sf agent test run</code> antes de qualquer deploy; não só validação estrutural</p>
+        </div>
+        <span class="step-owner">FDE</span>
+      </li>
+      <li>
+        <span class="step-num" style="background:var(--orange);">P1</span>
+        <div class="step-body">
+          <strong>Validar fluxo case-first com a operação da Claro (F-01)</strong>
+          <p>Se o fluxo não for sempre case-first → implementar entrada por CPF/contrato</p>
+        </div>
+        <span class="step-owner">Lucas + Claro</span>
+      </li>
+      <li>
+        <span class="step-num" style="background:var(--orange);">P1</span>
+        <div class="step-body">
+          <strong>Saneamento de governança de flows — documentar dependências IBM (F-11)</strong>
+          <p>Descrição, ativação e versionamento explícitos das Flows reaproveitadas</p>
+        </div>
+        <span class="step-owner">Lucas</span>
+      </li>
+      <li>
+        <span class="step-num" style="background:var(--yellow); color:#111;">P2</span>
+        <div class="step-body">
+          <strong>Ativar STDM (Data Cloud) + formalizar manifest Copado (F-04, F-07)</strong>
+          <p>Validar com Henrique Macadura se <code>AiAgentInteraction</code> stream está ativo (App Launcher → Data Cloud → Data Streams, não Service Setup). Criar dashboard sobre <code>SF_AgenticInvocation__c</code> como fallback imediato. Formalizar manifest para GMUD.</p>
+        </div>
+        <span class="step-owner">FDE + Lucas</span>
+      </li>
+      <li>
+        <span class="step-num" style="background:var(--yellow); color:#111;">P2</span>
+        <div class="step-body">
+          <strong>Confirmar prazo Anatel + executar FinDiag_Regression no sandbox (F-09, F-02)</strong>
+          <p>Validar prazo regulatório com jurídico da Claro + rodar os 31 casos de eval</p>
+        </div>
+        <span class="step-owner">Bia + FDE</span>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ══ 7. Prioridades 7 dias ══ -->
+  <section>
+    <h2><span class="section-num">7</span> Prioridades de execução — próximos 7 dias</h2>
+
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 4px;">
+      <div style="font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--red); grid-column: 1/-1; margin-top:8px; margin-bottom:4px;">P0 — Bloqueante</div>
+
+      <div class="finding critical" style="margin-bottom:0;">
+        <div class="finding-header">
+          <span class="badge badge-critical" style="font-size:11px;">P0</span>
+          <span class="finding-title" style="font-size:13px;">Reconciliação metadata/código + hardening de permissões</span>
+        </div>
+        <div class="finding-body">
+          Limpar 32 CMDT registros <code>Active=false</code> (F-03). Endurecer permissões de acesso ao audit trail conforme menor privilégio (F-06b).
+          <br>Evidências: <code>SF_AgenticGateway_AllowList.cls</code> · <code>SF_AgenticInvocation__c/</code> · <code>FinDiag_Admin.permissionset-meta.xml</code>
+        </div>
+      </div>
+
+      <div class="finding critical" style="margin-bottom:0;">
+        <div class="finding-header">
+          <span class="badge badge-critical" style="font-size:11px;">P0</span>
+          <span class="finding-title" style="font-size:13px;">Gate semântico no pipeline (regressão + adversarial + stress)</span>
+        </div>
+        <div class="finding-body">
+          Exigir resultado de eval como critério de corte antes de qualquer deploy — não só validação estrutural (F-06c).
+          <br>Evidência: <code>scripts/gmud/run-gmud-gates.sh</code>
+        </div>
+      </div>
+
+      <div style="font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--orange); grid-column: 1/-1; margin-top:16px; margin-bottom:4px;">P1 — Alta prioridade</div>
+
+      <div class="finding high" style="margin-bottom:0;">
+        <div class="finding-header">
+          <span class="badge badge-high" style="font-size:11px;">P1</span>
+          <span class="finding-title" style="font-size:13px;">Validar fluxo case-first com a operação</span>
+        </div>
+        <div class="finding-body">
+          Confirmar se o caso sempre pré-existe quando o agente é acionado (F-01). Se não → implementar entrada por CPF/contrato com handoff controlado.
+        </div>
+      </div>
+
+      <div class="finding high" style="margin-bottom:0;">
+        <div class="finding-header">
+          <span class="badge badge-high" style="font-size:11px;">P1</span>
+          <span class="finding-title" style="font-size:13px;">Saneamento de governança de flows</span>
+        </div>
+        <div class="finding-body">
+          Documentar dependências das Flows IBM reaproveitadas. Garantir descrição, ativação e versionamento explícitos (F-11).
+        </div>
+      </div>
+
+      <div style="font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--yellow); grid-column: 1/-1; margin-top:16px; margin-bottom:4px;">P2 — Melhoria</div>
+
+      <div class="finding medium" style="margin-bottom:0;">
+        <div class="finding-header">
+          <span class="badge badge-medium" style="font-size:11px;">P2</span>
+          <span class="finding-title" style="font-size:13px;">Ativar STDM (Data Cloud) + formalizar manifest Copado</span>
+        </div>
+        <div class="finding-body">
+          Data Cloud não está na sandbox — criar Report/Dashboard sobre <code>SF_AgenticInvocation__c</code> como observabilidade imediata. Confirmar com Claro se Data Cloud estará licenciado em produção. Formalizar manifest <code>package-findex-agent.xml</code> para GMUD (F-07).
+        </div>
+      </div>
+
+      <div class="finding medium" style="margin-bottom:0;">
+        <div class="finding-header">
+          <span class="badge badge-medium" style="font-size:11px;">P2</span>
+          <span class="finding-title" style="font-size:13px;">Confirmar prazo Anatel + expandir cobertura de evals</span>
+        </div>
+        <div class="finding-body">
+          Validar prazo vinculante de contestação (7 ou 30 dias) com regulatório da Claro (F-09) + executar <code>FinDiag_Regression</code> no sandbox (F-02/F-06).
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 8. Recomendações Pré-Produção ══ -->
+  <section>
+    <h2><span class="section-num">8</span> Recomendações pré-produção — checklist go-live</h2>
+    <p style="font-size:13px; color:var(--muted); margin-bottom:16px;">
+      Critérios mínimos que devem estar satisfeitos no sandbox <code>cec-claro--ibuypfpme</code>
+      antes de qualquer promoção para produção via GMUD/Copado.
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Critério</th>
+          <th>Como validar no sandbox</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>R-01</strong></td>
+          <td>Fluxo case-first confirmado com a operação da Claro (ou alternativa implementada)</td>
+          <td>Teste manual com operador real no sandbox</td>
+          <td><span class="badge badge-none">❌ Pendente</span></td>
+        </tr>
+        <tr>
+          <td><strong>R-02</strong></td>
+          <td>Eval suite <code>FinDiag_Regression</code> executada com 100% out-of-scope/PII e ≥90% in-scope</td>
+          <td><code>sf agent test run --api-name FinDiag_Regression --target-org claro-sandbox</code></td>
+          <td><span class="badge badge-none">❌ Não executado</span></td>
+        </tr>
+        <tr>
+          <td><strong>R-03</strong></td>
+          <td>32 registros CMDT <code>Active=false</code> limpos ou documentados intencionalmente</td>
+          <td><code>SELECT MasterLabel, Active__c FROM SF_AgenticGateway_Allow__mdt WHERE Active__c = false</code></td>
+          <td><span class="badge badge-none">❌ Pendente</span></td>
+        </tr>
+        <tr>
+          <td><strong>R-04</strong></td>
+          <td>STDM ativo no Data Cloud (<code>cec-claro--partial</code>) — probe <code>AI_Agent_Session__dlm</code> retorna linhas</td>
+          <td>Conectar à sandbox <code>cec-claro--partial</code> e verificar se <code>AI_Agent_Session__dlm</code> está coletando sessões do agente</td>
+          <td><span class="badge badge-warn">⚠️ Não verificado — sandbox separada</span></td>
+        </tr>
+        <tr>
+          <td><strong>R-05</strong></td>
+          <td>Permissões de acesso ao <code>SF_AgenticInvocation__c</code> restritas por menor privilégio</td>
+          <td>Revisar <code>FinDiag_Admin.permissionset-meta.xml</code> — somente perfis de auditoria leem <code>InputJson__c</code>/<code>OutputJson__c</code></td>
+          <td><span class="badge badge-none">❌ Pendente</span></td>
+        </tr>
+        <tr>
+          <td><strong>R-06</strong></td>
+          <td>Gate semântico ativo no pipeline GitLab — eval como critério de corte antes de qualquer deploy</td>
+          <td>Verificar <code>scripts/gmud/run-gmud-gates.sh</code> inclui <code>sf agent test run</code></td>
+          <td><span class="badge badge-none">❌ Pendente</span></td>
+        </tr>
+        <tr>
+          <td><strong>R-07</strong></td>
+          <td>Governor limits validados — nenhum handler <code>SF_FinDiag*</code> com SOQL-in-loop ou heap pressure</td>
+          <td>Executar SmokeRunner (S1..S19) com debug log e analisar com skill <code>debugging-apex-logs</code></td>
+          <td><span class="badge badge-none">❌ Não testado</span></td>
+        </tr>
+        <tr>
+          <td><strong>R-08</strong></td>
+          <td>Prazo Anatel confirmado com regulatório da Claro (7 ou 30 dias)</td>
+          <td>Alinhamento com time jurídico — atualizar system prompt se necessário</td>
+          <td><span class="badge badge-none">❌ Pendente</span></td>
+        </tr>
+        <tr>
+          <td><strong>R-09</strong></td>
+          <td>Manifest Copado (<code>package.xml</code>) formalizado e testado em deploy no sandbox</td>
+          <td><code>sf project deploy start --manifest manifest/package-findex-agent.xml --target-org claro-sandbox</code></td>
+          <td><span class="badge badge-none">❌ Não existe</span></td>
+        </tr>
+        <tr>
+          <td><strong>R-10</strong></td>
+          <td>GMUD registrado com evidências: resultado de evals + log de deploy + aprovação do time</td>
+          <td>Artefatos de evidência: output do <code>sf agent test run</code> + log do pipeline GitLab</td>
+          <td><span class="badge badge-none">❌ Pendente</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="margin-top:14px; padding:12px 16px; background:#f0fdf4; border:1px solid #bbf7d0; border-radius:8px; font-size:12px; color:#166534;">
+      <strong>Critério de go/no-go:</strong> R-01, R-02, R-05, R-06 e R-07 são bloqueantes — nenhum pode estar pendente no dia do GMUD.
+      R-03, R-04, R-08, R-09 e R-10 devem estar concluídos antes da abertura do GMUD.
+    </div>
+  </section>
+
+  <div style="margin-top:48px; padding-top:20px; border-top:1px solid var(--border); font-size:11px; color:var(--muted); text-align:center;">
+    Projeto Solar · Org Assessment · FinDiagAgent v13 · 08/jun/2026 · Salesforce — Uso interno
+  </div>
+
+</div>
+</body>
+</html>

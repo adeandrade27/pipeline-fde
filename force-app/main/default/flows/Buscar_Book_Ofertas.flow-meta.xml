@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <description>Monta a resposta padrão quando não há preço promocional, retornando apenas o preço base.</description>
+        <name>Build_Response_NoPromo</name>
+        <label>Montar Resposta Sem Promoção</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>varResposta</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>frmRespostaSemPromo</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
+        <description>Retorna mensagem padrão quando não há registros no Data Cloud para os critérios informados</description>
+        <name>Build_Response_NoPromoFound</name>
+        <label>Montar Resposta Sem Dados</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>varResposta</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Não encontramos ofertas para os filtros informados.</stringValue>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
+        <description>Monta a resposta quando há preço promocional disponível</description>
+        <name>Build_Response_Promo</name>
+        <label>Montar Resposta com Promoção</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>varResposta</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>frmRespostaPromo</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <decisions>
+        <description>Verifica se o Data Cloud retornou algum registro antes de continuar o fluxo.</description>
+        <name>Check_Oferta_Encontrada</name>
+        <label>Encontrou Oferta</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Build_Response_NoPromoFound</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Não encontrou</defaultConnectorLabel>
+        <rules>
+            <name>Encontrou</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Oferta_DataCloud.Id_Oferta__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Check_Preco_Promocional</targetReference>
+            </connector>
+            <label>Encontrou</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Verifica se existe preço promocional para a oferta encontrada</description>
+        <name>Check_Preco_Promocional</name>
+        <label>Verificar se possui preço promocional</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Build_Response_NoPromo</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Sem Promoção</defaultConnectorLabel>
+        <rules>
+            <name>Tem_Promo</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Oferta_DataCloud.preco_promocional__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Build_Response_Promo</targetReference>
+            </connector>
+            <label>Tem Promoção</label>
+        </rules>
+    </decisions>
+    <description>Sem ACCESS ALL; Consulta ofertas no Data Cloud por produto, cidade, mês e ano, retornando resposta formatada com preço base ou promocional.</description>
+    <environments>Default</environments>
+    <formulas>
+        <description>Monta a resposta formatada quando há preço promocional disponível</description>
+        <name>frmRespostaPromo</name>
+        <dataType>String</dataType>
+        <expression>&quot;R$ &quot; &amp; TEXT({!Get_Oferta_DataCloud.preco_promocional__c}) &amp;
+&quot; por &quot; &amp; {!Get_Oferta_DataCloud.periodo_promocional__c} &amp;
+&quot;, após R$ &quot; &amp; TEXT({!Get_Oferta_DataCloud.preco_base__c})</expression>
+    </formulas>
+    <formulas>
+        <description>Monta a resposta quando não há promoção, retornando apenas o preço base</description>
+        <name>frmRespostaSemPromo</name>
+        <dataType>String</dataType>
+        <expression>&quot;R$ &quot; &amp; TEXT({!Get_Oferta_DataCloud.preco_base__c})</expression>
+    </formulas>
+    <interviewLabel>Buscar {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Buscar Book Ofertas</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <description>Busca no Data Cloud a oferta com base em produto, cidade, mês e ano</description>
+        <name>Get_Oferta_DataCloud</name>
+        <label>Buscar Oferta no Data Cloud</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Check_Oferta_Encontrada</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>produto__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>varProduto</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>cidade__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>varCidade</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>mes__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>varMes</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>ano__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>varAno</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Oferta__dlm</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <runInMode>DefaultMode</runInMode>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Get_Oferta_DataCloud</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <variables>
+        <description>Ano da oferta utilizado como critério de busca</description>
+        <name>varAno</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+        <scale>0</scale>
+    </variables>
+    <variables>
+        <description>Cidade da oferta que será utilizada como filtro na busca</description>
+        <name>varCidade</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Mês da oferta (ex: Janeiro, Fevereiro) utilizado como critério de busca</description>
+        <name>varMes</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Nome do produto para buscar no Data Cloud (deve corresponder exatamente ao campo produto)</description>
+        <name>varProduto</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Texto final formatado com os dados da oferta para retorno ao agente</description>
+        <name>varResposta</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+</Flow>

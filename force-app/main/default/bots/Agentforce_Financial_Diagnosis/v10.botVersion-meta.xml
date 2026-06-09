@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BotVersion xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>v10</fullName>
+    <articleAnswersGPTEnabled>false</articleAnswersGPTEnabled>
+    <botDialogs>
+        <botSteps>
+            <botMessages>
+                <message>Olá sou o Agente de Diagnóstico Financeiro! Estou aqui para te ajudar, me informe o ocorrido.</message>
+                <messageIdentifier>5993fe25-960a-4c03-80c7-a90b8771f431</messageIdentifier>
+            </botMessages>
+            <stepIdentifier>f4894281-88d5-42ef-ae7a-edc466b445a0</stepIdentifier>
+            <type>Message</type>
+        </botSteps>
+        <botSteps>
+            <stepIdentifier>72b54712-dcef-4c8d-80db-3774f9d6bfcc</stepIdentifier>
+            <type>Wait</type>
+        </botSteps>
+        <developerName>Welcome</developerName>
+        <isPlaceholderDialog>false</isPlaceholderDialog>
+        <label>Hi! I&apos;m your helpful bot.</label>
+        <showInFooterMenu>false</showInFooterMenu>
+    </botDialogs>
+    <botDialogs>
+        <botSteps>
+            <botMessages>
+                <message>Algo deu errado. Por favor tente novamente.</message>
+                <messageIdentifier>2fc5e5b1-210a-4c80-bdf8-1302b229f80b</messageIdentifier>
+            </botMessages>
+            <stepIdentifier>30a2d27c-9fe3-4027-8322-39f7672280f0</stepIdentifier>
+            <type>Message</type>
+        </botSteps>
+        <botSteps>
+            <stepIdentifier>65c630d0-bf46-4b11-b1df-7a631a431ee1</stepIdentifier>
+            <type>Wait</type>
+        </botSteps>
+        <developerName>Error_Handling</developerName>
+        <isPlaceholderDialog>false</isPlaceholderDialog>
+        <label>Unfortunately, a system error occurred. Let us start again.</label>
+        <showInFooterMenu>false</showInFooterMenu>
+    </botDialogs>
+    <botDialogs>
+        <botSteps>
+            <botMessages>
+                <message>One moment while I connect you to the next available service representative.</message>
+                <messageIdentifier>ecfc168b-9c48-4198-a380-47dca77f386c</messageIdentifier>
+            </botMessages>
+            <stepIdentifier>d30d556e-482a-4b9d-9eed-d1a763f7ec4c</stepIdentifier>
+            <type>Message</type>
+        </botSteps>
+        <botSteps>
+            <conversationSystemMessage>
+                <type>Transfer</type>
+            </conversationSystemMessage>
+            <stepIdentifier>b336b80b-0621-4008-b061-c4c36fe345a7</stepIdentifier>
+            <type>SystemMessage</type>
+        </botSteps>
+        <developerName>Transfer_To_Agent</developerName>
+        <isPlaceholderDialog>false</isPlaceholderDialog>
+        <label>Transfer To Agent</label>
+        <showInFooterMenu>false</showInFooterMenu>
+    </botDialogs>
+    <citationsEnabled>false</citationsEnabled>
+    <company>Claro is a telecommunications operator in Brazil providing telephone, internet, and TV services.
+
+Customer service focuses on resolving billing issues, invoice discrepancies, and financial complaints for residential and comboMulti customers.</company>
+    <conversationDefinitionPlanners>
+        <genAiPlannerName>Agentforce_Financial_Diagnosis_v2_v3_v4_v5_v6_v7_v8_v10</genAiPlannerName>
+    </conversationDefinitionPlanners>
+    <conversationVariables>
+        <dataType>Number</dataType>
+        <description>The case number displayed on the screen. The number must match the standard field in the CaseNumber record.</description>
+        <developerName>Case_number</developerName>
+        <includeInPrompt>true</includeInPrompt>
+        <label>Case number</label>
+        <visibility>External</visibility>
+    </conversationVariables>
+    <conversationVariables>
+        <dataType>Text</dataType>
+        <description>The name of the record type for the case on screen that corresponds to the custom field RecordTypeName__c. It may be in English.</description>
+        <developerName>Case_recordType</developerName>
+        <includeInPrompt>true</includeInPrompt>
+        <label>Case recordType</label>
+        <visibility>External</visibility>
+    </conversationVariables>
+    <conversationVariables>
+        <dataType>Text</dataType>
+        <description>The customer ID for the on-screen support case. The ID must match the case&apos;s standard AccountId field.</description>
+        <developerName>Cliente_id</developerName>
+        <includeInPrompt>true</includeInPrompt>
+        <label>Cliente id</label>
+        <visibility>External</visibility>
+    </conversationVariables>
+    <conversationVariables>
+        <dataType>Text</dataType>
+        <description>The ContractBillingAccount__c field of the service case on screen. Systemically, it corresponds to an account type called Billing.</description>
+        <developerName>Contract_id</developerName>
+        <includeInPrompt>true</includeInPrompt>
+        <label>Contract id</label>
+        <visibility>External</visibility>
+    </conversationVariables>
+    <conversationVariables>
+        <dataType>Text</dataType>
+        <description>Salesforce Application Name.</description>
+        <developerName>currentAppName</developerName>
+        <includeInPrompt>true</includeInPrompt>
+        <label>currentAppName</label>
+        <visibility>External</visibility>
+    </conversationVariables>
+    <conversationVariables>
+        <dataType>Text</dataType>
+        <description>The API name of the Salesforce object (such as Account or Opportunity) associated with the record the user wants to interact with. Do not use this if the user is already talking about another object in the conversation.</description>
+        <developerName>currentObjectApiName</developerName>
+        <includeInPrompt>true</includeInPrompt>
+        <label>currentObjectApiName</label>
+        <visibility>External</visibility>
+    </conversationVariables>
+    <conversationVariables>
+        <dataType>Text</dataType>
+        <description>Type of Salesforce Page.</description>
+        <developerName>currentPageType</developerName>
+        <includeInPrompt>true</includeInPrompt>
+        <label>currentPageType</label>
+        <visibility>External</visibility>
+    </conversationVariables>
+    <conversationVariables>
+        <dataType>Text</dataType>
+        <description>The ID of the record on the user&apos;s screen. It may not relate to the user&apos;s input. Only use this if the user input mentions &apos;this&apos;, &apos;current&apos;, &apos;the record&apos;, etc. If in doubt, don&apos;t use it.</description>
+        <developerName>currentRecordId</developerName>
+        <includeInPrompt>true</includeInPrompt>
+        <label>currentRecordId</label>
+        <visibility>External</visibility>
+    </conversationVariables>
+    <conversationVariables>
+        <dataType>Text</dataType>
+        <description>Nome do perfil do usuário interagindo na conversa. Esse nome é encontrado buscando através do TargetUserId.</description>
+        <developerName>Profile_name</developerName>
+        <includeInPrompt>false</includeInPrompt>
+        <label>Profile name</label>
+        <visibility>Internal</visibility>
+    </conversationVariables>
+    <conversationVariables>
+        <dataType>Text</dataType>
+        <description>This variable may also be referred to as VerifiedCustomerId</description>
+        <developerName>VerifiedCustomerId</developerName>
+        <includeInPrompt>false</includeInPrompt>
+        <label>VerifiedCustomerId</label>
+        <visibility>Internal</visibility>
+    </conversationVariables>
+    <copilotPrimaryLanguage>pt_BR</copilotPrimaryLanguage>
+    <defaultStdObjForContactIdFltrEnabled>false</defaultStdObjForContactIdFltrEnabled>
+    <entryDialog>Welcome</entryDialog>
+    <intentDisambiguationEnabled>false</intentDisambiguationEnabled>
+    <intentV3Enabled>false</intentV3Enabled>
+    <isScriptCompatibleAgent>false</isScriptCompatibleAgent>
+    <knowledgeActionEnabled>false</knowledgeActionEnabled>
+    <knowledgeFallbackEnabled>false</knowledgeFallbackEnabled>
+    <role>Agent specialized in billing analysis.
+
+Assist only with invoices, discrepancies, charges, and case analysis.
+
+Do not answer unrelated questions (e.g., weather, recipes). Politely refuse and redirect to billing.
+
+Use the current service case context.</role>
+    <smallTalkEnabled>false</smallTalkEnabled>
+    <staticPromptsEnabled>false</staticPromptsEnabled>
+    <stopRecPrompts>false</stopRecPrompts>
+    <stopWelcomePrompts>false</stopWelcomePrompts>
+    <surfacesEnabled>false</surfacesEnabled>
+    <toneType>Casual</toneType>
+</BotVersion>

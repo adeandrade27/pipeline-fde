@@ -1,0 +1,13 @@
+{
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "caseReferenceID" : {
+      "title" : "caseReferenceID",
+      "description" : "Id do caso de atendimento como referência para encontrar os pedidos anteriores.",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    }
+  },
+  "lightning:type" : "lightning__objectType"
+}

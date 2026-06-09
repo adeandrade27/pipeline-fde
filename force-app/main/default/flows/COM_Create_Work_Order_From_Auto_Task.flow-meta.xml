@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>63.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <description>Set Fulfillment Step Values</description>
+        <name>Set_Fulfillment_Step_Values</name>
+        <label>Set Fulfillment Step Values</label>
+        <locationX>176</locationX>
+        <locationY>242</locationY>
+        <assignmentItems>
+            <assignToReference>Get_Fulfillment_Step.Name</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>stepId</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Update_Fulfillment_Step</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Set Order Line Item Values</description>
+        <name>Set_Order_Line_Item_Values</name>
+        <label>Set Order Line Item Values</label>
+        <locationX>176</locationX>
+        <locationY>890</locationY>
+        <assignmentItems>
+            <assignToReference>Get_Order_Line_Item.Description</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Update_Order_Line_Item</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Set Order Values</description>
+        <name>Set_Order_Values</name>
+        <label>Set Order Values</label>
+        <locationX>176</locationX>
+        <locationY>566</locationY>
+        <assignmentItems>
+            <assignToReference>Get_Order.Description</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>planSourceIdentifierId</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Update_Order</targetReference>
+        </connector>
+    </assignments>
+    <description>COM Create Work Order From Auto Task</description>
+    <environments>Default</environments>
+    <interviewLabel>COM Create Work Order From Auto Task {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>COM - Create Work Order From Auto Task</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <description>Create Work Order</description>
+        <name>Create_Work_Order</name>
+        <label>Create Work Order</label>
+        <locationX>176</locationX>
+        <locationY>1322</locationY>
+        <inputAssignments>
+            <field>AccountId</field>
+            <value>
+                <elementReference>Get_Account.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>COM_Order_Product__c</field>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>COM_Order__c</field>
+            <value>
+                <elementReference>Get_Order.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>City</field>
+            <value>
+                <elementReference>Get_Account.ShippingCity</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>PostalCode</field>
+            <value>
+                <elementReference>Get_Account.ShippingPostalCode</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>State</field>
+            <value>
+                <elementReference>Get_Account.ShippingState</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Street</field>
+            <value>
+                <elementReference>Get_Account.ShippingStreet</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>WorkTypeId</field>
+            <value>
+                <elementReference>Get_Work_Type.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <object>WorkOrder</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordLookups>
+        <description>Get Account</description>
+        <name>Get_Account</name>
+        <label>Get Account</label>
+        <locationX>176</locationX>
+        <locationY>1106</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Get_Work_Type</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Get_Order.AccountId</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Account</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Get Fulfillment Step</description>
+        <name>Get_Fulfillment_Step</name>
+        <label>Get Fulfillment Step</label>
+        <locationX>176</locationX>
+        <locationY>134</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Set_Fulfillment_Step_Values</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>stepId</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>FulfillmentStep</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Get Order</description>
+        <name>Get_Order</name>
+        <label>Get Order</label>
+        <locationX>176</locationX>
+        <locationY>458</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Set_Order_Values</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>planSourceIdentifierId</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Order</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Get Order Line Item</description>
+        <name>Get_Order_Line_Item</name>
+        <label>Get Order Line Item</label>
+        <locationX>176</locationX>
+        <locationY>782</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Set_Order_Line_Item_Values</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>OrderItem</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Get Work Order Type</description>
+        <name>Get_Work_Type</name>
+        <label>Get Work Type</label>
+        <locationX>176</locationX>
+        <locationY>1214</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Create_Work_Order</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Name</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Install Internet</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>WorkType</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <description>Update Fulfillment Step</description>
+        <name>Update_Fulfillment_Step</name>
+        <label>Update Fulfillment Step</label>
+        <locationX>176</locationX>
+        <locationY>350</locationY>
+        <connector>
+            <targetReference>Get_Order</targetReference>
+        </connector>
+        <inputReference>Get_Fulfillment_Step</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Update Order</description>
+        <name>Update_Order</name>
+        <label>Update Order</label>
+        <locationX>176</locationX>
+        <locationY>674</locationY>
+        <connector>
+            <targetReference>Get_Order_Line_Item</targetReference>
+        </connector>
+        <inputReference>Get_Order</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Update Order Line Item</description>
+        <name>Update_Order_Line_Item</name>
+        <label>Update Order Line Item</label>
+        <locationX>176</locationX>
+        <locationY>998</locationY>
+        <connector>
+            <targetReference>Get_Account</targetReference>
+        </connector>
+        <inputReference>Get_Order_Line_Item</inputReference>
+    </recordUpdates>
+    <runInMode>DefaultMode</runInMode>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Get_Fulfillment_Step</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <variables>
+        <name>planSourceIdentifierId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>The ID of the order line item or fulfillment order line item record that the Fulfillment Step Source relation record associates with the auto task.</description>
+        <name>recordId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>The ID of the auto task.</description>
+        <name>stepId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

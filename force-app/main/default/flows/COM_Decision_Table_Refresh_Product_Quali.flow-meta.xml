@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <description>Refresh pricing information.</description>
+        <name>Refresh_Product_Qualification_Table</name>
+        <label>Refresh Product Qualification Table</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>refreshDecisionTable</actionName>
+        <actionType>refreshDecisionTable</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>DecisionTableApiName</name>
+            <value>
+                <stringValue>COM_Product_Qual</stringValue>
+            </value>
+        </inputParameters>
+        <nameSegment>refreshDecisionTable</nameSegment>
+        <offset>0</offset>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <apiVersion>65.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <description>COM:  Refresh the decision table used for Product Qualification.</description>
+    <environments>Default</environments>
+    <interviewLabel>COM - Decision Table Refresh (Product Quali) {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>COM - Decision Table Refresh (Product Quali)</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Refresh_Product_Qualification_Table</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+</Flow>

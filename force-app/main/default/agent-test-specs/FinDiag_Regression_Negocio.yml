@@ -1,0 +1,236 @@
+name: FinDiag_Regression_Negocio
+description: >
+  Suíte de negócio do FinDiagAgent v13.
+  Cobre os 12 cenários reais mapeados pela Claro para o call center de cobrança.
+  Cada caso representa uma situação real de atendimento — o operador recebe a
+  reclamação do cliente e usa o agente para diagnosticar e recomendar ação.
+  Complementa FinDiag_Regression_Tecnico.yml (que cobre robustez técnica).
+  CaseId de referência: 500Hn00001sbGrYIAU.
+subjectType: AGENT
+subjectName: FinDiagAgent
+
+testCases:
+
+  # ══════════════════════════════════════════════════════════════════════════
+  # CT-01 — Nova oferta + fatura maior (troca registrada)
+  # Situação: cliente recebeu nova oferta no mês anterior mas a fatura não
+  # está de acordo com o combinado. Troca de pacote localizada via NBA.
+  # Handlers esperados: h02 (histórico faturas) + KB/NBA (busca oferta)
+  # ══════════════════════════════════════════════════════════════════════════
+
+  - utterance: "cliente informou que recebeu uma nova oferta no mês anterior mas alega que o valor da fatura atual não está de acordo com o que foi combinado"
+    expectedTopic: FinDiag_SubAgent
+    expectedActions:
+      - AgentGateway
+    expectedOutcome: >
+      Carrega histórico de faturas, localiza registro da troca via NBA,
+      confirma mudança de pacote e data. Explica ao operador a cobrança proporcional.
+      Apresenta link do caso de referência.
+    contextVariables:
+      - name: currentRecordId
+        value: "500Hn00001sbGrYIAU"
+
+  # ══════════════════════════════════════════════════════════════════════════
+  # CT-02 — Nova oferta + fatura maior (troca NÃO executada no sistema)
+  # Situação: igual ao CT-01, mas o sistema não registrou a troca. Cliente
+  # continua no plano anterior. Sem alteração nas últimas 6 faturas.
+  # ══════════════════════════════════════════════════════════════════════════
+
+  - utterance: "cliente recebeu nova oferta mas a fatura não bateu — não encontro registro da troca no sistema e as faturas dos últimos 6 meses não mostram alteração de plano"
+    expectedTopic: FinDiag_SubAgent
+    expectedActions:
+      - AgentGateway
+    expectedOutcome: >
+      Confirma via histórico de faturas que não houve alteração de plano nos últimos 6 meses.
+      Informa ao operador que a troca não foi executada no sistema.
+      Orienta que cliente continua no mesmo plano e explica próximos passos.
+    contextVariables:
+      - name: currentRecordId
+        value: "500Hn00001sbGrYIAU"
+
+  # ══════════════════════════════════════════════════════════════════════════
+  # CT-03 — Fatura maior: reajuste IGPM
+  # Situação: cliente não fez nenhuma alteração mas a fatura está maior.
+  # Causa: reajuste IGPM (Índice de Reajuste Anual — item de fatura).
+  # ══════════════════════════════════════════════════════════════════════════
+
+  - utterance: "cliente informa que a fatura está maior do que o normal e que não realizou nenhuma alteração ou contratação"
+    expectedTopic: FinDiag_SubAgent
+    expectedActions:
+      - AgentGateway
+      - AnswerQuestionsWithKnowledge
+    expectedOutcome: >
+      Identifica diferença na fatura vigente referente a reajuste IGPM.
+      Busca artigo da KB sobre reajuste anual.
+      Informa ao operador o que aconteceu e orienta a explicar ao cliente.
+    contextVariables:
+      - name: currentRecordId
+        value: "500Hn00001sbGrYIAU"
+
+  # ══════════════════════════════════════════════════════════════════════════
+  # CT-04 — Fatura maior: juros e multa por atraso
+  # Situação: cliente pagou fatura anterior após vencimento — gerou juros/multa.
+  # ══════════════════════════════════════════════════════════════════════════
+
+  - utterance: "fatura maior que o normal, cliente não fez alterações — identifico cobrança de juros e multa por pagamento da fatura anterior após o vencimento"
+    expectedTopic: FinDiag_SubAgent
+    expectedActions:
+      - AgentGateway
+      - AnswerQuestionsWithKnowledge
+    expectedOutcome: >
+      Identifica cobrança de juros e multa na fatura vigente.
+      Busca artigo da KB sobre política de juros por atraso.
+      Informa ao operador o que aconteceu e como explicar ao cliente.
+    contextVariables:
+      - name: currentRecordId
+        value: "500Hn00001sbGrYIAU"
+
+  # ══════════════════════════════════════════════════════════════════════════
+  # CT-05 — PPV cobrado + reclamação anterior localizada
+  # Situação: cliente não fez contratação mas há cobrança de PPV.
+  # Cenário: localizado caso de reclamação do mesmo tipo nos últimos 6 meses.
+  # ══════════════════════════════════════════════════════════════════════════
+
+  - utterance: "fatura maior, cliente não fez alterações — identifico cobrança de PPV (Pay-Per-View) e localizo registro de reclamação sobre esse mesmo tipo de cobrança nos últimos 6 meses"
+    expectedTopic: FinDiag_SubAgent
+    expectedActions:
+      - AgentGateway
+    expectedOutcome: >
+      Identifica cobrança de PPV na fatura vigente.
+      Localiza caso de reclamação anterior do mesmo tipo.
+      Informa ao operador a data de contratação, o serviço e o valor.
+      Recomenda que o operador explique ao cliente o que aconteceu.
+    contextVariables:
+      - name: currentRecordId
+        value: "500Hn00001sbGrYIAU"
+
+  # ══════════════════════════════════════════════════════════════════════════
+  # CT-06 — PPV cobrado + sem reclamação anterior
+  # Situação: igual CT-05, mas NÃO localiza caso de reclamação anterior.
+  # ══════════════════════════════════════════════════════════════════════════
+
+  - utterance: "fatura maior, cliente não fez alterações — identifico cobrança de PPV mas não localizo caso com a mesma reclamação em outra fatura"
+    expectedTopic: FinDiag_SubAgent
+    expectedActions:
+      - AgentGateway
+    expectedOutcome: >
+      Identifica cobrança de PPV na fatura vigente.
+      Confirma ausência de reclamação anterior do mesmo tipo.
+      Informa ao operador o que aconteceu, o motivo da cobrança e orienta próximos passos.
+    contextVariables:
+      - name: currentRecordId
+        value: "500Hn00001sbGrYIAU"
+
+  # ══════════════════════════════════════════════════════════════════════════
+  # CT-07 — SVA Premier cobrado (contratação via NBA)
+  # Situação: cobrança de SVA Premier localizada via jornada NBA.
+  # ══════════════════════════════════════════════════════════════════════════
+
+  - utterance: "fatura maior, cliente não fez alterações — identifico cobrança de SVA Premier e localizo registro da contratação através da jornada NBA"
+    expectedTopic: FinDiag_SubAgent
+    expectedActions:
+      - AgentGateway
+    expectedOutcome: >
+      Identifica cobrança de SVA Premier na fatura vigente.
+      Localiza registro da contratação via NBA.
+      Informa ao operador a data de contratação, o serviço e o valor.
+      Recomenda que o operador explique ao cliente.
+    contextVariables:
+      - name: currentRecordId
+        value: "500Hn00001sbGrYIAU"
+
+  # ══════════════════════════════════════════════════════════════════════════
+  # CT-08 — Plano alterado sem solicitação + perfil "Atendimento Call Center"
+  # Situação: cliente viu plano alterado no Minha Claro sem ter solicitado.
+  # Não há registro da troca no sistema nem contato do cliente na data.
+  # Perfil do operador = "Atendimento Call Center" → deve atualizar o Case.
+  # ══════════════════════════════════════════════════════════════════════════
+
+  - utterance: "cliente informa que ao acessar o Minha Claro viu seu plano foi alterado sem que ele tenha solicitado — não localizei registro da troca nem contato do cliente na data da mudança"
+    expectedTopic: FinDiag_SubAgent
+    expectedActions:
+      - AgentGateway
+    expectedOutcome: >
+      Identifica mudança de plano sem registro no sistema.
+      Valida que perfil do operador é "Atendimento Call Center".
+      Informa ao operador o novo plano e valor.
+      Direciona caso para área responsável e informa SLA conforme artigo KB.
+      Atualiza o Case com: Categoria=Reclamação, Modalidade=Cobrança,
+      Motivo de Entrada=Analise financeira, Motivo de Saída=Analise e correção financeira,
+      Description=diagnóstico completo.
+    contextVariables:
+      - name: currentRecordId
+        value: "500Hn00001sbGrYIAU"
+
+  # ══════════════════════════════════════════════════════════════════════════
+  # CT-09 — Plano alterado sem solicitação + perfil diferente (escalação)
+  # Situação: igual CT-08 mas perfil do operador ≠ "Atendimento Call Center".
+  # Deve seguir processo de escalação do canal do operador.
+  # ══════════════════════════════════════════════════════════════════════════
+
+  - utterance: "cliente informa que seu plano foi alterado no Minha Claro sem solicitação — não localizei registro da troca, preciso encaminhar mas meu perfil não é Atendimento Call Center"
+    expectedTopic: FinDiag_SubAgent
+    expectedActions:
+      - AgentGateway
+    expectedOutcome: >
+      Identifica mudança de plano sem registro no sistema.
+      Valida perfil do operador — não é "Atendimento Call Center".
+      Informa ao operador o novo plano e valor.
+      Orienta que operador siga o processo de escalação de acordo com seu canal.
+    contextVariables:
+      - name: currentRecordId
+        value: "500Hn00001sbGrYIAU"
+
+  # ══════════════════════════════════════════════════════════════════════════
+  # CT-10 — Desconto expirado
+  # Situação: fatura maior porque desconto com vigência X meses terminou.
+  # ══════════════════════════════════════════════════════════════════════════
+
+  - utterance: "fatura maior que o normal, cliente não fez alterações — identifico que a diferença é referente ao término de um desconto que o cliente possuía"
+    expectedTopic: FinDiag_SubAgent
+    expectedActions:
+      - AgentGateway
+      - AnswerQuestionsWithKnowledge
+    expectedOutcome: >
+      Identifica cobrança referente a desconto expirado na fatura vigente.
+      Busca artigo KB sobre término de benefício/desconto.
+      Informa ao operador a vigência do desconto que terminou e orienta explicação ao cliente.
+    contextVariables:
+      - name: currentRecordId
+        value: "500Hn00001sbGrYIAU"
+
+  # ══════════════════════════════════════════════════════════════════════════
+  # CT-11 — Limitadores
+  # Situação: cenário relacionado a limitadores de consumo/serviço.
+  # (detalhes a confirmar com a Claro — CT parcialmente disponível)
+  # ══════════════════════════════════════════════════════════════════════════
+
+  - utterance: "cliente reclamando de limitadores no serviço — preciso entender o contexto financeiro do caso"
+    expectedTopic: FinDiag_SubAgent
+    expectedActions:
+      - AgentGateway
+    expectedOutcome: >
+      Carrega dados do caso e contexto financeiro.
+      Identifica limitadores aplicados ao contrato.
+      Orienta o operador sobre as condições do serviço e política aplicável.
+    contextVariables:
+      - name: currentRecordId
+        value: "500Hn00001sbGrYIAU"
+
+  # ══════════════════════════════════════════════════════════════════════════
+  # CT-12 — Aviso de Recorrência
+  # Situação: cliente recebe aviso de recorrência — agente deve sempre
+  # consultar e considerar o histórico de recorrências.
+  # ══════════════════════════════════════════════════════════════════════════
+
+  - utterance: "cliente está recebendo aviso de recorrência — preciso analisar o histórico"
+    expectedTopic: FinDiag_SubAgent
+    expectedActions:
+      - AgentGateway
+    expectedOutcome: >
+      Consulta histórico de faturas e casos anteriores do cliente.
+      Identifica padrão de recorrência.
+      Apresenta ao operador o contexto completo para embasar a análise.
+    contextVariables:
+      - name: currentRecordId
+        value: "500Hn00001sbGrYIAU"

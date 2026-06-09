@@ -1,0 +1,907 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AiEvaluationDefinition xmlns="http://soap.sforce.com/2006/04/metadata">
+    <name>FinDiag_ErrorHandling_BRTelco_MultiTurn_OutputFormat</name>
+    <subjectName>FinDiagAgent</subjectName>
+    <subjectType>AGENT</subjectType>
+    <subjectVersion>v13</subjectVersion>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent silently omits FLS-restricted fields without mentioning field-level security technically</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Resposta do gateway com campos FLS restritos</utterance>
+        </inputs>
+        <number>1</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent omits the line from response template per Bloco R0 null handling rule</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Campo null no recordCase — como tratar?</utterance>
+        </inputs>
+        <number>2</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent completes first handler call before chaining to second as explicit sequence</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Dois handlerClass no mesmo turno</utterance>
+        </inputs>
+        <number>3</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent dispatches only one handlerClass per turn per Sec AI-1 rule</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Invoca dois handlers em sequencia no mesmo turno</utterance>
+        </inputs>
+        <number>4</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent handles timeout gracefully and instructs operator to retry</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Timeout de sessao durante consulta</utterance>
+        </inputs>
+        <number>5</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves invoice details and systematically maps each charge to contracted services</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Cliente alega cobranca indevida na fatura</utterance>
+        </inputs>
+        <number>6</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves historical invoices for comparison and identifies increased charges</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Fatura veio mais cara que o mes anterior</utterance>
+        </inputs>
+        <number>7</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves assets and invoice details to verify contracted vs charged services</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Cobranca de servico que o cliente nao contratou</utterance>
+        </inputs>
+        <number>8</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves invoice details and identifies unauthorized SVA charge in itemGroups</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>SVA cobrado sem autorizacao</utterance>
+        </inputs>
+        <number>9</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves invoice history to identify duplicate payments and adjustments</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Fatura duplicada — cliente pagou duas vezes</utterance>
+        </inputs>
+        <number>10</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves invoice details and offer book to compare contracted vs charged price</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Desconto prometido nao aparece na fatura</utterance>
+        </inputs>
+        <number>11</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves invoice details and checks for installation fee in eventuais category</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Promocao de instalacao cobrada indevidamente</utterance>
+        </inputs>
+        <number>12</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves assets offer book and invoice details to verify combo pricing</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Pacote combo nao aplicado corretamente</utterance>
+        </inputs>
+        <number>13</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves account info to verify customer name matches invoice</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Fatura veio com nome errado</utterance>
+        </inputs>
+        <number>14</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves assets to verify plan type and invoice details for data overage charge</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Franquia de dados cobrada mesmo com plano ilimitado</utterance>
+        </inputs>
+        <number>15</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves invoice phone details and identifies the disputed call</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Cobranca de ligacao para numero bloqueado</utterance>
+        </inputs>
+        <number>16</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves payment adjustments and case history to verify contractual fine basis</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Multa contratual — cliente alega indevida</utterance>
+        </inputs>
+        <number>17</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves invoice details comparing amount vs billCode for the disputed bill</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Boleto diferente do valor da fatura</utterance>
+        </inputs>
+        <number>18</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves assets and invoice history to verify cancellation date vs billing period</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Fatura de mes que o cliente cancelou o servico</utterance>
+        </inputs>
+        <number>19</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves payment adjustments and invoice history to verify payment status</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Corte de servico mesmo sem debito em aberto</utterance>
+        </inputs>
+        <number>20</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves offer book and invoice details to compare pricing discrepancy</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Valor da fatura diferente do book de ofertas</utterance>
+        </inputs>
+        <number>21</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves assets activation date and invoice history to verify billing start</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Internet cobrada mas ainda nao instalada</utterance>
+        </inputs>
+        <number>22</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves invoice details and identifies installment items in itemGroups</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Fatura com parcelas de equipamento nao reconhecidas</utterance>
+        </inputs>
+        <number>23</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves offer book and invoice details to check loyalty discount application</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Desconto de fidelidade nao computado</utterance>
+        </inputs>
+        <number>24</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent systematically retrieves invoice details assets and cases to diagnose R$ 50 discrepancy</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Divergencia de R$ 50 na fatura — nao identificou origem</utterance>
+        </inputs>
+        <number>25</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AnswerQuestionsWithKnowledge&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent queries KB for tax calculation procedure on telecommunications invoices</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Fatura com IVA e ICMS calculados incorretamente</utterance>
+        </inputs>
+        <number>26</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AnswerQuestionsWithKnowledge&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent queries KB for billing channel migration procedure</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Fatura em papel chegou mas cliente e digital</utterance>
+        </inputs>
+        <number>27</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AnswerQuestionsWithKnowledge&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent queries KB for installment procedure for overdue invoices</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Cliente quer parcelar fatura em atraso</utterance>
+        </inputs>
+        <number>28</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves invoice details for comboMulti customer and presents all charge categories</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Fatura comboMulti — analise de todas as linhas</utterance>
+        </inputs>
+        <number>29</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent redirects SVA-specific billing to appropriate topic per A5 restriction</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Cliente reclama de cobranca de Cine BR</utterance>
+        </inputs>
+        <number>30</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent first loads case context then retrieves invoice history using stored contract info</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Carrega caso, depois mostra historico de faturas</utterance>
+        </inputs>
+        <number>31</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent chains historical invoices to invoice details using invoiceId from previous response</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Apos ver faturas, abre detalhe da ultima</utterance>
+        </inputs>
+        <number>32</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent chains three handlers across turns maintaining context from Memory cache</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Carrega caso, lista ativos, depois book de ofertas</utterance>
+        </inputs>
+        <number>33</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent chains case loading and investigation before invoking discrepancy routing</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Apos diagnostico, encaminha para analise financeira</utterance>
+        </inputs>
+        <number>34</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves service cases then chains to payment adjustments for same contract</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Busca casos do cliente, depois ajustes de pagamento</utterance>
+        </inputs>
+        <number>35</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves interactions and chains to topics using interaction ID from first result</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Interacoes, depois topicos da primeira interacao</utterance>
+        </inputs>
+        <number>36</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent detects new currentRecordId, clears Memory cache and reloads case context</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Carrega caso diferente — atualiza contexto</utterance>
+        </inputs>
+        <number>37</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent transitions back to gateway actions after KB consultation maintaining case context</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Operador quer voltar para diagnostico apos KB</utterance>
+        </inputs>
+        <number>38</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AnswerQuestionsWithKnowledge&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent handles multiple sequential KB queries using normalized queries each time</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Multiplas perguntas de KB em sequencia</utterance>
+        </inputs>
+        <number>39</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent synthesizes all gathered data from multiple handlers into a coherent diagnostic summary</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Resumo completo do diagnostico apos 6 handlers</utterance>
+        </inputs>
+        <number>40</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent never shows raw JSON and always paraphrases in natural Portuguese</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Exibe dados do caso em formato JSON</utterance>
+        </inputs>
+        <number>41</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent formats all response fields as bold Campo Valor on separate lines per Bloco R0</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Resposta deve usar formato Campo: Valor por linha</utterance>
+        </inputs>
+        <number>42</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent inserts clear separator line between data section and agent recommendation section</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Separador entre secao de dados e recomendacao</utterance>
+        </inputs>
+        <number>43</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent omits lines with null or empty values instead of displaying null or n/a</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Nenhum campo null na resposta ao operador</utterance>
+        </inputs>
+        <number>44</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent maintains professional Brazilian Portuguese tone without dataJson FLS or envelope terms</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Tom profissional em pt-BR sem jargao tecnico</utterance>
+        </inputs>
+        <number>45</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent ends every response with a question about what aspect of diagnosis to explore next</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Secao de recomendacao — pergunta sobre proximo passo</utterance>
+        </inputs>
+        <number>46</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AnswerQuestionsWithKnowledge&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent presents KnowledgeSummary rich-text directly preserving embedded citations and links</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Output de KB exibido com citacoes preservadas</utterance>
+        </inputs>
+        <number>47</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent extracts relevant fields from Memory cache and presents in Bloco R0 formatted layout</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Dados do Memory cache apresentados em formato legivel</utterance>
+        </inputs>
+        <number>48</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent presents routing success in structured format with case number status and next steps</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Resposta de roteamento — formato de proximos passos</utterance>
+        </inputs>
+        <number>49</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent uses bold Campo Valor markdown formatting for every field in the response</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Campos do template R0 todos formatados com negrito</utterance>
+        </inputs>
+        <number>50</number>
+    </testCase>
+</AiEvaluationDefinition>

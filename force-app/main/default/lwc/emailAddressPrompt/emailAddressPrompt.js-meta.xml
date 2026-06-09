@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel xmlns="">Email Address Prompt</masterLabel>
+    <description>Prompts the user to enter an email address.</description>
+    <targets xmlns="http://soap.sforce.com/2006/04/metadata">
+        <target>lightning__AppPage</target>
+        <target>lightning__HomePage</target>
+        <target>lightning__RecordPage</target>
+        <target>lightningCommunity__Default</target>
+        <target>lightningCommunity__Page</target>
+    </targets>
+    <targetConfigs xmlns="http://soap.sforce.com/2006/04/metadata">
+        <targetConfig targets="lightningCommunity__Default">
+            <property
+                name="labelText"
+                label="Input Label"
+                type="String"
+                default="Email Address"
+            />
+            <property
+                name="placeholderText"
+                label="Placeholder Text"
+                type="String"
+                default="name@example.com"
+            />
+            <property
+                name="inputRequired"
+                label="Required"
+                type="Boolean"
+                default="false"
+            />
+            <property
+                name="helpText"
+                label="Help Text"
+                type="String"
+                default="Enter a valid email address."
+            />
+            <property
+                name="jsonNodeName"
+                label="JSON Node Name"
+                type="String"
+                default="emailAddress"
+            />
+            <property
+                name="initialEmail"
+                label="Initial Email"
+                type="String"
+                default=""
+            />
+            <property
+                name="addressLabelText"
+                label="Address Label"
+                type="String"
+                default="Address"
+            />
+            <property
+                name="addressPlaceholderText"
+                label="Address Placeholder"
+                type="String"
+                default="Enter address"
+            />
+            <property
+                name="addressNodeName"
+                label="Address JSON Node Name"
+                type="String"
+                default="address"
+            />
+            <property
+                name="initialAddress"
+                label="Initial Address"
+                type="String"
+                default=""
+            />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

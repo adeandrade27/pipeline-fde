@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>COM Product Catalog Tiles</masterLabel>
+    <description>Product tiles from a productsList array (or JSON string): image, name, description, monthly price, Add to Cart.</description>
+    <targets>
+        <target>lightning__AppPage</target>
+        <target>lightning__RecordPage</target>
+        <target>lightning__HomePage</target>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="productsList" type="String" label="Products list (JSON array)" description='JSON array of products. Each item may include id, displayUrl, name, description, price or prices[].price.'/>
+        </targetConfig>
+        <targetConfig targets="lightning__AppPage,lightning__RecordPage,lightning__HomePage">
+            <property name="productsList" type="String" label="Products list (JSON array)" description='JSON array of products. Each item may include id, displayUrl, name, description, price or prices[].price.'/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

@@ -1,0 +1,26 @@
+<template>
+    <template lwc:if={hasError}>
+        <div class="slds-notify slds-notify_alert slds-theme_error slds-m-around_small" role="alert">
+            <span class="slds-assistive-text">Error</span>
+            <h2>{errorMessage}</h2>
+        </div>
+    </template>
+
+    <template lwc:if={showBanner}>
+        <div class="slds-notify slds-notify_alert slds-theme_info slds-m-around_small" role="alert">
+            <span class="slds-assistive-text">Info</span>
+            <h2>
+                <template lwc:if={isNoParentMessage}>
+                    {bannerState.message}
+                </template>
+                <template lwc:else>
+                    {parentMessagePrefix}
+                    <a href={parentAccountUrl} target="_blank" rel="noopener noreferrer">
+                        {bannerState.parentAccountName}
+                    </a>
+                    {parentMessageSuffix}
+                </template>
+            </h2>
+        </div>
+    </template>
+</template>

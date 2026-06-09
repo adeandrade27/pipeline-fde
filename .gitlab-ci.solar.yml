@@ -1,0 +1,38 @@
+stages:
+  - validate
+  - quality_gate
+  - gmud_evidence
+
+variables:
+  SF_DISABLE_AUTOUPDATE: "true"
+  SF_USE_PROGRESS_BAR: "false"
+  ORG: "cec-claro-sandbox"
+
+validate_metadata:
+  stage: validate
+  script:
+    - ./scripts/validate-fase1-metadata.sh
+    - ./scripts/validate-stress-test.sh
+    - ./scripts/validate-eval-gates.sh
+  artifacts:
+    when: always
+    paths:
+      - results/
+
+quality_gate_agent:
+  stage: quality_gate
+  script:
+    - ORG="$ORG" ./scripts/run-eval-gates.sh
+  artifacts:
+    when: always
+    paths:
+      - results/gates/
+
+gmud_evidence_pack:
+  stage: gmud_evidence
+  script:
+    - ORG="$ORG" ./scripts/gmud/run-gmud-gates.sh
+  artifacts:
+    when: always
+    paths:
+      - results/gmud/

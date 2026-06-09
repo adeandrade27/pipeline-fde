@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>64.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <description>Adds details from the Outputs from IterateOverTransformInvoices variable to the prompt instructions.</description>
+        <name>AddInvoiceSummaryPromptInstructions</name>
+        <elementSubtype>AddPromptInstructions</elementSubtype>
+        <label>Add Invoice Summary Prompt Instructions</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Output.Prompt</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <stringValue>{!TransformInvoices}
+</stringValue>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <collectionProcessors>
+        <description>Sorts InvoiceDate so that the most recent invoice is first and keeps no more than the 6 most recent invoices, discarding other records in the collection. To keep a different number of invoices, change 6 to the maximum number of invoices you want to keep.</description>
+        <name>KeepMostRecentInvoices</name>
+        <elementSubtype>SortCollectionProcessor</elementSubtype>
+        <label>Keep Most Recent Invoices</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <collectionProcessorType>SortCollectionProcessor</collectionProcessorType>
+        <collectionReference>TransformInvoices</collectionReference>
+        <connector>
+            <targetReference>AddInvoiceSummaryPromptInstructions</targetReference>
+        </connector>
+        <sortOptions>
+            <doesPutEmptyStringAndNullFirst>false</doesPutEmptyStringAndNullFirst>
+            <sortField>invoice_date</sortField>
+            <sortOrder>Desc</sortOrder>
+        </sortOptions>
+    </collectionProcessors>
+    <decisions>
+        <description>Determines whether the invoice details for the account are available in the external billing system.</description>
+        <name>IsInvoiceInformationAvailable</name>
+        <label>Is Invoice Information Available?</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>HasInvoiceInformation</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>ActionResponse</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>OK</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>TransformInvoices</targetReference>
+            </connector>
+            <label>Yes</label>
+        </rules>
+    </decisions>
+    <description>COM:  Billing Resolution agent flow.</description>
+    <environments>Default</environments>
+    <interviewLabel>COM - Get Account Invoices {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>COM - Get Account Invoices</label>
+    <overriddenFlow>ind_comms_agentforce__GetAcctInvoices</overriddenFlow>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>PromptFlow</processType>
+    <recordLookups>
+        <description>Gets the account number with an ID that matches the Account ID associated with the account that&apos;s passed into the flow. Stores the result in the AccountNumber variable.</description>
+        <name>GetAccountNumber</name>
+        <label>Get Account Number</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>IsInvoiceInformationAvailable</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Input.objectToSummarize.Id</elementReference>
+            </value>
+        </filters>
+        <object>Account</object>
+        <outputAssignments>
+            <assignToReference>AccountNumber</assignToReference>
+            <field>AccountNumber</field>
+        </outputAssignments>
+    </recordLookups>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <capabilityTypes>
+            <name>PromptTemplateType://einstein_gpt__recordSummary</name>
+            <capabilityName>PromptTemplateType://einstein_gpt__recordSummary</capabilityName>
+            <inputs>
+                <name>objectToSummarize</name>
+                <capabilityInputName>objectToSummarize</capabilityInputName>
+                <dataType>SOBJECT://Account</dataType>
+                <isCollection>false</isCollection>
+            </inputs>
+        </capabilityTypes>
+        <connector>
+            <targetReference>GetAccountNumber</targetReference>
+        </connector>
+        <triggerType>Capability</triggerType>
+    </start>
+    <status>Draft</status>
+    <transforms>
+        <description>Maps and transforms fields from the InvoiceFormat record collection to the Apex ind_comms_agentforce__Invoice class. Stores the target data in Outputs from TransformInvoices.</description>
+        <name>TransformInvoices</name>
+        <label>Transform Invoices</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <apexClass>ind_comms_agentforce__Invoice</apexClass>
+        <connector>
+            <targetReference>KeepMostRecentInvoices</targetReference>
+        </connector>
+        <dataType>Apex</dataType>
+        <isCollection>true</isCollection>
+        <scale>0</scale>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+        <transformValues>
+            <transformValueActions>
+                <outputFieldApiName>invoice_date</outputFieldApiName>
+                <transformType>Map</transformType>
+                <value>
+                    <elementReference>InvoiceFormat[$EachItem].invoice_date</elementReference>
+                </value>
+            </transformValueActions>
+            <transformValueActions>
+                <outputFieldApiName>invoice_no</outputFieldApiName>
+                <transformType>Map</transformType>
+                <value>
+                    <elementReference>InvoiceFormat[$EachItem].invoice_no</elementReference>
+                </value>
+            </transformValueActions>
+        </transformValues>
+    </transforms>
+    <variables>
+        <description>Stores the AccountNumber from GetAccountNumber.</description>
+        <name>AccountNumber</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Stores the response of the call to the external billing system while trying to retrieve the invoice details.</description>
+        <name>ActionResponse</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Stores the format for mapping the invoice record to the ind_comms_agentforce__Invoice Apex variable.</description>
+        <name>InvoiceFormat</name>
+        <apexClass>ind_comms_agentforce__Invoice</apexClass>
+        <dataType>Apex</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

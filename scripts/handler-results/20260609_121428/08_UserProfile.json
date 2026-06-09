@@ -1,0 +1,14 @@
+{
+  "status": 0,
+  "result": {
+    "success": true,
+    "compiled": true,
+    "compileProblem": "",
+    "exceptionMessage": "",
+    "exceptionStackTrace": "",
+    "line": -1,
+    "column": -1,
+    "logs": "67.0 APEX_CODE,DEBUG;APEX_PROFILING,INFO\nExecute Anonymous: SF_AgenticGateway.Request req = new SF_AgenticGateway.Request();\nExecute Anonymous: req.handlerClass = 'flow:Buscar_perfil_do_usuario';\nExecute Anonymous: req.payloadJson  = '{\\\"caseId\\\":\\\"500Hn00001sbGrYIAU\\\"}';\nExecute Anonymous: req.correlationId = 'smoke-08_UserProfile';\nExecute Anonymous: List<SF_AgenticGateway.Request> reqs = new List<SF_AgenticGateway.Request>{ req };\nExecute Anonymous: List<SF_AgenticGateway.Response> resps = SF_AgenticGateway.invoke(reqs);\nExecute Anonymous: SF_AgenticGateway.Response r = resps[0];\nExecute Anonymous: System.debug('RESULT::' + JSON.serialize(r));\n12:15:04.925 (1925781385)|USER_INFO|[EXTERNAL]|005HZ00000LVGNm|adeandrade@salesforce.com.ibuy|(GMT-03:00) Brasilia Standard Time (America/Sao_Paulo)|GMT-03:00\n12:15:04.925 (1925810195)|EXECUTION_STARTED\n12:15:04.925 (1925986855)|CODE_UNIT_STARTED|[EXTERNAL]|execute_anonymous_apex\n12:15:04.925 (1930270838)|EXCEPTION_THROWN|[328]|SF_AgenticGateway.SF_AgenticGatewayException: CORRELATION_ID_INVALID:smoke-08_UserProfile\n12:15:04.925 (1930456772)|USER_DEBUG|[408]|WARN|[SF_AgenticGateway] reject handlerClass=flow:Buscar_perfil_do_usuario correlationId=smoke-08_UserProfile error=SF_AgenticGateway.SF_AgenticGatewayException: CORRELATION_ID_INVALID:smoke-08_UserProfile\n12:15:04.925 (1965425961)|USER_DEBUG|[8]|DEBUG|RESULT::{\"success\":false,\"message\":\"SF_AgenticGateway.SF_AgenticGatewayException: CORRELATION_ID_INVALID:smoke-08_UserProfile\",\"dataJson\":null,\"correlationId\":\"smoke-08_UserProfile\"}\n12:15:04.972 (1972779561)|CUMULATIVE_LIMIT_USAGE\n12:15:04.972 (1972779561)|LIMIT_USAGE_FOR_NS|(default)|\n  Number of SOQL queries: 0 out of 100\n  Number of query rows: 1 out of 50000\n  Number of SOSL queries: 0 out of 20\n  Number of DML statements: 1 out of 150\n  Number of Publish Immediate DML: 0 out of 150\n  Number of DML rows: 1 out of 10000\n  Maximum CPU time: 3 out of 10000\n  Maximum heap size: 0 out of 6000000\n  Number of callouts: 0 out of 100\n  Number of Email Invocations: 0 out of 10\n  Number of future calls: 0 out of 50\n  Number of queueable jobs added to the queue: 0 out of 50\n  Number of Mobile Apex push calls: 0 out of 10\n\n12:15:04.972 (1972779561)|CUMULATIVE_LIMIT_USAGE_END\n\n12:15:04.925 (1972862293)|CODE_UNIT_FINISHED|execute_anonymous_apex\n12:15:04.925 (1972884083)|EXECUTION_FINISHED\n"
+  },
+  "warnings": []
+}

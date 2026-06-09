@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Service Not Available Prompt</masterLabel>
+    <description>Collects email and consent when service is unavailable.</description>
+    <targets>
+        <target>lightning__AppPage</target>
+        <target>lightning__HomePage</target>
+        <target>lightning__RecordPage</target>
+        <target>lightningCommunity__Default</target>
+        <target>lightningCommunity__Page</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property
+                name="titleText"
+                label="Title Text"
+                type="String"
+                default="Service isn't available for this area... yet"
+            />
+            <property
+                name="subtitleText"
+                label="Subtitle Text"
+                type="String"
+                default="Enter your email address to get updated when services are available."
+            />
+            <property
+                name="emailLabelText"
+                label="Email Label"
+                type="String"
+                default="Email"
+            />
+            <property
+                name="emailPlaceholderText"
+                label="Email Placeholder"
+                type="String"
+                default="your email adress"
+            />
+            <property
+                name="checkboxLabelText"
+                label="Checkbox Label"
+                type="String"
+                default="I agree to be contacted at the above email address regarding new products and services."
+            />
+            <property
+                name="emailNodeName"
+                label="Email JSON Node Name"
+                type="String"
+                default="email_address"
+            />
+            <property
+                name="consentNodeName"
+                label="Consent JSON Node Name"
+                type="String"
+                default="contact_consent"
+            />
+            <property
+                name="initialEmail"
+                label="Initial Email"
+                type="String"
+                default=""
+            />
+            <property
+                name="initialConsent"
+                label="Initial Consent"
+                type="Boolean"
+                default="false"
+            />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

@@ -1,0 +1,68 @@
+<template>
+    <div class="address-lookup slds-p-around_small">
+        <label class="address-lookup__title slds-form-element__label" for="address-search">
+            {labelText}
+        </label>
+
+        <div class="slds-form-element">
+            <div class="slds-form-element__control">
+                <div class="slds-input-has-icon slds-input-has-icon_right">
+                    <lightning-icon
+                        class="slds-input__icon slds-input__icon_right slds-icon-text-default"
+                        icon-name="utility:search"
+                        size="x-small"
+                        alternative-text="Search"
+                    >
+                    </lightning-icon>
+                    <input
+                        id="address-search"
+                        class="slds-input address-lookup__input"
+                        type="text"
+                        value={searchTerm}
+                        placeholder={placeholderText}
+                        oninput={handleSearchInput}
+                        onfocus={handleSearchFocus}
+                        onblur={handleSearchBlur}
+                        role="combobox"
+                        aria-autocomplete="list"
+                        aria-expanded={ariaExpanded}
+                    />
+                </div>
+            </div>
+        </div>
+
+        <template if:true={showSuggestions}>
+            <ul class="address-lookup__suggestions" role="listbox" aria-label="Address suggestions">
+                <template for:each={suggestions} for:item="suggestion">
+                    <li key={suggestion} class="address-lookup__suggestion-item" role="option">
+                        <button
+                            class="address-lookup__suggestion-button"
+                            type="button"
+                            data-address={suggestion}
+                            onmousedown={handleSuggestionMouseDown}
+                            onclick={handleSelectSuggestion}
+                        >
+                            {suggestion}
+                        </button>
+                    </li>
+                </template>
+            </ul>
+        </template>
+
+        <div class="address-lookup__actions slds-m-top_medium">
+            <lightning-button
+                variant="base"
+                label="Check Availability"
+                onclick={handleCheckAvailability}
+                disabled={isCheckDisabled}
+            >
+            </lightning-button>
+        </div>
+
+        <template if:true={hasResult}>
+            <div class="address-lookup__result slds-m-top_small slds-text-body_small">
+                {availabilityMessage}
+            </div>
+        </template>
+    </div>
+</template>

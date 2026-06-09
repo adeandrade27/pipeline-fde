@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AiEvaluationDefinition xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Suite de regressao para gate de promocao do FinDiagAgent com variacoes de fraseado.</description>
+    <masterLabel>FinDiag RegressionGate</masterLabel>
+    <subjectName>FinDiagAgent</subjectName>
+    <subjectType>AGENT</subjectType>
+    <testCases>
+        <inputs>{"utterance":"diagnostique o caso 500Hn00001sbGrYIAU"}</inputs>
+        <number>1</number>
+    </testCases>
+    <testCases>
+        <inputs>{"utterance":"preciso entender divergencia de cobranca no caso 500Hn00001sbGrYIAU"}</inputs>
+        <number>2</number>
+    </testCases>
+    <testCases>
+        <inputs>{"utterance":"me traga status e assunto do caso 500Hn00001sbGrYIAU"}</inputs>
+        <number>3</number>
+    </testCases>
+    <testCases>
+        <inputs>{"utterance":"quero apoio para contestacao de fatura no caso 500Hn00001sbGrYIAU"}</inputs>
+        <number>4</number>
+    </testCases>
+    <testCases>
+        <inputs>{"utterance":"consulte base de conhecimento para explicar regras de contestacao"}</inputs>
+        <number>5</number>
+    </testCases>
+    <testCases>
+        <inputs>{"utterance":"o cliente quer contestar a fatura mas nao tenho o id do caso ainda"}</inputs>
+        <number>6</number>
+    </testCases>
+</AiEvaluationDefinition>

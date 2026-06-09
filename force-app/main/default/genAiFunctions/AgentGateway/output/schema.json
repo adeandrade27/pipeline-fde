@@ -1,0 +1,30 @@
+{
+  "unevaluatedProperties": false,
+  "properties": {
+    "dataJson": {
+      "title": "dataJson",
+      "description": "JSON com os dados retornados pelo handler (dados do caso, histórico, cobrança)",
+      "lightning:type": "lightning__textType",
+      "lightning:isPII": false,
+      "copilotAction:isDisplayable": true,
+      "copilotAction:isUsedByPlanner": true
+    },
+    "status": {
+      "title": "status",
+      "description": "Status da execução: Success ou Error",
+      "lightning:type": "lightning__textType",
+      "lightning:isPII": false,
+      "copilotAction:isDisplayable": false,
+      "copilotAction:isUsedByPlanner": true
+    },
+    "errorMessage": {
+      "title": "errorMessage",
+      "description": "Mensagem de erro caso status seja Error",
+      "lightning:type": "lightning__textType",
+      "lightning:isPII": false,
+      "copilotAction:isDisplayable": false,
+      "copilotAction:isUsedByPlanner": true
+    }
+  },
+  "lightning:type": "lightning__objectType"
+}

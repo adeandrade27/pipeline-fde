@@ -1,0 +1,961 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AiEvaluationDefinition xmlns="http://soap.sforce.com/2006/04/metadata">
+    <name>FinDiag_Assets_AccountInfo</name>
+    <subjectName>FinDiagAgent</subjectName>
+    <subjectType>AGENT</subjectType>
+    <subjectVersion>v13</subjectVersion>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves all assets and presents full count breakdown by type and status</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Resumo total de ativos do cliente</utterance>
+        </inputs>
+        <number>1</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent paraphrases contract not found error and asks operator to verify Contract ID</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Busca ativos — retornou erro de contrato não encontrado</utterance>
+        </inputs>
+        <number>2</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent maps CECFixo to Telefonia Fixa and presents the human-readable label</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Tipo do ativo retornado é CECFixo — como traduzir?</utterance>
+        </inputs>
+        <number>3</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent invokes assets handler and presents full asset history including cancelled</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Quero ver o histórico de produtos do cliente</utterance>
+        </inputs>
+        <number>4</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent asks whether to search by Cliente_id or Contract_id then invokes flow:Buscar_informacoes_da_Conta</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Dados cadastrais do cliente</utterance>
+        </inputs>
+        <number>5</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent confirms operator wants contract account and invokes handler with caseBillingAccount</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Informações da conta do contrato</utterance>
+        </inputs>
+        <number>6</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent invokes account handler with caseConsumerAccount from Cliente_id variable</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Informações do cliente — busca por Client ID</utterance>
+        </inputs>
+        <number>7</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves account info and presents city field for use in offer book queries</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Qual a cidade do cliente?</utterance>
+        </inputs>
+        <number>8</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves account info and presents state field</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Qual o estado do cliente?</utterance>
+        </inputs>
+        <number>9</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves account info and presents account segment</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Qual o segmento da conta?</utterance>
+        </inputs>
+        <number>10</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent asks operator to confirm which type of search to perform before invoking</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Dados da conta — Contract ID ou Client ID?</utterance>
+        </inputs>
+        <number>11</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent refuses per PII guard and does not expose or use CPF field</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Usa o CPF para buscar dados da conta</utterance>
+        </inputs>
+        <number>12</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent informs that Buscar_informacoes_da_Conta is exclusive for Net/Residencial</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Busca conta para cliente Empresarial</utterance>
+        </inputs>
+        <number>13</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent confirms the city can be used as reference for offer book but always requires operator confirmation</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Cidade retornada pode ser usada no book de ofertas?</utterance>
+        </inputs>
+        <number>14</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent detects the mix-up and asks operator to clarify which ID should be used</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Dados de conta — misturou Client ID com Contract ID</utterance>
+        </inputs>
+        <number>15</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent paraphrases the error message politely and does not retry with same payload</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Busca info da conta — retornou erro</utterance>
+        </inputs>
+        <number>16</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves account info and presents Nome field from recordAccount</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Quero o nome do cliente</utterance>
+        </inputs>
+        <number>17</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves account info and presents RecordType field</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Qual o tipo de registro da conta?</utterance>
+        </inputs>
+        <number>18</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves account info and presents the Account ID from the response</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Account ID retornado da conta</utterance>
+        </inputs>
+        <number>19</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent informs that no account was found for the given contract ID and asks to verify</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Conta não encontrada para o contrato informado</utterance>
+        </inputs>
+        <number>20</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent uses Contract_id and Cliente_id from Memory cache and confirms with operator before invoking</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Busca info com IDs do caso já carregado</utterance>
+        </inputs>
+        <number>21</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves account info, extracts segment field and offers to proceed to offer book</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Preciso do segmento para confirmar book de ofertas</utterance>
+        </inputs>
+        <number>22</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves account info and presents account status</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Qual o status da conta do cliente?</utterance>
+        </inputs>
+        <number>23</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent reuses previously loaded account context without re-invoking gateway</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Usa dados do Memory cache da conta</utterance>
+        </inputs>
+        <number>24</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent invokes flow:Buscar_Book_Ofertas with varProduto varCidade varMes varAno and presents result</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Qual o preco do produto Internet 100MB em Sao Paulo em Janeiro 2026?</utterance>
+        </inputs>
+        <number>25</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent asks for all 4 required parameters product city month and year</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Consulta book de ofertas</utterance>
+        </inputs>
+        <number>26</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent applies FIXO ILIMITADO special rule setting varCidade to Nacional and invokes handler</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Preco do FIXO BRASIL ILIMITADO em marco 2026</utterance>
+        </inputs>
+        <number>27</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent asks for city parameter before invoking offer book handler</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Quanto custa o produto sem informar a cidade?</utterance>
+        </inputs>
+        <number>28</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent asks operator for the reference month before proceeding</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Preco do produto X — sem mes informado</utterance>
+        </inputs>
+        <number>29</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent asks operator for the reference year before invoking</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Preco do produto — sem ano informado</utterance>
+        </inputs>
+        <number>30</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent confirms all 4 parameters with operator and invokes Buscar_Book_Ofertas</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Confirma busca: Internet 200MB, Sao Paulo, Janeiro, 2026</utterance>
+        </inputs>
+        <number>31</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent paraphrases offer not found error and asks operator to verify product and location</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Oferta nao encontrada para os parametros informados</utterance>
+        </inputs>
+        <number>32</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent overrides provided city with Nacional per special rule and informs operator</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>FIXO ILIMITADO — cidade informada como Rio de Janeiro</utterance>
+        </inputs>
+        <number>33</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent asks for new product details and invokes offer book again for the new query</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Consulta outro produto apos resultado anterior</utterance>
+        </inputs>
+        <number>34</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent uses city from account info as reference but confirms with operator before invoking</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Preco do produto — cidade da conta como referencia</utterance>
+        </inputs>
+        <number>35</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent invokes offer book with correct parameters and presents formatted varResposta</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Qual o preco de TV 200 canais em Curitiba em Junho 2026?</utterance>
+        </inputs>
+        <number>36</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves offer book result and presents promotional pricing from varResposta</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Preco promocional disponivel no book?</utterance>
+        </inputs>
+        <number>37</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent detects invalid parameter error and asks operator to correct and retry</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Book de ofertas — parametro invalido</utterance>
+        </inputs>
+        <number>38</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent informs offer book is restricted to Net/Residencial segment</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Consulta book para cliente Movel</utterance>
+        </inputs>
+        <number>39</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent invokes offer book with correct parameters and presents formatted result</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Preco de Internet 1GB em Brasilia em Dezembro 2026?</utterance>
+        </inputs>
+        <number>40</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent clarifies that varMes expects month name in full Portuguese extension</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Book confirma — mes como numero ou extenso?</utterance>
+        </inputs>
+        <number>41</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent applies FIXO ILIMITADO prefix rule, uses Nacional as city and invokes offer book</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Produto FIXO ILIMITADO Plus — qual cidade usar?</utterance>
+        </inputs>
+        <number>42</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent presents varResposta directly as returned by the flow without modification</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Book de ofertas — retornou sucesso com varResposta</utterance>
+        </inputs>
+        <number>43</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent refuses to use Case ID for offer book query per Bloco A7 restriction</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Consulta preco usando Case ID ao inves de Contract ID</utterance>
+        </inputs>
+        <number>44</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent clarifies that varAno expects a 4-digit year integer and asks to reconfirm</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Ano informado como 26 ao inves de 2026</utterance>
+        </inputs>
+        <number>45</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent processes one product at a time per single-handlerClass-per-turn rule</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Dois produtos para consultar no book</utterance>
+        </inputs>
+        <number>46</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent invokes offer book with all validated parameters and presents result</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Preco de Internet 500MB em Recife em Marco 2025?</utterance>
+        </inputs>
+        <number>47</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent does not invoke until all 4 parameters are confirmed by operator</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Busca book sem confirmar os parametros</utterance>
+        </inputs>
+        <number>48</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent invokes offer book with correct parameters and presents formatted result</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Preco de Internet 200MB em Fortaleza em Maio 2026?</utterance>
+        </inputs>
+        <number>49</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent invokes flow:Buscar_perfil_do_usuario_em_conversa with TargetUserId and populates Profile_name</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Qual meu perfil de usuario?</utterance>
+        </inputs>
+        <number>50</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves user profile early in conversation to fill Profile_name variable</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Busca o perfil do usuario logado</utterance>
+        </inputs>
+        <number>51</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent retrieves profile and stores Profile_name for use throughout the conversation</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Perfil do usuario para verificar permissoes</utterance>
+        </inputs>
+        <number>52</number>
+    </testCase>
+    <testCase>
+        <expectation>
+            <expectedValue>FinDiag_SubAgent</expectedValue>
+            <name>topic_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>[&apos;AgentGateway&apos;]</expectedValue>
+            <name>action_sequence_match</name>
+        </expectation>
+        <expectation>
+            <expectedValue>Agent invokes profile handler and returns profile name in natural language</expectedValue>
+            <name>bot_response_rating</name>
+        </expectation>
+        <inputs>
+            <utterance>Preciso saber meu perfil antes de prosseguir</utterance>
+        </inputs>
+        <number>53</number>
+    </testCase>
+</AiEvaluationDefinition>

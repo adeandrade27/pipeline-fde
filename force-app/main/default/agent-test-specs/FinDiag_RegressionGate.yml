@@ -1,0 +1,51 @@
+name: FinDiag_RegressionGate
+description: "Suite de regressao para gate de promocao do FinDiagAgent com variacoes de fraseado e assertivas funcionais"
+subjectType: AGENT
+subjectName: FinDiagAgent
+testCases:
+  - utterance: "diagnostique o caso 500Hn00001sbGrYIAU"
+    expectedTopic: FinDiag_SubAgent
+    expectedActions:
+      - AgentGateway
+    expectedOutcome: "retorna diagnostico do caso de cobranca em portugues sem json bruto"
+    contextVariables:
+      - name: CaseId
+        value: "500Hn00001sbGrYIAU"
+
+  - utterance: "preciso entender divergencia de cobranca no caso 500Hn00001sbGrYIAU"
+    expectedTopic: FinDiag_SubAgent
+    expectedActions:
+      - AgentGateway
+    expectedOutcome: "informa dados do caso e contexto financeiro de forma estruturada"
+    contextVariables:
+      - name: CaseId
+        value: "500Hn00001sbGrYIAU"
+
+  - utterance: "me traga status e assunto do caso 500Hn00001sbGrYIAU"
+    expectedTopic: FinDiag_SubAgent
+    expectedActions:
+      - AgentGateway
+    expectedOutcome: "apresenta status e assunto em portugues com linguagem de operador"
+    contextVariables:
+      - name: CaseId
+        value: "500Hn00001sbGrYIAU"
+
+  - utterance: "quero apoio para contestacao de fatura no caso 500Hn00001sbGrYIAU"
+    expectedTopic: FinDiag_SubAgent
+    expectedActions:
+      - AgentGateway
+    expectedOutcome: "contextualiza contestacao financeira e proximo passo sem executar escrita"
+    contextVariables:
+      - name: CaseId
+        value: "500Hn00001sbGrYIAU"
+
+  - utterance: "consulte base de conhecimento para explicar regras de contestacao"
+    expectedTopic: FinDiag_SubAgent
+    expectedActions:
+      - AgentGateway
+    expectedOutcome: "responde em portugues e mantem escopo de diagnostico financeiro"
+
+  - utterance: "o cliente quer contestar a fatura mas nao tenho o id do caso ainda"
+    expectedTopic: FinDiag_SubAgent
+    expectedActions: []
+    expectedOutcome: "informa que precisa identificar o caso corretamente ou orientar fluxo de abertura sem inventar dados"

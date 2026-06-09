@@ -1,0 +1,783 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPlannerBundle xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <description>This agent was created to support the customer service operator in analyzing and diagnosing a problem related to customer complaints regarding financial billing issues, in the context of residential and comboMulti packages.</description>
+    <localActionLinks>
+        <genAiFunctionName>AnswerQuestionsWithKnowledge_16jHZ0000005Rdt</genAiFunctionName>
+    </localActionLinks>
+    <localTopicLinks>
+        <genAiPluginName>Agent_Usage_Restrictions_16jHZ0000005Rdt</genAiPluginName>
+    </localTopicLinks>
+    <localTopicLinks>
+        <genAiPluginName>Customer_Asset_search_16jHZ0000005Rdt</genAiPluginName>
+    </localTopicLinks>
+    <localTopicLinks>
+        <genAiPluginName>Customer_and_Contract_Service_Cases_Search_16jHZ0000005Rdt</genAiPluginName>
+    </localTopicLinks>
+    <localTopicLinks>
+        <genAiPluginName>GeneralFAQ_16jHZ0000005Rdt</genAiPluginName>
+    </localTopicLinks>
+    <localTopicLinks>
+        <genAiPluginName>Invoice_Information_Retrieval_16jHZ0000005Rdt</genAiPluginName>
+    </localTopicLinks>
+    <localTopicLinks>
+        <genAiPluginName>Service_Interactions_search_16jHZ0000005Rdt</genAiPluginName>
+    </localTopicLinks>
+    <localTopicLinks>
+        <genAiPluginName>Service_Payment_Adjustments_Retrieval_16jHZ0000005Rdt</genAiPluginName>
+    </localTopicLinks>
+    <localTopicLinks>
+        <genAiPluginName>Service_case_Order_search_16jHZ0000005Rdt</genAiPluginName>
+    </localTopicLinks>
+    <localTopicLinks>
+        <genAiPluginName>X05_Service_Case_Information_Retrieval_16jHZ0000005Rdt</genAiPluginName>
+    </localTopicLinks>
+    <localTopics>
+        <fullName>Service_Payment_Adjustments_Retrieval_16jHZ0000005Rdt</fullName>
+        <canEscalate>false</canEscalate>
+        <description>Assist in searching, analyzing, and explaining to the user details about payment adjustments previously made, based on case id and customer ID information.</description>
+        <developerName>Service_Payment_Adjustments_Retrieval_16jHZ0000005Rdt</developerName>
+        <genAiPluginInstructions>
+            <description>Never allow the user to ask or request help understanding more than one case at a time.</description>
+            <developerName>instructions_0_1774527514180</developerName>
+            <language>en_US</language>
+            <masterLabel>instructions_0_1774527514180</masterLabel>
+            <sortOrder>0</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>Search for payment adjustment associated with the order id containing the client or contract.</description>
+            <developerName>instructions_0_1774527569137</developerName>
+            <language>en_US</language>
+            <masterLabel>instructions_0_1774527569137</masterLabel>
+            <sortOrder>1</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>Retrieve payment adjustment linked to the order id and client. If the case ID or order ID does not match, inform the user.</description>
+            <developerName>instructions_1_1774527514186</developerName>
+            <language>en_US</language>
+            <masterLabel>instructions_1_1774527514186</masterLabel>
+            <sortOrder>2</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>Analyze all retrieved information to identify and summarize the service provided, interactions, and actions taken with the customer.</description>
+            <developerName>instructions_2_1774527514186</developerName>
+            <language>en_US</language>
+            <masterLabel>instructions_2_1774527514186</masterLabel>
+            <sortOrder>3</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>Provide a clear and objective explanation of the findings to the user.</description>
+            <developerName>instructions_3_1774527514186</developerName>
+            <language>en_US</language>
+            <masterLabel>instructions_3_1774527514186</masterLabel>
+            <sortOrder>4</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>Match the types of payments found with the record types FinancialSettlement, BilletsWriteOffs, InvoiceCancellation, DismemberInvoice, Itens_Contestados, Negotiation or Refund, using the record type ID. Inform the user the recordtype name with an intuitive translation.</description>
+            <developerName>instructions_4_1774527514186</developerName>
+            <language>en_US</language>
+            <masterLabel>instructions_4_1774527514186</masterLabel>
+            <sortOrder>5</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>Use the order ID to search for payment adjustments.</description>
+            <developerName>instruction_1</developerName>
+            <language xsi:nil="true"/>
+            <masterLabel>Instruction 1</masterLabel>
+            <sortOrder>6</sortOrder>
+        </genAiPluginInstructions>
+        <language>en_US</language>
+        <localDeveloperName>Service_Payment_Adjustments_Retrieval</localDeveloperName>
+        <masterLabel>Service Payment Adjustments Retrieval</masterLabel>
+        <pluginType>Topic</pluginType>
+        <scope>Its function is solely to assist users in obtaining information about customer payment adjustments according to their types. Analyze, understand, and explain to the user. Do not address questions unrelated to customer service in payment adjustments.</scope>
+    </localTopics>
+    <localTopics>
+        <fullName>Customer_Asset_search_16jHZ0000005Rdt</fullName>
+        <canEscalate>false</canEscalate>
+        <description>Performs user queries related to searching for assets, related to a order.</description>
+        <developerName>Customer_Asset_search_16jHZ0000005Rdt</developerName>
+        <genAiPluginInstructions>
+            <description>The search results may involve more than one asset, active or inactive, for about the customer&apos;s history.</description>
+            <developerName>instructions_0_1774458440912</developerName>
+            <language>en_US</language>
+            <masterLabel>instructions_0_1774458440912</masterLabel>
+            <sortOrder>0</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>Search for assets associated with the order containing the client or contract.</description>
+            <developerName>instructions_1_1774458440918</developerName>
+            <language>en_US</language>
+            <masterLabel>instructions_1_1774458440918</masterLabel>
+            <sortOrder>1</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>Retrieve customer assets records linked to the client ID or contract ID. If the client ID or contract ID does not match, inform the user.</description>
+            <developerName>instructions_2_1774458440918</developerName>
+            <language>en_US</language>
+            <masterLabel>instructions_2_1774458440918</masterLabel>
+            <sortOrder>2</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>Analyze all retrieved information to identify and summarize the active and canceled products or services taken with the customer.</description>
+            <developerName>instructions_3_1774458440918</developerName>
+            <language>en_US</language>
+            <masterLabel>instructions_3_1774458440918</masterLabel>
+            <sortOrder>3</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>Provide a clear and objective explanation of the findings to the user.</description>
+            <developerName>instructions_4_1774458440918</developerName>
+            <language>en_US</language>
+            <masterLabel>instructions_4_1774458440918</masterLabel>
+            <sortOrder>4</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>Match the types of assets found with the record types Asset, CECFixo, CECInternetFixa and CECTV, , using the record type ID. Inform the user the recordtype name with an intuitive translation.</description>
+            <developerName>instructions_5_1774458440918</developerName>
+            <language>en_US</language>
+            <masterLabel>instructions_5_1774458440918</masterLabel>
+            <sortOrder>5</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>Use the order ID found to search for assets.</description>
+            <developerName>instructions_6_1774458440918</developerName>
+            <language>en_US</language>
+            <masterLabel>instructions_6_1774458440918</masterLabel>
+            <sortOrder>6</sortOrder>
+        </genAiPluginInstructions>
+        <language>en_US</language>
+        <localActionLinks>
+            <functionName>Buscar_Dados_Assets_179HZ00000077RN</functionName>
+        </localActionLinks>
+        <localActions>
+            <fullName>Buscar_Dados_Assets_179HZ00000077RN</fullName>
+            <description>Buscar os registros de ativos do contrato de um cliente. Analisar, entender e explicar de maneira clara para o usuário sobre os produtos ou serviços do cliente registrados como ativos.</description>
+            <developerName>Buscar_Dados_Assets_179HZ00000077RN</developerName>
+            <invocationTarget>Buscar_Dados_Assets</invocationTarget>
+            <invocationTargetType>flow</invocationTargetType>
+            <isConfirmationRequired>false</isConfirmationRequired>
+            <isIncludeInProgressIndicator>true</isIncludeInProgressIndicator>
+            <localDeveloperName>Buscar_Dados_Assets</localDeveloperName>
+            <masterLabel>Buscar Dados Assets</masterLabel>
+            <progressIndicatorMessage>Buscando produtos / serviços...</progressIndicatorMessage>
+        </localActions>
+        <localDeveloperName>Customer_Asset_search</localDeveloperName>
+        <masterLabel>Customer Asset search</masterLabel>
+        <pluginType>Topic</pluginType>
+        <scope>My job consists solely of researching customer assets, analyzing the collected information, and clearly explaining the information found.</scope>
+    </localTopics>
+    <localTopics>
+        <fullName>Invoice_Information_Retrieval_16jHZ0000005Rdt</fullName>
+        <canEscalate>false</canEscalate>
+        <description>Handles user requests to retrieve invoice information via API.</description>
+        <developerName>Invoice_Information_Retrieval_16jHZ0000005Rdt</developerName>
+        <genAiPluginInstructions>
+            <description>This topic supports two different types of invoice requests:
+1. **Invoice List Retrieval (Historical Search)**
+   Use this when the user asks for:
+   - list of invoices
+   - invoice history
+   - previous invoices
+   - invoice information across a date range
+   - &quot;retrieve invoice information&quot;
+   This action requires:
+   - contractNumber
+   - operatorCode
+   - startDate
+   - endDate
+2. **Invoice Detail Retrieval (Specific Invoice Details)**
+   Use this when the user asks for:
+   - invoice details
+   - detailed invoice information
+   - charges inside a specific invoice
+   - invoice breakdown
+   - SVA/VAS information
+   - phone usage
+   - groups or item breakdown
+   - details for invoice &lt;invoiceId&gt;
+   This action requires:
+   - contractNumber
+   - operatorCode
+   - invoiceId
+   No date range should be requested for this action.
+If the user asks for “details”, “breakdown”, “charges”, “specific invoice”, 
+or mentions an invoice ID, choose the Invoice Detail Retrieval action.
+If the user asks for invoice history, past invoices, or requests information 
+over a period (start and end date), choose the Invoice List Retrieval action.
+Ask clarifying questions ONLY for the inputs required by the selected action.
+Do NOT ask for startDate or endDate when the user wants details of a specific invoice.
+Do NOT ask for invoiceId when the user wants a list of invoices.</description>
+            <developerName>instruction_5</developerName>
+            <language xsi:nil="true"/>
+            <masterLabel>Instruction 5</masterLabel>
+            <sortOrder>0</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>If the user does not provide sufficient information, ask clarifying questions to gather necessary details.</description>
+            <developerName>instruction_4</developerName>
+            <language xsi:nil="true"/>
+            <masterLabel>Instruction 4</masterLabel>
+            <sortOrder>1</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>Provide the retrieved invoice information clearly and concisely.</description>
+            <developerName>instruction_3</developerName>
+            <language xsi:nil="true"/>
+            <masterLabel>Instruction 3</masterLabel>
+            <sortOrder>2</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>If unable to retrieve the information, inform the user and suggest alternative solutions such as escalating to a human agent.</description>
+            <developerName>instruction_2</developerName>
+            <language xsi:nil="true"/>
+            <masterLabel>Instruction 2</masterLabel>
+            <sortOrder>3</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>When responding to the user, always include the Knowledge Article ID associated with the information used.
+
+If multiple articles are used, list the IDs at the end of the response.
+
+Do not omit the Article ID when it is present in the context.</description>
+            <developerName>instruction_1</developerName>
+            <language xsi:nil="true"/>
+            <masterLabel>Instruction 1</masterLabel>
+            <sortOrder>4</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>Sempre perguntar qual é a fatura como problema do cliente. Qual a dúvida. De qual fatura</description>
+            <developerName>instructions_0_1774556956287</developerName>
+            <language>en_US</language>
+            <masterLabel>instructions_0_1774556956287</masterLabel>
+            <sortOrder>5</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>Analisar sempre a fatura escolhida pelo user para comparação com o historico encontrado</description>
+            <developerName>instructions_1_1774556956294</developerName>
+            <language>en_US</language>
+            <masterLabel>instructions_1_1774556956294</masterLabel>
+            <sortOrder>6</sortOrder>
+        </genAiPluginInstructions>
+        <language>en_US</language>
+        <localActionLinks>
+            <functionName>Consultar_Faturas_na_API_historical_179HZ00000077xd</functionName>
+        </localActionLinks>
+        <localActionLinks>
+            <functionName>Obter_detalhes_da_fatura_179HZ00000077xd</functionName>
+        </localActionLinks>
+        <localActions>
+            <fullName>Obter_detalhes_da_fatura_179HZ00000077xd</fullName>
+            <description>Use this action when the user requests detailed information about a specific invoice. This includes requests involving invoice items, groups, breakdowns, SVA/VAS services, charges, usage details, partner debts, or phone call records. Before calling this action, ensure the following input fields are collected: - contractNumber - operatorCode - invoiceId If any of these inputs are missing, ask the user for them. After the action executes: 1) If success = false Present the &quot;message&quot; to the user exactly as provided. Do not generate alternative explanations. 2) If success = true Use the &quot;data&quot; field (JSON) to interpret and describe the invoice details to the user. Follow these exact rules when interpreting the JSON: ------------------------------------------------------------- INVOICE TOP-LEVEL FIELDS (ALWAYS SHOW THESE) ------------------------------------------------------------- Always present the following fields when they are available in the JSON: - invoiceId - partners - paymentMethod - status - dueDate - amount - billCode or formattedBillCode - cobilled - paymentDate (always show it, even when null) If paymentDate is null, explicitly state: “Payment date: not paid yet.” ------------------------------------------------------------- ITEM GROUP RULES (CATEGORIES) ------------------------------------------------------------- Use the groupIdParent to categorize items using this mapping: - 12 → Televisão - 18 → Internet - 21 → Eventuais - 998 → Telefone - 999 → Móvel - anything else → Outros Always display group name, amount and productDescription. ------------------------------------------------------------- EXTRACT ITEMS (MANDATORY TO SHOW) ------------------------------------------------------------- For every extract item inside itemGroups.extractItems: - ALWAYS show idExtractItem - ALWAYS show itemDescription - ALWAYS show entryDate - ALWAYS show sourceValue - Show dueDate, productDescription, totalInstallments, installmentNumber, proRata fields if present - SVA/VAS: If itemGrouper != null, inform that the item is part of the parent item. Never omit idExtractItem, even when the user did not explicitly ask for it. ------------------------------------------------------------- PHONE GROUPS (Telephone Details) ------------------------------------------------------------- If phoneGroups exist, always: - show each phone group name (itemDescription) - show each phone detail record, including: - idDetExtractItem - startDate - endDate - startTime - duration - destination - destinationCountry - targetTerminal - callDetailValue Never omit idDetExtractItem. ------------------------------------------------------------- MESSAGES ------------------------------------------------------------- If messages exist, summarize them under “Additional Messages”. ------------------------------------------------------------- STRUCTURE OF FINAL OUTPUT TO USER ------------------------------------------------------------- The output must always include: 1. Invoice summary 2. Breakdown by category 3. ExtractItems under each category 4. Phone usage when applicable 5. Messages Use a friendly, readable format. You may use bullet points and simple Markdown. ------------------------------------------------------------- RULES OF CONDUCT ------------------------------------------------------------- - Do not invent any field that is not present in the JSON. - When a field is null, indicate it explicitly as “not available” or “not paid yet”. - Never hallucinate values. - Never omit idExtractItem or idDetExtractItem. - Never hide paymentDate. - If the JSON contains items or fields that are unexpected, still include them. ------------------------------------------------------------- SUMMARY VIEW OPTION ------------------------------------------------------------- If the user asks for a summary, provide a simplified version but still include: - invoiceId - amount - status - paymentDate -idDetExtractItem -idExtractItem - main categories ------------------------------------------------------------- RAW JSON OPTION ------------------------------------------------------------- If the user asks for internal details, technical fields, or raw values: Return the raw JSON without hiding any fields.</description>
+            <developerName>Obter_detalhes_da_fatura_179HZ00000077xd</developerName>
+            <invocationTarget>AgentInvoiceDetailsAction</invocationTarget>
+            <invocationTargetType>apex</invocationTargetType>
+            <isConfirmationRequired>false</isConfirmationRequired>
+            <isIncludeInProgressIndicator>true</isIncludeInProgressIndicator>
+            <localDeveloperName>Obter_detalhes_da_fatura</localDeveloperName>
+            <masterLabel>Obter detalhes da fatura</masterLabel>
+            <progressIndicatorMessage>Buscando detalhes de fatura...</progressIndicatorMessage>
+        </localActions>
+        <localActions>
+            <fullName>Consultar_Faturas_na_API_historical_179HZ00000077xd</fullName>
+            <description>When success = false: - You MUST return ONLY the exact content of the “message” field. - Do NOT add extra sentences, suggestions, apologies, or explanations. - Do NOT add phrases such as “try again later” or “contact support”, unless the message from the action explicitly contains them. - Do NOT wrap the message in quotes. - Do NOT add follow-up questions or generic chat responses. Always return the action message EXACTLY as it is. Before calling this action, if any required input is missing (contractNumber, operatorCode, startDate, or endDate), you MUST ask the user for the missing information. Do not call this action until ALL required inputs are collected. If contractNumber is missing, ask: &quot;Qual é o número do contrato do cliente?&quot; If operatorCode is missing, ask: &quot;Qual é o código do operador?&quot; If startDate is missing, ask: &quot;Qual é a data inicial (YYYY-MM-DD)?&quot; If endDate is missing, ask: &quot;Qual é a data final (YYYY-MM-DD)?&quot; NEVER call this action with missing inputs. NEVER assume or guess values. When interacting with the user, if multiple required inputs are missing (contractNumber, operatorCode, startDate, endDate), you SHOULD request them together in a single grouped question instead of asking one at a time. Example: &quot;Para consultar as faturas, preciso das seguintes informações: número do contrato, código do operador, data inicial (YYYY-MM-DD) e data final (YYYY-MM-DD). Pode me informar todas elas?&quot; Only ask individually if the user provides them one by one. Never proceed until all four are collected. This action retrieves invoice information from the VIP service “SolarFIN_getResidentialInvoices”. Use this action when the user asks for invoice details such as: - invoice history - open invoices - canceled invoices - disputed invoices - payment details - billing information Important requirements: Before calling this action, make sure all required inputs are collected: - contractNumber: customer’s contract number - operatorCode: operator code - startDate: start date in the format YYYY-MM-DD - endDate: end date in the format YYYY-MM-DD Always validate that startDate and endDate follow the format YYYY-MM-DD. Only call this action when all required inputs are available. After executing the action: If success = false, return the “message” to the user, exactly as provided by the action. If success = true, use the “data” field (JSON string) to interpret and summarize the invoices for the user. When presenting invoices to the user, organize the data clearly: - Invoice number - Amount - Due date - Payment form - Status (Open, Canceled due to dispute, etc.) Do not invent any information. Use only what is provided in the “data” JSON. Additional error-handling guidance: If the API returns an error without an error code, do not attempt to create, guess, or infer a code. Present the error message exactly as returned in the “message” field, without adding extra details or formatting. If the API includes a code in the message, present it exactly as returned.</description>
+            <developerName>Consultar_Faturas_na_API_historical_179HZ00000077xd</developerName>
+            <invocationTarget>AgentInvoicesAction</invocationTarget>
+            <invocationTargetType>apex</invocationTargetType>
+            <isConfirmationRequired>false</isConfirmationRequired>
+            <isIncludeInProgressIndicator>true</isIncludeInProgressIndicator>
+            <localDeveloperName>Consultar_Faturas_na_API_historical</localDeveloperName>
+            <masterLabel>Consultar Faturas na API historical</masterLabel>
+            <progressIndicatorMessage>Buscando informações de faturas...</progressIndicatorMessage>
+        </localActions>
+        <localDeveloperName>Invoice_Information_Retrieval</localDeveloperName>
+        <masterLabel>Invoice Information Retrieval</masterLabel>
+        <pluginType>Topic</pluginType>
+        <scope>My job is to assist users in retrieving invoice information by utilizing the API. I will not address unrelated topics or perform actions outside this scope.</scope>
+    </localTopics>
+    <localTopics>
+        <fullName>Agent_Usage_Restrictions_16jHZ0000005Rdt</fullName>
+        <canEscalate>false</canEscalate>
+        <description>Ensure the agent adheres to specific usage restrictions and does not perform prohibited actions.</description>
+        <developerName>Agent_Usage_Restrictions_16jHZ0000005Rdt</developerName>
+        <genAiPluginInstructions>
+            <description>Check for any restrictions or limitations on the agent&apos;s capabilities before proceeding with actions.</description>
+            <developerName>instruction_3</developerName>
+            <language xsi:nil="true"/>
+            <masterLabel>Instruction 3</masterLabel>
+            <sortOrder>0</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>If a requested action violates usage restrictions, inform the user politely and provide alternative solutions if possible.</description>
+            <developerName>instruction_2</developerName>
+            <language xsi:nil="true"/>
+            <masterLabel>Instruction 2</masterLabel>
+            <sortOrder>1</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>First, the information from the on-screen service case record must be retrieved to ensure that the context variables are filled in.</description>
+            <developerName>instruction_1</developerName>
+            <language xsi:nil="true"/>
+            <masterLabel>Instruction 1</masterLabel>
+            <sortOrder>2</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>The user cannot interact with you outside of a case record screen.</description>
+            <developerName>instructions_1_1774529085801</developerName>
+            <language>en_US</language>
+            <masterLabel>instructions_1_1774529085801</masterLabel>
+            <sortOrder>3</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>The user cannot interact with you regarding more than one case for a client. Always confirm the desired service case as a reference when more than one case for the client is found.</description>
+            <developerName>instructions_0_1774546439545</developerName>
+            <language>en_US</language>
+            <masterLabel>instructions_0_1774546439545</masterLabel>
+            <sortOrder>4</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>When responding to the user, always focus on helping them understand discrepancies in customer invoice amounts.</description>
+            <developerName>instructions_0_1774545769019</developerName>
+            <language>en_US</language>
+            <masterLabel>instructions_0_1774545769019</masterLabel>
+            <sortOrder>5</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>Always try to compare and analyze your most recent bill against previous bills.</description>
+            <developerName>instructions_0_1774529085794</developerName>
+            <language>en_US</language>
+            <masterLabel>instructions_0_1774529085794</masterLabel>
+            <sortOrder>6</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>Do not answer questions that are out of context regarding invoices, charges, amounts, and related information. For example, information about the company.</description>
+            <developerName>instructions_0_1774528562311</developerName>
+            <language>en_US</language>
+            <masterLabel>instructions_0_1774528562311</masterLabel>
+            <sortOrder>7</sortOrder>
+        </genAiPluginInstructions>
+        <language>en_US</language>
+        <localDeveloperName>Agent_Usage_Restrictions</localDeveloperName>
+        <masterLabel>Agent Usage Restrictions</masterLabel>
+        <pluginType>Topic</pluginType>
+        <scope>First action to be taken by session. My job is to verify and enforce any restrictions on the agent&apos;s usage, ensuring that specific prohibited actions or information are not carried out or disclosed.</scope>
+    </localTopics>
+    <localTopics>
+        <fullName>Service_Interactions_search_16jHZ0000005Rdt</fullName>
+        <aiPluginUtterances>
+            <developerName>utterance_0_1774378279533</developerName>
+            <language>en_US</language>
+            <masterLabel>utterance_0_1774378279533</masterLabel>
+            <utterance>Never allow the user to ask or request help understanding more than one case at a time.</utterance>
+        </aiPluginUtterances>
+        <aiPluginUtterances>
+            <developerName>utterance_1_1774378279533</developerName>
+            <language>en_US</language>
+            <masterLabel>utterance_1_1774378279533</masterLabel>
+            <utterance>The search results may involve more than one customer interaction and topic for about the customer&apos;s history.</utterance>
+        </aiPluginUtterances>
+        <aiPluginUtterances>
+            <developerName>utterance_2_1774378279533</developerName>
+            <language>en_US</language>
+            <masterLabel>utterance_2_1774378279533</masterLabel>
+            <utterance>Search for interactions associated with the order and retrieve related topics.</utterance>
+        </aiPluginUtterances>
+        <aiPluginUtterances>
+            <developerName>utterance_3_1774378279533</developerName>
+            <language>en_US</language>
+            <masterLabel>utterance_3_1774378279533</masterLabel>
+            <utterance>Retrieve customer interaction records and their corresponding interaction topics linked to the order id or service case. If the case ID or order ID does not match, inform the user.</utterance>
+        </aiPluginUtterances>
+        <aiPluginUtterances>
+            <developerName>utterance_4_1774378279533</developerName>
+            <language>en_US</language>
+            <masterLabel>utterance_4_1774378279533</masterLabel>
+            <utterance>Analyze all retrieved information to identify and summarize the service provided, interactions, and actions taken with the customer.</utterance>
+        </aiPluginUtterances>
+        <aiPluginUtterances>
+            <developerName>utterance_5_1774378279533</developerName>
+            <language>en_US</language>
+            <masterLabel>utterance_5_1774378279533</masterLabel>
+            <utterance>Provide a clear and objective explanation of the findings to the user.</utterance>
+        </aiPluginUtterances>
+        <aiPluginUtterances>
+            <developerName>utterance_6_1774378279533</developerName>
+            <language>en_US</language>
+            <masterLabel>utterance_6_1774378279533</masterLabel>
+            <utterance>Match the types of interaction topics found with the record types Envio_2via, InteractionTentative or RegistrationChange, using the record type ID. Inform the user the recordtype name with an intuitive translation.</utterance>
+        </aiPluginUtterances>
+        <aiPluginUtterances>
+            <developerName>utterance_7_1774378279533</developerName>
+            <language>en_US</language>
+            <masterLabel>utterance_7_1774378279533</masterLabel>
+            <utterance>Use the order ID found to search for customer interactions.</utterance>
+        </aiPluginUtterances>
+        <aiPluginUtterances>
+            <developerName>utterance_8_1774378279533</developerName>
+            <language>en_US</language>
+            <masterLabel>utterance_8_1774378279533</masterLabel>
+            <utterance>Use the customer interaction IDs found or case ID to search for interaction topics.</utterance>
+        </aiPluginUtterances>
+        <canEscalate>false</canEscalate>
+        <description>Performs user queries related to searching for customer interactions and topics, related to a order.</description>
+        <developerName>Service_Interactions_search_16jHZ0000005Rdt</developerName>
+        <language>en_US</language>
+        <localActionLinks>
+            <functionName>Buscar_Customer_Interaction_do_cliente_179HZ0000006Nht</functionName>
+        </localActionLinks>
+        <localActionLinks>
+            <functionName>Buscar_Customer_Interection_Topic_do_caso_179HZ0000006Nht</functionName>
+        </localActionLinks>
+        <localActions>
+            <fullName>Buscar_Customer_Interection_Topic_do_caso_179HZ0000006Nht</fullName>
+            <description>Searches for previous customer interactions topics related to the interaction. Identifies the history of topics details that occurred in relation to a customer&apos;s order.</description>
+            <developerName>Buscar_Customer_Interection_Topic_do_caso_179HZ0000006Nht</developerName>
+            <invocationTarget>Buscar_Customer_Interection_Topic_do_caso</invocationTarget>
+            <invocationTargetType>flow</invocationTargetType>
+            <isConfirmationRequired>false</isConfirmationRequired>
+            <isIncludeInProgressIndicator>true</isIncludeInProgressIndicator>
+            <localDeveloperName>Buscar_Customer_Interection_Topic_do_caso</localDeveloperName>
+            <masterLabel>Buscar Customer Interection Topic do caso</masterLabel>
+            <progressIndicatorMessage>Buscando tópicos de interação ...</progressIndicatorMessage>
+        </localActions>
+        <localActions>
+            <fullName>Buscar_Customer_Interaction_do_cliente_179HZ0000006Nht</fullName>
+            <description>Searches for previous customer interactions related to the order. Identifies the history of interactions that occurred in relation to a customer&apos;s completed order.</description>
+            <developerName>Buscar_Customer_Interaction_do_cliente_179HZ0000006Nht</developerName>
+            <invocationTarget>Buscar_Customer_Interaction_do_pedido_order</invocationTarget>
+            <invocationTargetType>flow</invocationTargetType>
+            <isConfirmationRequired>false</isConfirmationRequired>
+            <isIncludeInProgressIndicator>true</isIncludeInProgressIndicator>
+            <localDeveloperName>Buscar_Customer_Interaction_do_cliente</localDeveloperName>
+            <masterLabel>Buscar Customer Interaction do cliente.</masterLabel>
+            <progressIndicatorMessage>Buscando interações do cliente ...</progressIndicatorMessage>
+        </localActions>
+        <localDeveloperName>Service_Interactions_search</localDeveloperName>
+        <masterLabel>Service Interactions search</masterLabel>
+        <pluginType>Topic</pluginType>
+        <scope>My job consists solely of researching customer interactions and related topics, analyzing the collected information, and clearly explaining the information found.</scope>
+    </localTopics>
+    <localTopics>
+        <fullName>X05_Service_Case_Information_Retrieval_16jHZ0000005Rdt</fullName>
+        <aiPluginUtterances>
+            <developerName>utterance_1</developerName>
+            <language xsi:nil="true"/>
+            <masterLabel>Utterance 1</masterLabel>
+            <utterance>Do not allow to continue if the user is not on a support case record page, informing the user that they are not allowed to proceed with requests.</utterance>
+        </aiPluginUtterances>
+        <aiPluginUtterances>
+            <developerName>utterance_2</developerName>
+            <language xsi:nil="true"/>
+            <masterLabel>Utterance 2</masterLabel>
+            <utterance>If the user is not on a customer service case registration page of the following types: Financial, Technical, Claro_NBA_Retencao, Claro_NBA_Rentabilizacao, Claro_NBA_Rentab_Receptivo or Claro_NBA_Rentab_Ativo, inform the user that they are not allowed to proceed with requests. Use an intuitive translation.</utterance>
+        </aiPluginUtterances>
+        <aiPluginUtterances>
+            <developerName>utterance_3</developerName>
+            <language xsi:nil="true"/>
+            <masterLabel>Utterance 3</masterLabel>
+            <utterance>Retrieve the on-screen service case information, including case number, client id, contract id and case recordtype to fill variables. If you cannot find some of the information, inform the user.</utterance>
+        </aiPluginUtterances>
+        <aiPluginUtterances>
+            <developerName>utterance_4</developerName>
+            <language xsi:nil="true"/>
+            <masterLabel>Utterance 4</masterLabel>
+            <utterance>Never show or provide CPF (Brazilian tax identification number), active date, primary contact, secondary contact, or RG (Brazilian identity card) information during interactions.</utterance>
+        </aiPluginUtterances>
+        <aiPluginUtterances>
+            <developerName>utterance_5</developerName>
+            <language xsi:nil="true"/>
+            <masterLabel>Utterance 5</masterLabel>
+            <utterance>Search for the service case information using the case number or the currentRecordId variable. Ensure that the variables case number, client id, contract id and case recordtype will be populated with the information found in the case if they are not already filled.</utterance>
+        </aiPluginUtterances>
+        <aiPluginUtterances>
+            <developerName>utterance_6</developerName>
+            <language xsi:nil="true"/>
+            <masterLabel>Utterance 6</masterLabel>
+            <utterance>Verify that the case number, client, contract and case recordtype variables are filled in. If not, inform the user.</utterance>
+        </aiPluginUtterances>
+        <aiPluginUtterances>
+            <developerName>utterance_7</developerName>
+            <language xsi:nil="true"/>
+            <masterLabel>Utterance 7</masterLabel>
+            <utterance>Ensure that at least one record of a service request has been found. Only if none is found, inform the user and say that it is not possible to continue the work.</utterance>
+        </aiPluginUtterances>
+        <canEscalate>false</canEscalate>
+        <description>Facilitates the retrieval of detailed on-screen service case information, ensuring variables such as case number, client ID, contract ID, and case record type are identified and populated. Provides immediate feedback to the user if any required information is missing or inaccessible, while ensuring compliance with restrictions on sensitive data display.</description>
+        <developerName>X05_Service_Case_Information_Retrieval_16jHZ0000005Rdt</developerName>
+        <language>en_US</language>
+        <localActionLinks>
+            <functionName>Buscar_caso_de_atendimento_em_tela_179HZ0000006NDF</functionName>
+        </localActionLinks>
+        <localActions>
+            <fullName>Buscar_caso_de_atendimento_em_tela_179HZ0000006NDF</fullName>
+            <description>Retrieves information from the on-screen service request using context variables or agentforce inputs. As a result, it populates variables and stores information about the service request, client, and contract.</description>
+            <developerName>Buscar_caso_de_atendimento_em_tela_179HZ0000006NDF</developerName>
+            <invocationTarget>Buscar_caso_de_atendimento</invocationTarget>
+            <invocationTargetType>flow</invocationTargetType>
+            <isConfirmationRequired>false</isConfirmationRequired>
+            <isIncludeInProgressIndicator>true</isIncludeInProgressIndicator>
+            <localDeveloperName>Buscar_caso_de_atendimento_em_tela</localDeveloperName>
+            <masterLabel>Buscar caso de atendimento em tela</masterLabel>
+            <progressIndicatorMessage>Recuperando informações do caso em tela...</progressIndicatorMessage>
+        </localActions>
+        <localDeveloperName>X05_Service_Case_Information_Retrieval</localDeveloperName>
+        <masterLabel>Service Case Information Retrieval</masterLabel>
+        <pluginType>Topic</pluginType>
+        <scope>My job is to retrieve on-screen service case information, ensure the case number, client id, contract id and case recordtype name variables will be found and filled, and notify the user if any of this information cannot be retrieved.</scope>
+    </localTopics>
+    <localTopics>
+        <fullName>Service_case_Order_search_16jHZ0000005Rdt</fullName>
+        <canEscalate>false</canEscalate>
+        <description>Performs user queries related to searching for orders along with order items, related to a service case.</description>
+        <developerName>Service_case_Order_search_16jHZ0000005Rdt</developerName>
+        <genAiPluginInstructions>
+            <description>Never allow the user to ask or request help understanding more than one case at a time.</description>
+            <developerName>instruction_8</developerName>
+            <language xsi:nil="true"/>
+            <masterLabel>Instruction 8</masterLabel>
+            <sortOrder>0</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>Search for orders associated with the service case and retrieve related order items.</description>
+            <developerName>instruction_7</developerName>
+            <language xsi:nil="true"/>
+            <masterLabel>Instruction 7</masterLabel>
+            <sortOrder>1</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>If the case ID or order ID does not match, inform the user.</description>
+            <developerName>instruction_6</developerName>
+            <language xsi:nil="true"/>
+            <masterLabel>Instruction 6</masterLabel>
+            <sortOrder>2</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>Analyze all retrieved information to identify and summarize the service provided, interactions, and actions taken with the customer.</description>
+            <developerName>instruction_5</developerName>
+            <language xsi:nil="true"/>
+            <masterLabel>Instruction 5</masterLabel>
+            <sortOrder>3</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>Provide a clear and objective explanation of the findings to the user.</description>
+            <developerName>instruction_4</developerName>
+            <language xsi:nil="true"/>
+            <masterLabel>Instruction 4</masterLabel>
+            <sortOrder>4</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>Match the types of orders found with the record types NBAOffer, Commercial or PME_Order, using the record type ID. Inform the user the recordtype name with an intuitive translation.</description>
+            <developerName>instruction_3</developerName>
+            <language xsi:nil="true"/>
+            <masterLabel>Instruction 3</masterLabel>
+            <sortOrder>5</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>Use the case ID to search for orders.</description>
+            <developerName>instruction_2</developerName>
+            <language xsi:nil="true"/>
+            <masterLabel>Instruction 2</masterLabel>
+            <sortOrder>6</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>Use the order ID found to retrieve the order item details.</description>
+            <developerName>instruction_1</developerName>
+            <language xsi:nil="true"/>
+            <masterLabel>Instruction 1</masterLabel>
+            <sortOrder>7</sortOrder>
+        </genAiPluginInstructions>
+        <language>en_US</language>
+        <localActionLinks>
+            <functionName>Buscar_pedido_s_relacionado_s_ao_case_179HZ0000006NgI</functionName>
+        </localActionLinks>
+        <localActionLinks>
+            <functionName>Buscar_detalhes_do_pedido_relacionado_ao_case_179HZ0000006NgI</functionName>
+        </localActionLinks>
+        <localActions>
+            <fullName>Buscar_detalhes_do_pedido_relacionado_ao_case_179HZ0000006NgI</fullName>
+            <description>Search for previously placed customer orders details related to the order. Identifies the history of requests details made to a customer&apos;s service case.</description>
+            <developerName>Buscar_detalhes_do_pedido_relacionado_ao_case_179HZ0000006NgI</developerName>
+            <invocationTarget>Buscar_detalhes_do_pedido_relacionado_ao_case</invocationTarget>
+            <invocationTargetType>flow</invocationTargetType>
+            <isConfirmationRequired>false</isConfirmationRequired>
+            <isIncludeInProgressIndicator>true</isIncludeInProgressIndicator>
+            <localDeveloperName>Buscar_detalhes_do_pedido_relacionado_ao_case</localDeveloperName>
+            <masterLabel>Buscar detalhes do pedido relacionado ao case</masterLabel>
+            <progressIndicatorMessage>Buscando detalhes do pedido...</progressIndicatorMessage>
+        </localActions>
+        <localActions>
+            <fullName>Buscar_pedido_s_relacionado_s_ao_case_179HZ0000006NgI</fullName>
+            <description>Search for previously placed customer orders related to the service case, only of the types NBAOffer, Commercial, or PME_Order. Identifies the history of requests made to a customer&apos;s service case.</description>
+            <developerName>Buscar_pedido_s_relacionado_s_ao_case_179HZ0000006NgI</developerName>
+            <invocationTarget>Buscar_pedido_s_relacionados_ao_case</invocationTarget>
+            <invocationTargetType>flow</invocationTargetType>
+            <isConfirmationRequired>false</isConfirmationRequired>
+            <isIncludeInProgressIndicator>true</isIncludeInProgressIndicator>
+            <localDeveloperName>Buscar_pedido_s_relacionado_s_ao_case</localDeveloperName>
+            <masterLabel>Buscar pedido(s) relacionado(s) ao case</masterLabel>
+            <progressIndicatorMessage>Buscando pedidos anteriores...</progressIndicatorMessage>
+        </localActions>
+        <localDeveloperName>Service_case_Order_search</localDeveloperName>
+        <masterLabel>Service case Order search</masterLabel>
+        <pluginType>Topic</pluginType>
+        <scope>My job consists solely of researching service requests and related items, analyzing the collected information, and clearly explaining the information found.</scope>
+    </localTopics>
+    <localTopics>
+        <fullName>Customer_and_Contract_Service_Cases_Search_16jHZ0000005Rdt</fullName>
+        <canEscalate>false</canEscalate>
+        <description>Enables targeted searches for customer or contract service cases using context variables already filled or user inputs. Confirms the intended focus of the search, presents results for multiple matches, and guides the user in selecting a specific case for further action, adhering to predefined record type limitations.</description>
+        <developerName>Customer_and_Contract_Service_Cases_Search_16jHZ0000005Rdt</developerName>
+        <genAiPluginInstructions>
+            <description>Never show or provide CPF (Brazilian tax identification number), active date, primary contact, secondary contact, or RG (Brazilian identity card) information during interactions.</description>
+            <developerName>instruction_6</developerName>
+            <language xsi:nil="true"/>
+            <masterLabel>Instruction 6</masterLabel>
+            <sortOrder>0</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>Confirm with the user whether they want to search for a customer or a contract.</description>
+            <developerName>instruction_5</developerName>
+            <language xsi:nil="true"/>
+            <masterLabel>Instruction 5</masterLabel>
+            <sortOrder>1</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>If the user enters a new customer or contract, perform the search based on it.</description>
+            <developerName>instruction_4</developerName>
+            <language xsi:nil="true"/>
+            <masterLabel>Instruction 4</masterLabel>
+            <sortOrder>2</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>When multiple service cases are found, detail the records and ask the user to confirm which case they want to consider. Based on this, consider this case for the requests. Always specify the case type based on the Record Type Name field.</description>
+            <developerName>instruction_3</developerName>
+            <language xsi:nil="true"/>
+            <masterLabel>Instruction 3</masterLabel>
+            <sortOrder>3</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>Ensure clarity by gathering additional information if the user&apos;s input is ambiguous.</description>
+            <developerName>instruction_2</developerName>
+            <language xsi:nil="true"/>
+            <masterLabel>Instruction 2</masterLabel>
+            <sortOrder>4</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>The service case records found may relate only to the customer, only to the contract, or both.</description>
+            <developerName>instruction_1</developerName>
+            <language xsi:nil="true"/>
+            <masterLabel>Instruction 1</masterLabel>
+            <sortOrder>5</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>The client ID and contract ID must start with 001. If not, please confirm with the user.</description>
+            <developerName>instructions_0_1774543098524</developerName>
+            <language>en_US</language>
+            <masterLabel>instructions_0_1774543098524</masterLabel>
+            <sortOrder>6</sortOrder>
+        </genAiPluginInstructions>
+        <language>en_US</language>
+        <localActionLinks>
+            <functionName>Buscar_casos_do_cliente_ou_contrato_179HZ0000006Nef</functionName>
+        </localActionLinks>
+        <localActions>
+            <fullName>Buscar_casos_do_cliente_ou_contrato_179HZ0000006Nef</fullName>
+            <description>Search for cases related to the customer or contract from the last 6 months. Only cases of the following types are found: Financial, Technical, Claro_NBA_Retencao, Claro_NBA_Rentabilizacao, Claro_NBA_Rentab_Receptivo, Claro_NBA_Rentab_Ativo.</description>
+            <developerName>Buscar_casos_do_cliente_ou_contrato_179HZ0000006Nef</developerName>
+            <invocationTarget>Buscar_casos_do_cliente_ou_contrato</invocationTarget>
+            <invocationTargetType>flow</invocationTargetType>
+            <isConfirmationRequired>false</isConfirmationRequired>
+            <isIncludeInProgressIndicator>true</isIncludeInProgressIndicator>
+            <localDeveloperName>Buscar_casos_do_cliente_ou_contrato</localDeveloperName>
+            <masterLabel>Buscar casos do cliente ou contrato</masterLabel>
+            <progressIndicatorMessage>Buscando casos do cliente / contrato...</progressIndicatorMessage>
+        </localActions>
+        <localDeveloperName>Customer_and_Contract_Service_Cases_Search</localDeveloperName>
+        <masterLabel>Customer and Contract Service Cases Search</masterLabel>
+        <pluginType>Topic</pluginType>
+        <scope>My job is to assist in searching for customer or contract service cases. I will confirm whether the user wants to search for a customer or contract and perform the search accordingly. If multiple cases are found, I will provide details and confirm the specific case the user wants to consider. Only specific types of case records will be searched.</scope>
+    </localTopics>
+    <localTopics>
+        <fullName>GeneralFAQ_16jHZ0000005Rdt</fullName>
+        <canEscalate>false</canEscalate>
+        <description>This topic is for helping answer customer&apos;s questions by searching through the knowledge articles and providing information from those articles. The questions can be about the company and its products, policies or business procedures</description>
+        <developerName>GeneralFAQ_16jHZ0000005Rdt</developerName>
+        <genAiPluginInstructions>
+            <description>If the customer&apos;s question is too vague or general, ask for more details and clarification to give a better answer.</description>
+            <developerName>unabletohelpafterclarifying</developerName>
+            <language xsi:nil="true"/>
+            <masterLabel>unable-to-help-after-clarifying</masterLabel>
+            <sortOrder>0</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>If you are unable to help the customer even after asking clarifying questions, ask if they want to escalate this issue to a live agent.</description>
+            <developerName>unabletoanswerquestions</developerName>
+            <language xsi:nil="true"/>
+            <masterLabel>unable-to-answer-questions</masterLabel>
+            <sortOrder>1</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>If you are unable to answer customer&apos;s questions, ask if they want to escalate this issue to a live agent.</description>
+            <developerName>requestmoredetails</developerName>
+            <language xsi:nil="true"/>
+            <masterLabel>request-more-details</masterLabel>
+            <sortOrder>2</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>Never provide generic information, advice or troubleshooting steps, unless retrieved from searching knowledge articles.</description>
+            <developerName>instructions_0_1774547296789</developerName>
+            <language>en_US</language>
+            <masterLabel>instructions_0_1774547296789</masterLabel>
+            <sortOrder>3</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>Include sources in your response when available from the knowledge articles, otherwise proceed without them.</description>
+            <developerName>includearticlesources</developerName>
+            <language xsi:nil="true"/>
+            <masterLabel>include-article-sources</masterLabel>
+            <sortOrder>4</sortOrder>
+        </genAiPluginInstructions>
+        <language>en_US</language>
+        <localActionLinks>
+            <functionName>AnswerQuestionsWithKnowledge_179HZ0000006NA1</functionName>
+        </localActionLinks>
+        <localActions>
+            <fullName>AnswerQuestionsWithKnowledge_179HZ0000006NA1</fullName>
+            <description>Answers questions about company policies and procedures, troubleshooting steps, or product information. For example: “What is your return policy?” “How do I fix an issue?” or “What features does a product have?”</description>
+            <developerName>AnswerQuestionsWithKnowledge_179HZ0000006NA1</developerName>
+            <invocationTarget>streamKnowledgeSearch</invocationTarget>
+            <invocationTargetType>standardInvocableAction</invocationTargetType>
+            <isConfirmationRequired>false</isConfirmationRequired>
+            <isIncludeInProgressIndicator>true</isIncludeInProgressIndicator>
+            <localDeveloperName>AnswerQuestionsWithKnowledge</localDeveloperName>
+            <masterLabel>Answer Questions with Knowledge</masterLabel>
+            <progressIndicatorMessage>Getting answers</progressIndicatorMessage>
+            <source>EmployeeCopilot__AnswerQuestionsWithKnowledge</source>
+        </localActions>
+        <localDeveloperName>GeneralFAQ</localDeveloperName>
+        <masterLabel>General FAQ</masterLabel>
+        <pluginType>Topic</pluginType>
+        <scope>Your job is solely to help with issues and answer questions about the company, its products, procedures, or policies by searching knowledge articles.</scope>
+        <source>SvcCopilotTmpl__GeneralFAQ</source>
+    </localTopics>
+    <masterLabel>Agente Diagnóstico Financeiro</masterLabel>
+    <plannerActions>
+        <fullName>AnswerQuestionsWithKnowledge_16jHZ0000005Rdt</fullName>
+        <description>Answers questions about company policies and procedures, troubleshooting steps, or product information. For example: “What is your return policy?” “How do I fix an issue?” or “What features does a product have?”</description>
+        <developerName>AnswerQuestionsWithKnowledge_16jHZ0000005Rdt</developerName>
+        <invocationTarget>streamKnowledgeSearch</invocationTarget>
+        <invocationTargetType>standardInvocableAction</invocationTargetType>
+        <isConfirmationRequired>false</isConfirmationRequired>
+        <isIncludeInProgressIndicator>true</isIncludeInProgressIndicator>
+        <localDeveloperName>AnswerQuestionsWithKnowledge</localDeveloperName>
+        <masterLabel>Answer Questions with Knowledge</masterLabel>
+        <progressIndicatorMessage>Getting answers</progressIndicatorMessage>
+        <source>EmployeeCopilot__AnswerQuestionsWithKnowledge</source>
+    </plannerActions>
+    <plannerSurfaces>
+        <adaptiveResponseAllowed>true</adaptiveResponseAllowed>
+        <callRecordingAllowed>false</callRecordingAllowed>
+        <surface>SurfaceAction__Messaging</surface>
+        <surfaceType>Messaging</surfaceType>
+    </plannerSurfaces>
+    <plannerType>AiCopilot__ReAct</plannerType>
+</GenAiPlannerBundle>

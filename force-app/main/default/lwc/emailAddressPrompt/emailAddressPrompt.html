@@ -1,0 +1,26 @@
+<template>
+    <div class="email-address-prompt slds-p-around_small">
+        <lightning-input
+            type="email"
+            name="emailAddress"
+            label={labelText}
+            placeholder={placeholderText}
+            message-when-type-mismatch="Enter a valid email address."
+            field-level-help={helpText}
+            required={inputRequired}
+            value={emailValue}
+            onchange={handleEmailChange}
+        >
+        </lightning-input>
+        <lightning-input
+            type="text"
+            name="address"
+            label={addressLabelText}
+            placeholder={addressPlaceholderText}
+            required
+            value={addressValue}
+            onchange={handleAddressChange}
+        >
+        </lightning-input>
+    </div>
+</template>

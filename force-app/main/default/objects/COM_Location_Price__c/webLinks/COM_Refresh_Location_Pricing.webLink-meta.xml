@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>COM_Refresh_Location_Pricing</fullName>
+    <availability>online</availability>
+    <description>COM:  Launch flow to refresh location pricing decision table.</description>
+    <displayType>button</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <height>600</height>
+    <linkType>url</linkType>
+    <masterLabel>Refresh Location Pricing</masterLabel>
+    <openType>noSidebar</openType>
+    <protected>false</protected>
+    <url>/flow/COM_Decision_Table_Refresh_Location_Pricing</url>
+</WebLink>

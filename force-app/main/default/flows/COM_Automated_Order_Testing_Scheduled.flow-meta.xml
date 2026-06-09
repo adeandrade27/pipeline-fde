@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Create_Order_From_Quote</name>
+        <label>Create Order From Quote</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>createOrderFromQuote</actionName>
+        <actionType>createOrderFromQuote</actionType>
+        <connector>
+            <targetReference>Orchestrate_Order</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>quoteRecordId</name>
+            <value>
+                <elementReference>QuoteId</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>createOrderFromQuote</nameSegment>
+        <offset>0</offset>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <apiVersion>65.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <name>Assign_Quote_Id</name>
+        <label>Assign Quote Id</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>QuoteId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Get_Quote_Id.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Was_Quote_Found</targetReference>
+        </connector>
+    </assignments>
+    <constants>
+        <name>Test_Quote_Name_Prefix</name>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Daily Test</stringValue>
+        </value>
+    </constants>
+    <decisions>
+        <name>Was_Quote_Found</name>
+        <label>Was Quote Found</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>Quote Not Found</defaultConnectorLabel>
+        <rules>
+            <name>Quote_Found</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>QuoteId</leftValueReference>
+                <operator>IsBlank</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>QuoteId</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Quote_Name</targetReference>
+            </connector>
+            <label>Quote Found</label>
+        </rules>
+    </decisions>
+    <environments>Default</environments>
+    <formulas>
+        <name>New_Quote_Name</name>
+        <dataType>String</dataType>
+        <expression>{!Test_Quote_Name_Prefix} &amp; &quot; &quot; &amp; TEXT(    TODAY()   )</expression>
+    </formulas>
+    <interviewLabel>COM - Automated Order Testing (Scheduled) {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>COM - Automated Order Testing (Scheduled)</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <description>Get id of testing quote</description>
+        <name>Get_Quote_Id</name>
+        <label>Get Quote Id</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Assign_Quote_Id</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Name</field>
+            <operator>StartsWith</operator>
+            <value>
+                <elementReference>Test_Quote_Name_Prefix</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Quote</object>
+        <queriedFields>Id</queriedFields>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <description>Remove quote id from order.  This way, same quote can be used over and over again.</description>
+        <name>Disconnect_Order_From_Quote</name>
+        <label>Disconnect Order From Quote</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Pause_After_Order_Update</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Create_Order_From_Quote.orderId</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>QuoteId</field>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </inputAssignments>
+        <object>Order</object>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_Quote_Name</name>
+        <label>Update Quote Name</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Pause_after_Quote_Update</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Get_Quote_Id.Id</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Name</field>
+            <value>
+                <elementReference>New_Quote_Name</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Quote</object>
+    </recordUpdates>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Get_Quote_Id</targetReference>
+        </connector>
+        <schedule>
+            <frequency>Daily</frequency>
+            <startDate>2025-10-27</startDate>
+            <startTime>06:15:00.000Z</startTime>
+        </schedule>
+        <triggerType>Scheduled</triggerType>
+    </start>
+    <status>Active</status>
+    <subflows>
+        <description>Submit for decomp and orchestration.</description>
+        <name>Orchestrate_Order</name>
+        <label>Orchestrate Order</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Disconnect_Order_From_Quote</targetReference>
+        </connector>
+        <flowName>COM_Orchestrate_RLM_Order</flowName>
+        <inputAssignments>
+            <name>orderId</name>
+            <value>
+                <elementReference>Create_Order_From_Quote.orderId</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <variables>
+        <name>QuoteId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <waits>
+        <description>Pause needed to allow update to process.</description>
+        <name>Pause_After_Order_Update</name>
+        <elementSubtype>WaitDuration</elementSubtype>
+        <label>Pause After Order Update</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>Default Path</defaultConnectorLabel>
+        <waitEvents>
+            <conditionLogic>and</conditionLogic>
+            <label>el_1</label>
+            <offset>1</offset>
+            <offsetUnit>Minutes</offsetUnit>
+        </waitEvents>
+    </waits>
+    <waits>
+        <description>1 min wait is the shortest available. Needed to allow the quote update to run.</description>
+        <name>Pause_after_Quote_Update</name>
+        <elementSubtype>WaitDuration</elementSubtype>
+        <label>Pause after Quote Update</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>Default Path</defaultConnectorLabel>
+        <waitEvents>
+            <conditionLogic>and</conditionLogic>
+            <connector>
+                <targetReference>Create_Order_From_Quote</targetReference>
+            </connector>
+            <label>el_0</label>
+            <offset>1</offset>
+            <offsetUnit>Minutes</offsetUnit>
+        </waitEvents>
+    </waits>
+</Flow>

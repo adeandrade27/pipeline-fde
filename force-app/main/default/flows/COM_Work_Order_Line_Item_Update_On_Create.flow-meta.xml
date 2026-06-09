@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>65.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <constants>
+        <name>EQUIPMENT_RETURN_CONST</name>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Equipment Return</stringValue>
+        </value>
+    </constants>
+    <decisions>
+        <name>Parent_Work_Order_Type</name>
+        <label>Parent Work Order Type</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Equipment_Return</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.WorkOrder.WorkType.Name</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>EQUIPMENT_RETURN_CONST</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Records_1</targetReference>
+            </connector>
+            <label>Equipment Return</label>
+        </rules>
+    </decisions>
+    <description>COM:  Update fields automatically when creating new work order line items.</description>
+    <environments>Default</environments>
+    <interviewLabel>COM - Work Order Line Item Update On Create {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>COM - Work Order Line Item Update On Create</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>Update_Records_1</name>
+        <label>Update Line Item</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <inputAssignments>
+            <field>Description</field>
+            <value>
+                <elementReference>$Record.WorkOrder.Description</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>WorkTypeId</field>
+            <value>
+                <elementReference>$Record.WorkOrder.WorkType.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Parent_Work_Order_Type</targetReference>
+        </connector>
+        <object>WorkOrderLineItem</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

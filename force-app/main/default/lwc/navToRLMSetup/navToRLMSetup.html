@@ -1,0 +1,21 @@
+<template>      
+    <lightning-card title="Quick Navigation to RLM Setup Pages">  
+        <div class="slds-m-around_medium">
+                <lightning-button onclick={openContextDefinitions}      label="Context Definitions"     variant="brand"                                       ></lightning-button>
+                <lightning-button onclick={openRevenueSettings}         label="Rev Cloud Settings"      variant="success"          class="slds-m-left_x-small"></lightning-button>
+                <lightning-button onclick={openSFPricing}               label="Salesforce Pricing"      variant="brand-outline"    class="slds-m-left_x-small"></lightning-button>
+                <lightning-button onclick={openDecisionTables}          label="Decision Tables"         variant="Destructive"      class="slds-m-left_x-small"></lightning-button>
+        </div>
+        <div class="slds-m-around_medium">
+            <lightning-button onclick={openProductDiscovery}        label="Product Discovery"       variant="Destructive"      class="slds-m-left_x-small"></lightning-button>
+        </div>
+
+        <div class="slds-m-around_medium"> <lightning-button onclick={openProductIndex}     label="Product Index Rebuild"   variant="Destructive"   class="my-style2"></lightning-button></div>
+        <div class="slds-m-around_medium"> <lightning-button onclick={openPricingRecipe}    label="Pricing Recipe"          variant="success"       class="my-button-padding"></lightning-button></div>
+
+
+
+    </lightning-card>
+
+    
+</template>

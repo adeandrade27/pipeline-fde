@@ -1,0 +1,28 @@
+{
+  "required" : [ "contractNumber", "invoiceId", "operatorCode" ],
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "contractNumber" : {
+      "title" : "contractNumber",
+      "description" : "Número do contrato do cliente usado como referência para buscar informações de faturas.",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    },
+    "invoiceId" : {
+      "title" : "invoiceId",
+      "description" : "Id da fatura usado como referências para buscar os detalhes dela.",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    },
+    "operatorCode" : {
+      "title" : "operatorCode",
+      "description" : "Código da operadora usado como referência para buscar os detalhes. É associado com o contrato do cliente.",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    }
+  },
+  "lightning:type" : "lightning__objectType"
+}

@@ -1,0 +1,13 @@
+{
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "TargetUserID" : {
+      "title" : "TargetUserID",
+      "description" : "ID do usuário em conversação usado como referência para buscar o nome do perfil dele.",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    }
+  },
+  "lightning:type" : "lightning__objectType"
+}

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPlannerBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Customer Billing diagnosis bot for Claro, which is a telecommunications operator in Brazil providing telephone, internet, and TV services.
+Customer service focuses on resolving billing issues, invoice discrepancies, and financial complaints for residential and comboMulti customers</description>
+    <localTopicLinks>
+        <genAiPluginName>FinDiag_SubAgent_16jHZ0000006Ou5</genAiPluginName>
+    </localTopicLinks>
+    <localTopicLinks>
+        <genAiPluginName>agent_router_16jHZ0000006Ou5</genAiPluginName>
+    </localTopicLinks>
+    <localTopics>
+        <fullName>agent_router_16jHZ0000006Ou5</fullName>
+        <canEscalate>false</canEscalate>
+        <description>Welcome the user and route to the SubAgent</description>
+        <developerName>agent_router_16jHZ0000006Ou5</developerName>
+        <genAiPluginInstructions>
+            <description>Agent specialized in billing analysis and customer service case context; Assist only with invoices, discrepancies, charges, and case analysis. Refuse all out-of-scope topics
+
+{{state.AgentScriptInternal_agent_instructions}}</description>
+            <developerName>instruction0_179HZ00000092PB</developerName>
+            <language>en_US</language>
+            <masterLabel>instruction0_179HZ00000092PB</masterLabel>
+            <sortOrder>1</sortOrder>
+        </genAiPluginInstructions>
+        <language>en_US</language>
+        <localDeveloperName>agent_router</localDeveloperName>
+        <masterLabel>Agent Router</masterLabel>
+        <pluginType>Topic</pluginType>
+    </localTopics>
+    <localTopics>
+        <fullName>FinDiag_SubAgent_16jHZ0000006Ou5</fullName>
+        <canEscalate>false</canEscalate>
+        <description>Topic único de diagnóstico financeiro— dispatch via Flow autolaunched. Toda invocação flui pelo SF_AgenticGateway com lookup CMDT por Target__c=&apos;Buscar_caso_de_atendimento&apos;; row SF_AgenticGateway_Allow.CaseInfoFlow ativa, DispatchType=Flow, Sync, MaxBatchSize=1). Leitura carrega o Case completo (Id, CaseNumber, AccountId, ContractBillingAccount__c, RecordTypeId) e contexto de tela; gravação não está habilitada(Flow é read-only). Consultas KB seguem usando streamKnowledgeSearch (Data Cloud Retriever shared, read-only).</description>
+        <developerName>FinDiag_SubAgent_16jHZ0000006Ou5</developerName>
+        <genAiPluginInstructions>
+            <description>Agent specialized in billing analysis and customer service case context; Assist only with invoices, discrepancies, charges, and case analysis. Refuse all out-of-scope topics</description>
+            <developerName>instruction0_179HZ00000092PC</developerName>
+            <language>en_US</language>
+            <masterLabel>instruction0_179HZ00000092PC</masterLabel>
+            <sortOrder>1</sortOrder>
+        </genAiPluginInstructions>
+        <language>en_US</language>
+        <localActionLinks>
+            <functionName>AgentGateway_179HZ00000092PC</functionName>
+        </localActionLinks>
+        <localActionLinks>
+            <functionName>AnswerQuestionsWithKnowledge_179HZ00000092PC</functionName>
+        </localActionLinks>
+        <localActions>
+            <fullName>AnswerQuestionsWithKnowledge_179HZ00000092PC</fullName>
+            <description>Consulta Knowledge Articles via Data Cloud Retriever shared (read-only) usando standardInvocableAction streamKnowledgeSearch (Einstein Trust Layer + EmployeeCopilot stock action wrapper). Para perguntas de politicas, procedimentos, troubleshooting, info de produto, FAQ. NUNCA roteada via SF_AgenticGateway. KB lookups bypass do allow-list do gateway por design legado.</description>
+            <developerName>AnswerQuestionsWithKnowledge_179HZ00000092PC</developerName>
+            <invocationTarget>streamKnowledgeSearch</invocationTarget>
+            <invocationTargetType>standardInvocableAction</invocationTargetType>
+            <isConfirmationRequired>false</isConfirmationRequired>
+            <isIncludeInProgressIndicator>true</isIncludeInProgressIndicator>
+            <localDeveloperName>AnswerQuestionsWithKnowledge</localDeveloperName>
+            <masterLabel>Answer Questions with Knowledge</masterLabel>
+            <progressIndicatorMessage>Consultando base de conhecimento...</progressIndicatorMessage>
+            <source>EmployeeCopilot__AnswerQuestionsWithKnowledge</source>
+        </localActions>
+        <localActions>
+            <fullName>AgentGateway_179HZ00000092PC</fullName>
+            <description>Single touchpoint for all agentic interaction within the Org and it&apos;s tools</description>
+            <developerName>AgentGateway_179HZ00000092PC</developerName>
+            <invocationTarget>SF_AgenticGateway</invocationTarget>
+            <invocationTargetType>apex</invocationTargetType>
+            <isConfirmationRequired>false</isConfirmationRequired>
+            <isIncludeInProgressIndicator>true</isIncludeInProgressIndicator>
+            <localDeveloperName>AgentGateway</localDeveloperName>
+            <masterLabel>AgentGateway</masterLabel>
+            <progressIndicatorMessage>Loading</progressIndicatorMessage>
+        </localActions>
+        <localDeveloperName>FinDiag_SubAgent</localDeveloperName>
+        <masterLabel>FinDiag_SubAgent</masterLabel>
+        <pluginType>Topic</pluginType>
+    </localTopics>
+    <masterLabel>FinDiagAgent</masterLabel>
+    <plannerType>Atlas__ConcurrentMultiAgentOrchestration</plannerType>
+</GenAiPlannerBundle>

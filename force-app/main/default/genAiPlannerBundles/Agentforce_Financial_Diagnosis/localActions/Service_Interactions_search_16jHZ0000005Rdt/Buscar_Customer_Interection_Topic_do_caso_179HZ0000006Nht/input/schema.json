@@ -1,0 +1,20 @@
+{
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "caseReference" : {
+      "title" : "caseReference",
+      "description" : "Id do caso como referência para encontrar os tópicos detalhados.",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    },
+    "customerInterectionReference" : {
+      "title" : "customerInterectionReference",
+      "description" : "Id da interação do cliente como referência para encontrar os tópicos detalhados.",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    }
+  },
+  "lightning:type" : "lightning__objectType"
+}

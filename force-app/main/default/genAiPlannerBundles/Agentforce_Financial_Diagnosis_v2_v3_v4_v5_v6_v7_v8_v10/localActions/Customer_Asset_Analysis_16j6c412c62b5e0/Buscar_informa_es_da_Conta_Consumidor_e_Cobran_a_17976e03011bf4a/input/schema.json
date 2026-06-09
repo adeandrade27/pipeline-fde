@@ -1,0 +1,20 @@
+{
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "caseBillingAccount" : {
+      "title" : "caseBillingAccount",
+      "description" : "ID do contrato usado como referência para buscar seu detalhes",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    },
+    "caseConsumerAccount" : {
+      "title" : "caseConsumerAccount",
+      "description" : "ID do cliente usado como referência para buscar seus detalhes",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    }
+  },
+  "lightning:type" : "lightning__objectType"
+}

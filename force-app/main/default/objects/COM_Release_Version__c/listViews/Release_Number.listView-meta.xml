@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Release_Number</fullName>
+    <columns>CREATED_DATE</columns>
+    <columns>NAME</columns>
+    <columns>Release_Version__c</columns>
+    <columns>Instance_Name__c</columns>
+    <columns>Org_Id__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>Release Number</label>
+</ListView>

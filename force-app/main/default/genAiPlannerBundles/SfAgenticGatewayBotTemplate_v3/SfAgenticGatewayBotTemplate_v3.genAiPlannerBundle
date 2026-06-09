@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPlannerBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Smoke + soak harness for SF_AgenticGateway production readiness validation.
+Each instruction block S1..S19 dispatches one feature combination against a no-op fixture.
+Internal-only — flip botVersion Active=false post-PM-Gate-4 closeout for prod hygiene.</description>
+    <localTopicLinks>
+        <genAiPluginName>SmokeRunner_16jHZ0000006Mlp</genAiPluginName>
+    </localTopicLinks>
+    <localTopicLinks>
+        <genAiPluginName>agent_router_16jHZ0000006Mlp</genAiPluginName>
+    </localTopicLinks>
+    <localTopics>
+        <fullName>SmokeRunner_16jHZ0000006Mlp</fullName>
+        <canEscalate>false</canEscalate>
+        <description>Dispatches one of 19 SF_AgenticGateway smoke probes per user message.</description>
+        <developerName>SmokeRunner_16jHZ0000006Mlp</developerName>
+        <genAiPluginInstructions>
+            <description>Internal smoke + soak harness bot for SF_AgenticGateway. Each user message routes to one of 19 smoke probes (S1..S19) that exercise a specific dispatcher + operator + async mode.</description>
+            <developerName>instruction0_179HZ0000008y3q</developerName>
+            <language>en_US</language>
+            <masterLabel>instruction0_179HZ0000008y3q</masterLabel>
+            <sortOrder>1</sortOrder>
+        </genAiPluginInstructions>
+        <language>en_US</language>
+        <localActionLinks>
+            <functionName>SF_AgenticGateway_179HZ0000008y3q</functionName>
+        </localActionLinks>
+        <localActions>
+            <fullName>SF_AgenticGateway_179HZ0000008y3q</fullName>
+            <description>Snigle agentic touchpoint for all operations</description>
+            <developerName>SF_AgenticGateway_179HZ0000008y3q</developerName>
+            <invocationTarget>SF_AgenticGateway</invocationTarget>
+            <invocationTargetType>apex</invocationTargetType>
+            <isConfirmationRequired>false</isConfirmationRequired>
+            <isIncludeInProgressIndicator>false</isIncludeInProgressIndicator>
+            <localDeveloperName>SF_AgenticGateway</localDeveloperName>
+            <masterLabel>SF_AgenticGateway</masterLabel>
+        </localActions>
+        <localDeveloperName>SmokeRunner</localDeveloperName>
+        <masterLabel>SmokeRunner</masterLabel>
+        <pluginType>Topic</pluginType>
+    </localTopics>
+    <localTopics>
+        <fullName>agent_router_16jHZ0000006Mlp</fullName>
+        <canEscalate>false</canEscalate>
+        <description>Welcome and route to SmokeRunner subagent</description>
+        <developerName>agent_router_16jHZ0000006Mlp</developerName>
+        <genAiPluginInstructions>
+            <description>Internal smoke + soak harness bot for SF_AgenticGateway. Each user message routes to one of 19 smoke probes (S1..S19) that exercise a specific dispatcher + operator + async mode.</description>
+            <developerName>instruction0_179HZ0000008y3p</developerName>
+            <language>en_US</language>
+            <masterLabel>instruction0_179HZ0000008y3p</masterLabel>
+            <sortOrder>1</sortOrder>
+        </genAiPluginInstructions>
+        <language>en_US</language>
+        <localDeveloperName>agent_router</localDeveloperName>
+        <masterLabel>Smoke Router</masterLabel>
+        <pluginType>Topic</pluginType>
+    </localTopics>
+    <masterLabel>SF Agentic Gateway Bot Template</masterLabel>
+    <plannerType>Atlas__ConcurrentMultiAgentOrchestration</plannerType>
+</GenAiPlannerBundle>

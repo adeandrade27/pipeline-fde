@@ -1,0 +1,20 @@
+{
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "accountReference" : {
+      "title" : "accountReference",
+      "description" : "Id do cliente ou do contrato usado como referência para a busca.",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    },
+    "caseReference" : {
+      "title" : "caseReference",
+      "description" : "Id do caso usado como referência para a busca.",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    }
+  },
+  "lightning:type" : "lightning__objectType"
+}

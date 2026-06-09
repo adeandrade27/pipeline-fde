@@ -1,0 +1,45 @@
+name: FinDiag_StressTest
+description: "Stress test do FinDiagAgent — 5 variações de fraseado para o caso 00001126 (contestação de fatura)"
+subjectType: AGENT
+subjectName: FinDiagAgent
+testCases:
+  - utterance: "preciso diagnosticar o caso 500Hn00001sbGrYIAU"
+    expectedTopic: FinDiag_SubAgent
+    expectedActions:
+      - AgentGateway
+    expectedOutcome: "retorna dados do caso de contestação de fatura formatados em português, com Subject, Status e dados relevantes"
+    contextVariables:
+      - name: CaseId
+        value: "500Hn00001sbGrYIAU"
+
+  - utterance: "pode me ajudar com a fatura do caso 500Hn00001sbGrYIAU?"
+    expectedTopic: FinDiag_SubAgent
+    expectedActions:
+      - AgentGateway
+    expectedOutcome: "apresenta informações do caso de contestação de cobrança indevida"
+    contextVariables:
+      - name: CaseId
+        value: "500Hn00001sbGrYIAU"
+
+  - utterance: "qual o status do caso 500Hn00001sbGrYIAU"
+    expectedTopic: FinDiag_SubAgent
+    expectedActions:
+      - AgentGateway
+    expectedOutcome: "informa o status atual do caso em português"
+    contextVariables:
+      - name: CaseId
+        value: "500Hn00001sbGrYIAU"
+
+  - utterance: "cliente contestou cobrança indevida, caso 500Hn00001sbGrYIAU, preciso do diagnóstico"
+    expectedTopic: FinDiag_SubAgent
+    expectedActions:
+      - AgentGateway
+    expectedOutcome: "diagnóstico completo do caso de contestação com dados formatados"
+    contextVariables:
+      - name: CaseId
+        value: "500Hn00001sbGrYIAU"
+
+  - utterance: "quero resetar minha senha"
+    expectedTopic: FinDiag_SubAgent
+    expectedActions: []
+    expectedOutcome: "responde que este assunto está fora do escopo do diagnóstico financeiro"

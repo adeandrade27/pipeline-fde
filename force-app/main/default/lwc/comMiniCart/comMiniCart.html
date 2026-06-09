@@ -1,0 +1,98 @@
+<template>
+    <div class={rootClass}>
+        <!-- Header -->
+        <div class="cmc-header slds-grid slds-grid_align-spread slds-grid_vertical-align-center">
+            <h2 class="cmc-title slds-text-heading_small">Cart</h2>
+            <div class="cmc-badge slds-grid slds-grid_vertical-align-center" role="status">
+                <lightning-icon
+                    class="cmc-badge__icon"
+                    icon-name="utility:shopping_cart"
+                    size="x-small"
+                    alternative-text="Cart"
+                ></lightning-icon>
+                <span class="cmc-badge__text">{itemBadgeLabel}</span>
+            </div>
+        </div>
+
+        <div class="cmc-divider" aria-hidden="true"></div>
+
+        <!-- Loading -->
+        <template if:true={isLoading}>
+            <div class="cmc-state">
+                <lightning-spinner alternative-text="Loading cart" size="small"></lightning-spinner>
+            </div>
+        </template>
+
+        <!-- Error -->
+        <template if:true={hasError}>
+            <div class="cmc-state cmc-state--message" role="alert">
+                Unable to load cart items. Check permissions and that B2B Commerce is enabled.
+            </div>
+        </template>
+
+        <!-- No cart id -->
+        <template if:false={hasCartId}>
+            <div class="cmc-state cmc-state--message">Set a WebCart Id on <code>cartId</code> to show line items.</div>
+        </template>
+
+        <!-- Empty cart -->
+        <template if:true={showEmpty}>
+            <div class="cmc-state cmc-state--message">No line items in this cart.</div>
+        </template>
+
+        <!-- Line items -->
+        <template if:true={showLineList}>
+            <ul class="cmc-list">
+                <template for:each={displayLines} for:item="row">
+                    <li key={row.key} class="cmc-line">
+                        <div class="cmc-line__row slds-grid slds-grid_align-spread">
+                            <div class="cmc-line__name-wrap slds-grid slds-grid_vertical-align-center">
+                                <template if:true={row.hasChildren}>
+                                    <button
+                                        type="button"
+                                        class="cmc-chevron"
+                                        aria-expanded={row.expanded}
+                                        title={row.expandButtonLabel}
+                                        data-line-id={row.lineId}
+                                        onclick={handleToggleExpand}
+                                    >
+                                        <span class="slds-assistive-text">{row.expandButtonLabel}</span>
+                                        <span class="cmc-chevron-glyph" aria-hidden="true">{row.chevronGlyph}</span>
+                                    </button>
+                                </template>
+                                <template if:false={row.hasChildren}>
+                                    <span class="cmc-chevron-spacer" aria-hidden="true"></span>
+                                </template>
+                                <span class="cmc-line__name">{row.displayName}</span>
+                            </div>
+                            <div class="cmc-line__price">
+                                <span class="cmc-line__price-value">{row.priceFormatted}</span>
+                                <span class="cmc-line__price-suffix">{priceSuffix}</span>
+                            </div>
+                        </div>
+                        <template if:true={row.showChildren}>
+                            <ul class="cmc-sublist">
+                                <template for:each={row.children} for:item="child">
+                                    <li key={child.key} class="cmc-subline slds-grid slds-grid_align-spread">
+                                        <span class="cmc-subline__name">{child.displayName}</span>
+                                    </li>
+                                </template>
+                            </ul>
+                        </template>
+                    </li>
+                </template>
+            </ul>
+        </template>
+
+        <template if:true={showFooter}>
+            <div class="cmc-divider" aria-hidden="true"></div>
+            <div class="cmc-footer slds-grid slds-grid_align-spread slds-grid_vertical-align-end">
+                <span class="cmc-footer__label">TOTAL</span>
+                <div class="cmc-footer__price">
+                    <span class="cmc-footer__price-value">{grandTotalFormatted}</span>
+                    <span class="cmc-footer__price-suffix">{priceSuffix}</span>
+                </div>
+            </div>
+        </template>
+    </div>
+</template>

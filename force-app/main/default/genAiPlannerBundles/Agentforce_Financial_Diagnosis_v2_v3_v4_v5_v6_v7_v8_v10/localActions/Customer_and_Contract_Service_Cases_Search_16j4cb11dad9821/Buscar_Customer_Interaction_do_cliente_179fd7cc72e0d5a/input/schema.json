@@ -1,0 +1,13 @@
+{
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "orderReference" : {
+      "title" : "orderReference",
+      "description" : "ID do pedido, referente ao campo Order__c no registro do caso de atendimento e usado para a busca.",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    }
+  },
+  "lightning:type" : "lightning__objectType"
+}

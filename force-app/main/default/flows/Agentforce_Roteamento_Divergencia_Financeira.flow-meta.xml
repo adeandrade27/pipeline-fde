@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <description>Define a mensagem de retorno do flow indicando sucesso na atualização do caso.</description>
+        <name>ASSIGN_Resultado</name>
+        <label>Definir Resultado</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>varResultado</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Caso atualizado com sucesso e encaminhado para análise financeira.</stringValue>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
+        <description>Define a mensagem de retorno quando o usuário não possui o perfil necessário para executar a ação.</description>
+        <name>ASSIGN_SemPermissao</name>
+        <label>Definir Resultado - Sem Permissão</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>varResultado</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Ação não realizada. Usuário não possui perfil de Atendimento Call Center ou Atendimento Call Center Madrugada.</stringValue>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <decisions>
+        <description>Valida se o perfil do usuário que está executando o fluxo é &quot;Atendimento Call Center&quot;. O fluxo só continua se a condição for atendida.</description>
+        <name>DEC_Perfil_Usuario</name>
+        <label>Perfil é Call Center?</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>ASSIGN_SemPermissao</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Não é Atendimento Call Center</defaultConnectorLabel>
+        <rules>
+            <name>Atendimento_Call_Center</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>$User.ProfileName__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Atendimento Call Center</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$User.ProfileName__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Atendimento Call Center Madrugada</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>GET_Case_By_Id</targetReference>
+            </connector>
+            <label>É Atendimento Call Center</label>
+        </rules>
+    </decisions>
+    <description>Ajuste para ACCESS ALL DATA; Ajuste da comparação Profile name; Flow utilizado pelo Agentforce para tratar casos em que não foi possível identificar a causa da divergência durante o atendimento. A partir do Case Id informado, o fluxo atualiza automaticamente os campos de categorização e roteamento financeiro, além de registrar a análise fornecida pelo agente no campo Description, incluindo um complemento padrão indicando o encaminhamento para análise financeira.</description>
+    <environments>Default</environments>
+    <interviewLabel>Agentforce - Roteamento Divergência Financeira {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Agentforce - Roteamento Divergência Financeira</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <description>Busca o registro do Caso utilizando o Id informado na variável varCaseId. Esse caminho tem prioridade por ser mais preciso.</description>
+        <name>GET_Case_By_Id</name>
+        <label>Buscar Caso por Id</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>UPD_Case</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>varCaseId</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Case</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <description>Atualiza o Caso com os dados de roteamento financeiro quando não é possível identificar a causa da divergência, incluindo a análise informada pelo agente no campo Description.</description>
+        <name>UPD_Case</name>
+        <label>Atualizar Caso</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>ASSIGN_Resultado</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>GET_Case_By_Id.Id</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>CallReason__c</field>
+            <value>
+                <stringValue>Cobrança</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Category__c</field>
+            <value>
+                <stringValue>Reclamação</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Description</field>
+            <value>
+                <stringValue>{!varDescricaoAnalise}  [Agentforce] Análise realizada em {!$Flow.CurrentDateTime}. Não foi possível identificar a causa da divergência. Caso encaminhado para análise financeira.</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>EntryReason__c</field>
+            <value>
+                <stringValue>Analise financeira</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>LeavingReason__c</field>
+            <value>
+                <stringValue>Analise e correção financeira</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Modalidade__c</field>
+            <value>
+                <stringValue>Cobrança</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Resolution__c</field>
+            <value>
+                <stringValue>Roteamento do Agentforce</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Solar_Cross_forwardingReason__c</field>
+            <value>
+                <stringValue>Fora da alçada</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Case</object>
+    </recordUpdates>
+    <runInMode>SystemModeWithoutSharing</runInMode>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>DEC_Perfil_Usuario</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <variables>
+        <description>Identificador único do Caso (Id do Salesforce). Utilizado como prioridade para busca do registro.</description>
+        <name>varCaseId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Descrição preenchida pelo agente contendo a análise realizada. Será registrada no campo Description do Caso junto com o texto padrão do Agentforce.</description>
+        <name>varDescricaoAnalise</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Retorna o status da execução do flow para o Agentforce, indicando que o caso foi atualizado com sucesso.</description>
+        <name>varResultado</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+</Flow>

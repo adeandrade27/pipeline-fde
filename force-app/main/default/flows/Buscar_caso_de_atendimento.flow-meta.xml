@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <name>Copy_2_of_set_cases_do_cliente</name>
+        <label>Copy 2 of set cases do cliente</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>recordCase</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Copy_2_of_Recuperar_informa_es_do_caso</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
+        <name>set_cases_do_cliente</name>
+        <label>set cases do cliente</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>recordCase</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Recuperar_informacoes_do_caso</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <description>Sem ACCESS ALL</description>
+    <environments>Default</environments>
+    <interviewLabel>Buscar {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Buscar caso de atendimento em tela</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <description>Sem Id do registro; Recuperar informações do caso de atendimento em tela</description>
+        <name>Copy_2_of_Recuperar_informa_es_do_caso</name>
+        <label>Copy 2 of Recuperar informações do caso</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Copy_2_of_set_cases_do_cliente</targetReference>
+        </connector>
+        <filterLogic>or</filterLogic>
+        <filters>
+            <field>CaseNumber</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>referenceCase</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Case</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Recuperar informações do caso de atendimento em tela</description>
+        <name>Recuperar_informacoes_do_caso</name>
+        <label>Recuperar informações do caso</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>set_cases_do_cliente</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Copy_2_of_Recuperar_informa_es_do_caso</targetReference>
+        </faultConnector>
+        <filterLogic>or</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>referenceCase</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>CaseNumber</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>referenceCase</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Case</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <runInMode>DefaultMode</runInMode>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Recuperar_informacoes_do_caso</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <variables>
+        <description>Informações do caso de atendimento</description>
+        <name>recordCase</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+        <objectType>Case</objectType>
+    </variables>
+    <variables>
+        <description>Caso de referência em tela do usuário</description>
+        <name>referenceCase</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

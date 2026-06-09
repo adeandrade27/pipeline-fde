@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPlannerBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Agente de diagnóstico financeiro — copilot do operador para contestação de faturas. Recupera contexto completo do caso e dados de cobrança para apoiar o operador no atendimento ao cliente.</description>
+    <genAiPlugins>
+        <genAiPluginName>FinDiag_SubAgent</genAiPluginName>
+    </genAiPlugins>
+    <masterLabel>FinDiag Agent</masterLabel>
+    <plannerType>AiCopilot__ReAct</plannerType>
+</GenAiPlannerBundle>

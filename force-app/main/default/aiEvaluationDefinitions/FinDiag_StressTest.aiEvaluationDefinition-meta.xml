@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AiEvaluationDefinition xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Suíte de stress test do FinDiagAgent — 5 variações de fraseado para diagnóstico de contestação de fatura</description>
+    <masterLabel>FinDiag StressTest</masterLabel>
+    <subjectName>FinDiagAgent</subjectName>
+    <subjectType>AGENT</subjectType>
+    <testCases>
+        <inputs>{"utterance": "preciso diagnosticar o caso 500Hn00001sbGrYIAU"}</inputs>
+        <number>1</number>
+    </testCases>
+    <testCases>
+        <inputs>{"utterance": "pode me ajudar com a fatura do caso 500Hn00001sbGrYIAU?"}</inputs>
+        <number>2</number>
+    </testCases>
+    <testCases>
+        <inputs>{"utterance": "qual o status do caso 500Hn00001sbGrYIAU"}</inputs>
+        <number>3</number>
+    </testCases>
+    <testCases>
+        <inputs>{"utterance": "cliente contestou cobrança indevida, caso 500Hn00001sbGrYIAU, preciso do diagnóstico"}</inputs>
+        <number>4</number>
+    </testCases>
+    <testCases>
+        <inputs>{"utterance": "quero resetar minha senha"}</inputs>
+        <number>5</number>
+    </testCases>
+</AiEvaluationDefinition>

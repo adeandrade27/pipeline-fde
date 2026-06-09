@@ -1,0 +1,14 @@
+{
+  "status": 0,
+  "result": {
+    "success": true,
+    "compiled": true,
+    "compileProblem": "",
+    "exceptionMessage": "",
+    "exceptionStackTrace": "",
+    "line": -1,
+    "column": -1,
+    "logs": "67.0 APEX_CODE,DEBUG;APEX_PROFILING,INFO\nExecute Anonymous: SF_AgenticGateway.Request req = new SF_AgenticGateway.Request();\nExecute Anonymous: req.handlerClass = 'flow:Buscar_Customer_Interaction_do_pedido_order';\nExecute Anonymous: req.payloadJson  = '{\\\"caseId\\\":\\\"500Hn00001sbGrYIAU\\\"}';\nExecute Anonymous: req.correlationId = 'smokeh11Interactions';\nExecute Anonymous: List<SF_AgenticGateway.Request> reqs = new List<SF_AgenticGateway.Request>{ req };\nExecute Anonymous: List<SF_AgenticGateway.Response> resps = SF_AgenticGateway.invoke(reqs);\nExecute Anonymous: SF_AgenticGateway.Response r = resps[0];\nExecute Anonymous: System.debug('RESULT::' + JSON.serialize(r));\n12:16:55.742 (3742766463)|USER_INFO|[EXTERNAL]|005HZ00000LVGNm|adeandrade@salesforce.com.ibuy|(GMT-03:00) Brasilia Standard Time (America/Sao_Paulo)|GMT-03:00\n12:16:55.742 (3742791238)|EXECUTION_STARTED\n12:16:55.742 (3743023987)|CODE_UNIT_STARTED|[EXTERNAL]|execute_anonymous_apex\n12:16:57.216 (5216991139)|USER_DEBUG|[8]|DEBUG|RESULT::{\"success\":true,\"message\":null,\"dataJson\":\"{\\\"data\\\":{\\\"message\\\":\\\"UNKNOWN_EXCEPTION: The flow doesn't have a variable with the name \\\\\\\"caseId\\\\\\\", or the variable isn't available for input.\\\",\\\"success\\\":false},\\\"truncated\\\":false,\\\"dataRef\\\":null,\\\"summary\\\":null}\",\"correlationId\":\"smokeh11Interactions\"}\n12:16:57.248 (5248099546)|CUMULATIVE_LIMIT_USAGE\n12:16:57.248 (5248099546)|LIMIT_USAGE_FOR_NS|(default)|\n  Number of SOQL queries: 2 out of 100\n  Number of query rows: 28 out of 50000\n  Number of SOSL queries: 0 out of 20\n  Number of DML statements: 1 out of 150\n  Number of Publish Immediate DML: 0 out of 150\n  Number of DML rows: 1 out of 10000\n  Maximum CPU time: 33 out of 10000\n  Maximum heap size: 0 out of 6000000\n  Number of callouts: 0 out of 100\n  Number of Email Invocations: 0 out of 10\n  Number of future calls: 0 out of 50\n  Number of queueable jobs added to the queue: 0 out of 50\n  Number of Mobile Apex push calls: 0 out of 10\n\n12:16:57.248 (5248099546)|CUMULATIVE_LIMIT_USAGE_END\n\n12:16:57.216 (5248156035)|CODE_UNIT_FINISHED|execute_anonymous_apex\n12:16:57.216 (5248173539)|EXECUTION_FINISHED\n"
+  },
+  "warnings": []
+}

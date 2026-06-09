@@ -1,0 +1,39 @@
+<template>
+    <section class="service-not-available">
+        <div class="service-not-available__icon-wrap" aria-hidden="true">
+            <span class="service-not-available__icon-circle">
+                <span class="service-not-available__icon-line service-not-available__icon-line--left"></span>
+                <span class="service-not-available__icon-line service-not-available__icon-line--right"></span>
+            </span>
+        </div>
+
+        <h2 class="service-not-available__title">{titleText}</h2>
+        <p class="service-not-available__subtitle">{subtitleText}</p>
+
+        <div class="service-not-available__inputs">
+            <lightning-input
+                class="service-not-available__email"
+                type="email"
+                name="emailAddress"
+                label={emailLabelText}
+                placeholder={emailPlaceholderText}
+                message-when-type-mismatch="Enter a valid email address."
+                required
+                value={emailValue}
+                onchange={handleEmailChange}
+            >
+            </lightning-input>
+
+            <lightning-input
+                class="service-not-available__consent"
+                type="checkbox"
+                name="contactConsent"
+                label={checkboxLabelText}
+                required
+                checked={isConsentChecked}
+                onchange={handleConsentChange}
+            >
+            </lightning-input>
+        </div>
+    </section>
+</template>

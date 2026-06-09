@@ -1,0 +1,28 @@
+{
+  "required" : [ "handlerClass", "payloadJson" ],
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "correlationId" : {
+      "title" : "Correlation ID",
+      "description" : "Optional opaque correlation identifier; echoed back in response and persisted to SF_AgenticInvocation__c.",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    },
+    "handlerClass" : {
+      "title" : "Handler Class Name",
+      "description" : "Dispatch target. Bare value or prefixed: apex:|flow:|ip:|dr:|agent:|dml:|query:. Must be allow-listed in SF_AgenticGateway_Allow__mdt.",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    },
+    "payloadJson" : {
+      "title" : "Payload JSON",
+      "description" : "JSON-encoded payload string. Format depends on handlerClass contract. Optional batch[] array supported when CMDT MaxBatchSize > 1.",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    }
+  },
+  "lightning:type" : "lightning__objectType"
+}
