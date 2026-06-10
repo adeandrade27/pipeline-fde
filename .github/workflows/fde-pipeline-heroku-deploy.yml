@@ -48,5 +48,5 @@ jobs:
           heroku_app_name: fde-allocation-pipeline-latam
           heroku_email: ${{ secrets.HEROKU_EMAIL }}
           appdir: "fde-pipeline"
-          procfile: "fde-pipeline/Procfile"
+          procfile: "Procfile"
           dontautocreate: true
