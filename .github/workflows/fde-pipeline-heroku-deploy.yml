@@ -11,6 +11,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment: heroku
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
